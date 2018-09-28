@@ -1,0 +1,24 @@
+// This file holds globally defined variables.
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@function pxToRem($px) {
+	// Assumption: By default, 1rem == 16px
+	@return (strip-unit($px) / 16) * 1rem;
+}
+
+$base-grid-size: pxToRem(8px);
+
+$pageborder-y: pxToRem(24px);
+
+$mainsidebar-width: $base-grid-size * 8;
+
+$color-primary: #4468EC;
+
+$color-text-light: rgba(255, 255, 255, 0.81);
