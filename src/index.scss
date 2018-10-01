@@ -1,0 +1,16 @@
+@import "variables";
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "M PLUS Rounded 1c", "Roboto", "Segoe UI", sans-serif;
+  font-weight: 500;
+  color: $color-text;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $color-text-heavy;
+}

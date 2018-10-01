@@ -1,0 +1,50 @@
+@import '../variables';
+
+header.mainsidebar {
+	box-sizing: border-box;
+	background: $color-primary;
+	width: $mainsidebar-width;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	height: 100vh;
+	position: fixed;
+	color: $color-text-light;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: column;
+	padding: $pageborder-y;
+
+	.logo-container {
+		height: $pageborder-y * 2;
+		display: flex;
+		align-items: center;
+	}
+
+	img.logo {
+		width: $base-grid-size * 6;
+	}
+
+	nav {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		margin-top: $pageborder-y;
+
+		.app-link {
+			margin: .5rem 0 .5rem 0;
+			height: 2.25rem;
+			width: 2.25rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: .81;
+			transition: opacity .15s ease-in-out;
+
+			&.active, &:hover {
+				opacity: 1;
+			}
+		}
+	}
+}
