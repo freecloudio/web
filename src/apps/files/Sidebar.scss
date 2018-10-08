@@ -1,60 +1,60 @@
 @import "../../variables";
 
 aside.files-sidebar {
-	background: #F0F2F4;
-	height: 100vh;
-	padding: 0 1rem 0 1rem;
+  background: $color-background-grey;
+  height: 100vh;
+  padding: 0 1rem 0 1rem;
 
-	h1 {
-		margin: $pageborder-y 0 $pageborder-y 0;
-		height: 3rem;
-		line-height: 3rem;
-		font-size: 2rem;
-		font-weight: 500;
-	}
+  h1 {
+    margin: $pageborder-y 0 $pageborder-y 0;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 2rem;
+    font-weight: 500;
+  }
 
-	nav ul {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		min-width: 260px;
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    min-width: 260px;
 
-		li {
-			line-height: 3.25rem;
-			font-size: 1.375rem;
-			height: 3.25rem;
+    li {
+      line-height: 3.25rem;
+      font-size: 1.375rem;
+      height: 3.25rem;
 
-			a {
-				border-radius: 5px;
-				padding: 0 1rem 0 1rem;
-				cursor: pointer;
-				display: flex;
-				align-items: center;
-				color: inherit;
-				text-decoration: none;
-				transition: color .15s ease-in-out, background .15s ease-in-out;
+      a {
+        border-radius: 5px;
+        padding: 0 1rem 0 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        color: inherit;
+        text-decoration: none;
+        transition: color .15s ease-in-out, background .15s ease-in-out;
 
-				&:hover {
-					color: $color-text-heavy;
+        &:hover {
+          color: $color-text-heavy;
 
-					svg path {
-						fill: $color-text-heavy !important;
-					}
-				}
+          svg path {
+            fill: $color-text-heavy !important;
+          }
+        }
 
-				&.active {
-					background: rgba(0, 0, 0, 0.06);
-					color: $color-primary;
+        &.active {
+          background: rgba(0, 0, 0, 0.06);
+          color: $color-primary;
 
-					svg path {
-						fill: $color-primary !important;
-					}
-				}
+          svg path {
+            fill: $color-primary !important;
+          }
+        }
 
-				svg {
-					margin-right: 1rem;
-				}
-			}
-		}
-	}
+        svg {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
 }

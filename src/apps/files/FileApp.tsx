@@ -2,6 +2,8 @@ import './FileApp.scss';
 
 import * as React from "react";
 import Sidebar from "./Sidebar";
+import FileList from "./FileList";
+import { fileStore } from 'src/store/File';
 
 interface Props {
 	// base path of the files app. This is used to generate sub-links like for shared files and trash.
@@ -14,7 +16,9 @@ class FileApp extends React.Component<Props, object> {
     return (
       <div className="file-app">
         <Sidebar base={this.props.base}/>
-        <div className="files"/>
+        <div className="files">
+          <FileList fileStore={fileStore} currentPath="/"/>
+        </div>
       </div>
     )
   }

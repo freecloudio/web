@@ -47,4 +47,14 @@ header.mainsidebar {
 			}
 		}
 	}
+
+	.bottom {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		> *:first-child {
+			height: 2.25rem;
+		}
+	}
 }

@@ -1,13 +1,20 @@
 import * as React from 'react';
-import {  NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { observer } from "mobx-react";
 
 import './MainSidebar.scss';
 
 import logo from '../res/img/logo_white_nopadding.svg';
 import Icon, { IconStyle } from 'src/core/Icon';
 import Avatar from '../core/Avatar';
+import { UserStore } from 'src/store/User';
 
-class MainSidebar extends React.Component {
+interface Props {
+  userStore: UserStore;
+}
+
+@observer
+class MainSidebar extends React.Component<Props, object> {
   public render() {
     return (
       <header className="mainsidebar">
@@ -23,7 +30,8 @@ class MainSidebar extends React.Component {
           </nav>
         </section>
         <section className="bottom">
-          <Avatar name="Pascal Riesinger" size={3}/>
+          <NavLink className="app-link" to="/apps/settings"><Icon name="settingsOutline" style={IconStyle.White} size={1.5} /></NavLink>
+          <Avatar name={this.props.userStore.currentUserInitials} size={3} />
         </section>
       </header>
     )

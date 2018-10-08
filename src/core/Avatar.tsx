@@ -10,22 +10,17 @@ interface Props {
 }
 
 class Avatar extends React.Component<Props, object> {
-  
+
   public render() {
     const { imageSrc, name, size } = this.props;
 
     return (
-      <div className="avatar" style={{width: `${(size || 2)}rem`, height: `${(size || 2)}rem`}}>
-        { imageSrc 
-        ? <img src={imageSrc}/>
-        : <span>{ this.nameInitials(name)}</span>} 
+      <div className="avatar" style={{ width: `${(size || 2)}rem`, height: `${(size || 2)}rem` }}>
+        {imageSrc
+          ? <img src={imageSrc} />
+          : <span>{name}</span>}
       </div>
     )
-  }
-
-  private nameInitials(name: string): string {
-    // only accept up to 2 letters
-    return name.split(" ").map((part, idx) => idx >= 2 ? "" : part[0].toUpperCase()).join("");
   }
 
 }
