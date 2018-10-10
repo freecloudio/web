@@ -9,17 +9,37 @@ interface Props {
   currentPath: string;
 }
 
+interface State {
+  scrollShadow: boolean;
+}
+
 @observer
-class FileList extends React.Component<Props, object> {
+class FileList extends React.Component<Props, State> {
+
+  constructor(props: Props) {
+    super(props);
+    this.onTableScrolled = this.onTableScrolled.bind(this);
+    this.state = { scrollShadow: false };
+  }
 
   public componentDidMount() {
     this.props.fileStore.fetchCurrentDirectory(this.props.currentPath);
   }
 
+  public shouldComponentUpdate(nextProps: Props, nextState: State) {
+    if (nextState.scrollShadow !== this.state.scrollShadow ||
+        nextProps.fileStore !== this.props.fileStore || 
+        nextProps.currentPath !== this.props.currentPath) {
+      return true;
+    }
+    return false;
+  }
+
   public render() {
     return (
       <div className="file-list">
-        <div className="file-table-wrapper">
+        <div className={`file-table-shadow-shim${this.state.scrollShadow ? " scrolled" : ""}`}/>
+        <div className="file-table-wrapper" onScroll={this.onTableScrolled}>
           <table className="file-table">
             <thead>
               <tr>
@@ -40,6 +60,17 @@ class FileList extends React.Component<Props, object> {
       </div>
     )
   }
+
+  private onTableScrolled(event: React.UIEvent): void {
+    if (!event.nativeEvent.srcElement) {
+      return
+    }
+    if (event.nativeEvent.srcElement.scrollTop > 0) {
+      this.setState({ scrollShadow: true });
+    } else {
+      this.setState({ scrollShadow: false });
+    }
+  };
 }
 
 export default FileList;

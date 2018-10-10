@@ -16,6 +16,7 @@ interface Props {
   name: string;
   size?: number;
   style: IconStyle;
+  className?: string;
 }
 
 type IconColorsDictionary = {[Style in IconStyle]: string};
@@ -32,7 +33,7 @@ class Icon extends React.Component<Props, object> {
     const iconName = 'mdi' + this.props.name.charAt(0).toUpperCase() + this.props.name.substr(1);
     
     return (
-      <MDIcon.Icon path={Icons[iconName]} size={(this.props.size || 1) / 1.5} color={IconColors[this.props.style]}/>
+      <MDIcon.Icon className={this.props.className} path={Icons[iconName]} size={(this.props.size || 1) / 1.5} color={IconColors[this.props.style]}/>
     )
   }
 }

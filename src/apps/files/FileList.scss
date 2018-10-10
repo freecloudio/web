@@ -2,7 +2,7 @@
 
 $padding-small: 1rem;
 
-$table-header-height: 2rem;
+$table-header-height: 3.25rem;
 
 .file-list {
   max-height: 100%;
@@ -18,6 +18,23 @@ $table-header-height: 2rem;
     max-height: 100%;
     margin-top: $table-header-height;
     box-sizing: border-box;
+  }
+
+  .file-table-shadow-shim {
+    position: absolute;
+    // width: 100%;
+    height: $table-header-height;
+    z-index: 1;
+    // background: transparentize($color: pink, $amount: 0.8);
+    top: $padding-small;
+    // left: -5px;
+    left: -1rem;
+    right: -1rem;
+    transition: box-shadow .15s ease-in-out;
+
+    &.scrolled {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.0);
+    }
   }
 
   .file-table {

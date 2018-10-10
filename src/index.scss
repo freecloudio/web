@@ -6,11 +6,17 @@ html, body {
 }
 
 body {
-  font-family: "M PLUS Rounded 1c", "Roboto", "Segoe UI", sans-serif;
+  font-family: $font-stack;
   font-weight: 500;
   color: $color-text;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: $color-text-heavy;
+}
+
+a {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
