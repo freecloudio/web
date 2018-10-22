@@ -9,10 +9,11 @@ export async function getDirectoryContent(fullPath: string): Promise<Array<File 
           {
             name: `Test ${i}`,
             size: 123,
+            ownerID: Math.ceil(Math.random() * 5),
           }
         )
       }
       resolve(a);
-    })
+    }, Math.random() * 150)
   });
 }

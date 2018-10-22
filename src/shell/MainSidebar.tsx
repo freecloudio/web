@@ -7,7 +7,7 @@ import './MainSidebar.scss';
 import logo from '../res/img/logo_white_nopadding.svg';
 import Icon, { IconStyle } from 'src/core/Icon';
 import Avatar from '../core/Avatar';
-import { UserStore } from 'src/store/User';
+import { UserStore } from 'src/store/UserStore';
 
 interface Props {
   userStore: UserStore;

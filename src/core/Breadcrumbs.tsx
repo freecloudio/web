@@ -3,6 +3,7 @@ import "./Breadcrumbs.scss";
 import { Link } from "react-router-dom";
 import * as React from "react";
 import Icon, { IconStyle } from "./Icon";
+import { Log } from "src/Log";
 
 export interface Part {
   name: string;
@@ -14,7 +15,13 @@ interface Props {
 }
 
 class Breadcrumbs extends React.Component<Props, object> {
+
+  private readonly log = new Log("Breadcrumbs");
+
   public render() {
+    this.log.debug("Rendering with parts: ", this.props.parts);
+
+
     return (
       <nav className="breadcrumbs">
         { this.props.parts.map((part, idx) => {

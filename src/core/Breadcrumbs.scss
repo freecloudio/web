@@ -1,14 +1,11 @@
 @import "../variables.scss";
 
 .breadcrumbs {
+  display: flex;
+  align-items: center;
   font-family: $font-stack;
   line-height: 3rem;
 
-  nav {
-    display: flex;
-    align-items: center;
-
-  }
 
   .breadcrumb-part {
     display: inline-flex;
