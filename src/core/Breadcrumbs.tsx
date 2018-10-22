@@ -24,13 +24,13 @@ class Breadcrumbs extends React.Component<Props, object> {
 
     return (
       <nav className="breadcrumbs">
-        { this.props.parts.map((part, idx) => {
-          return <span className="breadcrumb-part" key={idx}>
+        { this.props.parts.map((part, idx) => 
+          <span className="breadcrumb-part" key={idx}>
           {
             part.href ? 
               <Link to={part.href}>{ part.name }</Link>
               :
-              <span>{part.name}</span>
+              <span>{ part.name }</span>
           }
           { 
             idx < this.props.parts.length - 1 ? 
@@ -39,7 +39,7 @@ class Breadcrumbs extends React.Component<Props, object> {
               null
           }
           </span>
-        })}
+        )}
       </nav>
     )
   }

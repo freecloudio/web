@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import './Sidebar.scss';
 import Icon, { IconStyle } from 'src/core/Icon';
-import { NavLink } from 'react-router-dom';
+import { NavLink, match } from 'react-router-dom';
+import { Location } from 'history';
 
 interface Props {
 	// base path of the files app. This is used to generate sub-links like for shared files and trash.
@@ -19,7 +20,7 @@ class Sidebar extends React.Component<Props, object> {
 				<nav>
 					<ul>
 						<li>
-							<NavLink exact to={{ pathname: base }}><Icon name="homeOutline" size={1.5} style={IconStyle.Dark} />Your files</NavLink>
+							<NavLink to={{ pathname: base }} isActive={this.homeLinkIsActive}><Icon name="homeOutline" size={1.5} style={IconStyle.Dark} />Your files</NavLink>
 						</li>
 						<li>
 							<NavLink to={{ pathname: base + "/shared" }}><Icon name="shareVariant" size={1.5} style={IconStyle.Dark} />Shared</NavLink>
@@ -35,6 +36,10 @@ class Sidebar extends React.Component<Props, object> {
 				</nav>
 			</aside>
 		)
+	}
+
+	private homeLinkIsActive = (m: match, location: Location): boolean => {
+		return (m.url === this.props.base || m.url.includes(this.props.base + "/d"))
 	}
 }
 

@@ -6,7 +6,7 @@ import { Log } from "src/Log";
 export class UserStore {
 
   @observable public currentUser: User = { name: "", id: -1 }; 
-  @observable public users:  { [userID:number] : User } = {};
+  @observable public users: { [userID:number] : User } = {};
 
   private readonly log = new Log("UserStore");
 

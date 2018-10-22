@@ -19,7 +19,7 @@ class App extends React.Component {
             <Route exact path="/" render={FilesRedirect}/>
             { /* tslint:disable */ }
             <Route exact path="/apps/files" render={(props) => <FileApp {...props} base="/apps/files"/>}/>
-            <Route path="/apps/files/:type" render={(props) => <FileApp {...props} base="/apps/files"/>}/>
+            <Route exact path="/apps/files/:type" render={(props) => <FileApp {...props} base="/apps/files"/>}/>
             <Route path="/apps/files/:type/*" render={(props) => <FileApp {...props} base="/apps/files"/>}/>
             { /* tslint:enable */ }
 

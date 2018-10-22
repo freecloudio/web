@@ -7,6 +7,7 @@ import { observable } from "mobx";
 import FileTableBody from "./FileTableBody";
 
 interface Props {
+  base: string;
   fileStore: FileStore;
   currentPath: string;
 }
@@ -38,7 +39,7 @@ class FileList extends React.Component<Props, object> {
                 <th>Size<span>Size</span></th>
               </tr>
             </thead>
-            <FileTableBody files={this.props.fileStore.currentDirectoryContent}/>
+            <FileTableBody base={this.props.base} files={this.props.fileStore.currentDirectoryContent}/>
             </table>
         </div>
       </div>

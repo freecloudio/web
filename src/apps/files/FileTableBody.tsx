@@ -1,21 +1,24 @@
 import { File, Directory } from "src/models/File";
 import * as React from "react";
-import Icon, { IconStyle } from "src/core/Icon";
+import { observer } from "mobx-react";
+import FileTableRow from "./FileTableRow";
+import { Route } from "react-router-dom";
 
 interface Props {
+  base: string
   files: Array<File | Directory>
 }
 
+@observer
 class FileTableBody extends React.Component<Props, object> {
   public render() {
     return (
     <tbody>
       {this.props.files.map((f, i) =>
-        <tr key={i}>
-          <td><Icon name={('children' in f) ? "folderOutline" : "fileOutline"} size={1.5} style={IconStyle.Dark}/>{f.name}</td>
-          <td>{f.ownerName ? f.ownerName : "..."}</td>
-          <td>{f.size}</td>
-        </tr>
+        /* tslint:disable-next-line */
+        <Route key={f.name} render={(props) => 
+          <FileTableRow file={f} base={this.props.base} {...props}/>
+        }/>
       )}
     </tbody>
     )
