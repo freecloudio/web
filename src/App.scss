@@ -5,7 +5,11 @@
   margin-left: $mainsidebar-width;
   height: 100vh;
   box-sizing: border-box;
-  overflow-y: auto;
+	overflow-y: auto;
+	
+	&.fullbleed {
+		margin-left: 0;
+	}
 }
 
 

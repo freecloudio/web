@@ -7,23 +7,30 @@ import FileApp from "./apps/files/FileApp";
 import CalendarApp from "./apps/calendar/CalendarApp";
 import SettingsApp from "./apps/settings/SettingsApp";
 import { userStore } from "./store/UserStore";
+import Login from "./Login";
+import { observer } from "mobx-react";
+import PrivateRoute from "./core/PrivateRoute";
+import { authStore } from "./store/AuthStore";
 
+@observer
 class App extends React.Component {
 	public render() {
 		return (
 			<BrowserRouter>
 				<div className="App">
-					<MainSidebar userStore={userStore}/>
-					<main>
-						<Route exact path="/" render={FilesRedirect}/>
-						{ /* tslint:disable */ }
-            <Route exact path="/apps/files" render={(props) => <FileApp {...props} base="/apps/files"/>}/>
-            <Route exact path="/apps/files/:type" render={(props) => <FileApp {...props} base="/apps/files"/>}/>
-            <Route path="/apps/files/:type/*" render={(props) => <FileApp {...props} base="/apps/files"/>}/>
-            { /* tslint:enable */ }
+				{ authStore.isSignedIn ? <MainSidebar userStore={userStore} /> : null }
+					<main className={authStore.isSignedIn ? "" : "fullbleed"}>
+						<Route exact path="/" render={FilesRedirect} />
+						{ /* tslint:disable */}
+						<PrivateRoute exact path="/apps/files" component={FileApp} />
+						<PrivateRoute exact path="/apps/files/:type" component={FileApp} />
+						<PrivateRoute path="/apps/files/:type/*" component={FileApp} />
+						{ /* tslint:enable */}
 
-						<Route path="/apps/calendar" component={CalendarApp}/>
-						<Route path="/apps/settings" component={SettingsApp}/>
+						<PrivateRoute path="/apps/calendar" component={CalendarApp} />
+						<PrivateRoute path="/apps/settings" component={SettingsApp} />
+
+						<Route path="/login" component={Login} />
 					</main>
 				</div>
 			</BrowserRouter>
@@ -31,6 +38,6 @@ class App extends React.Component {
 	}
 }
 
-const FilesRedirect = () => ( <Redirect to="/apps/files" />);
+const FilesRedirect = () => (<Redirect to="/apps/files" />);
 
 export default App;
