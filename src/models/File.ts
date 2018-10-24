@@ -1,11 +1,11 @@
 export interface File {
-  path: string;
-  name: string;
-  size: number;
-  ownerName?: string;
-  ownerID: number;
+	path: string;
+	name: string;
+	size: number;
+	ownerName?: string;
+	ownerID: number;
 }
 
 export interface Directory extends File {
-  children: Set<File | Directory>;
+	children: Set<File | Directory>;
 }

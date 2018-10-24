@@ -5,24 +5,27 @@ import FileTableRow from "./FileTableRow";
 import { Route } from "react-router-dom";
 
 interface Props {
-  base: string
-  files: Array<File | Directory>
+	base: string;
+	files: Array<File | Directory>;
 }
 
 @observer
 class FileTableBody extends React.Component<Props, object> {
-  public render() {
-    return (
-    <tbody>
-      {this.props.files.map((f, i) =>
-        /* tslint:disable-next-line */
-        <Route key={f.name} render={(props) => 
-          <FileTableRow file={f} base={this.props.base} {...props}/>
-        }/>
-      )}
-    </tbody>
-    )
-  }
+	public render() {
+		return (
+			<tbody>
+				{this.props.files.map((f, i) =>
+					<Route
+						key={f.name}
+						render={
+							/* tslint:disable-next-line */
+							(props) => <FileTableRow file={f} base={this.props.base} {...props} />
+						}
+					/>,
+				)}
+			</tbody>
+		);
+	}
 }
 
 export default FileTableBody;

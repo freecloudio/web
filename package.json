@@ -103,7 +103,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfigFile": "/home/pascal/development/web/tsconfig.test.json"
+        "tsConfigFile": "tsconfig.test.json"
       }
     }
   },
