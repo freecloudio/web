@@ -1,6 +1,6 @@
 @import "../variables";
 
-.textfield-container {
+.inputfield-container {
 	margin: $base-grid-size * 2 0;
 
 
@@ -8,12 +8,12 @@
 		display: block;
 	}
 
-	.text-field {
+	.input-field {
 		font-family: $font-stack;
 		border: none;
 		outline: none;
 		background: transparent;
-		padding: $base-grid-size * 2 $base-grid-size * 4;
+		padding: $base-grid-size * 2 $base-grid-size * 2;
 		border-radius: 5px;
 		box-sizing: border-box;
 		font-size: $base-grid-size * 2;

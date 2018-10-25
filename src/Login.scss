@@ -35,7 +35,7 @@
 				transform: translateX(100%);
 			}
 
-			img {
+			.img {
 				max-width: calc(100% - #{$base-grid-size * 4});
 				position: relative;
 				top: 50%;
@@ -60,8 +60,9 @@
 				align-items: center;
 				justify-content: center;
 				color: $color-primary;
+				height: 1.5rem;
 
-				img {
+				.img {
 					height: 1.5rem;
 					margin-right: 2ch;
 				}

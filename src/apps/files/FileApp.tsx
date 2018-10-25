@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar";
 import FileList from "./FileList";
 import { fileStore } from "../../store/FileStore";
 import Breadcrumbs from "../../core/Breadcrumbs";
-import TextField, { InputStyle } from "../../core/TextField";
+import InputField, { InputStyle } from "../../core/InputField";
 import { RouteComponentProps } from "react-router";
 
 interface RouterParams {
@@ -39,7 +39,7 @@ class FileApp extends React.Component<Props, object> {
 				<div className="files">
 					<div className="files-header">
 						<Breadcrumbs parts={breadcrumbs} />
-						<TextField style={InputStyle.Dark} />
+						<InputField type="text" style={InputStyle.Dark} />
 					</div>
 					<FileList base={base + "/" + type} fileStore={fileStore} currentPath="/" />
 				</div>

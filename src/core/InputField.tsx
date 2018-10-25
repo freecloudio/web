@@ -1,4 +1,4 @@
-import "./TextField.scss";
+import "./InputField.scss";
 
 import * as React from "react";
 
@@ -16,9 +16,11 @@ interface State {
 interface Props {
 	label?: string;
 	style: InputStyle;
+	type: "text" | "number" | "email" | "password" | "tel" | "search";
+	autocomplete?: string;
 }
 
-class TextField extends React.Component<Props, State> {
+class InputField extends React.Component<Props, State> {
 	private readonly id: number;
 
 	constructor(props: Props) {
@@ -35,17 +37,18 @@ class TextField extends React.Component<Props, State> {
 
 	public render() {
 		return (
-			<div className="textfield-container">
+			<div className="inputfield-container">
 			{ this.props.label ?
 				<label htmlFor={`tf${this.id}`}>{this.props.label}</label>
 					:
 				null }
 				<input
 					id={`tf${this.id}`}
-					type="text"
+					type={this.props.type}
 					value={this.state.value}
 					onChange={this.onInput}
-					className={`text-field ${this.props.style === InputStyle.Dark ? "dark" : "light"}`}
+					className={`input-field ${this.props.style === InputStyle.Dark ? "dark" : "light"}`}
+					autoComplete={this.props.autocomplete}
 				/>
 
 			</div>
@@ -57,4 +60,4 @@ class TextField extends React.Component<Props, State> {
 	}
 }
 
-export default TextField;
+export default InputField;

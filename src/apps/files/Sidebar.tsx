@@ -4,6 +4,7 @@ import "./Sidebar.scss";
 import Icon, { IconStyle } from "../../core/Icon";
 import { NavLink, match } from "react-router-dom";
 import { Location } from "history";
+import { Log } from "../../Log";
 
 interface Props {
 	// base path of the files app. This is used to generate sub-links like for shared files and trash.
@@ -11,6 +12,8 @@ interface Props {
 }
 
 class Sidebar extends React.Component<Props, object> {
+	private readonly log = new Log("Sidebar");
+
 	public render() {
 		const {base} = this.props;
 		return (
@@ -45,6 +48,7 @@ class Sidebar extends React.Component<Props, object> {
 	}
 
 	private homeLinkIsActive = (m: match, location: Location): boolean => {
+		this.log.debug(m.url, this.props.base, m);
 		return (m.url === this.props.base || m.url.includes(this.props.base + "/d"));
 	}
 }

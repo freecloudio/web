@@ -7,6 +7,7 @@ import "./MainSidebar.scss";
 import logo from "../res/img/logo_white_nopadding.svg";
 import Icon, { IconStyle } from "../core/Icon";
 import Avatar from "../core/Avatar";
+import Image from "../core/Image";
 import { UserStore } from "../store/UserStore";
 
 interface Props {
@@ -15,12 +16,13 @@ interface Props {
 
 @observer
 class MainSidebar extends React.Component<Props, object> {
+
 	public render() {
 		return (
 			<header className="mainsidebar">
 				<section className="top">
 					<div className="logo-container">
-						<img className="logo" src={logo} />
+						<Image className="logo" src={logo} />
 					</div>
 					<nav>
 						<NavLink className="app-link" to="/apps/files"><Icon name="folderOutline" style={IconStyle.White} size={1.5} /></NavLink>
