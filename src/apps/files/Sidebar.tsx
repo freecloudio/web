@@ -5,8 +5,6 @@ import Icon, { IconStyle } from "../../core/Icon";
 import { NavLink, match } from "react-router-dom";
 import { Location } from "history";
 import { Log } from "../../Log";
-import Button from "src/core/Button";
-import { notificationStore, NotificationType } from "src/store/NotificationStore";
 
 interface Props {
 	// base path of the files app. This is used to generate sub-links like for shared files and trash.
@@ -43,9 +41,6 @@ class Sidebar extends React.Component<Props, object> {
 								<Icon name="deleteOutline" size={1.5} style={IconStyle.Dark} />Trash
 							</NavLink>
 						</li>
-						<Button text="Send default notification" onClick={this.defaultNotification} />
-						<Button text="Send positive notification" onClick={this.positiveNotification} />
-						<Button text="Send negative notification" onClick={this.negativeNotification} />
 					</ul>
 				</nav>
 			</aside>
@@ -55,18 +50,6 @@ class Sidebar extends React.Component<Props, object> {
 	private homeLinkIsActive = (m: match, location: Location): boolean => {
 		this.log.debug(m.url, this.props.base, m);
 		return (m.url === this.props.base || m.url.includes(this.props.base + "/d"));
-	}
-
-	private defaultNotification = () => {
-		notificationStore.sendNotification("Default notification");
-	}
-
-	private negativeNotification = () => {
-		notificationStore.sendNotification("Negative notification", NotificationType.NEGATIVE);
-	}
-
-	private positiveNotification = () => {
-		notificationStore.sendNotification("Positive notification", NotificationType.POSITIVE);
 	}
 }
 
