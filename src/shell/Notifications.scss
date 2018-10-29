@@ -1,0 +1,29 @@
+@import "../variables";
+
+.notification-container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 40vw;
+	min-width: 300px;
+	max-width: 1000px;
+	z-index: 999;
+	margin: $pageborder-y 1rem 0 0;
+
+	.notification {
+		display: block;
+		background: $color-background-grey;
+		color: $color-text;
+		padding: 1rem;
+		border-radius: 5px;
+		margin-bottom: 1rem;
+
+		&.negative {
+			color: $color-negative;
+		}
+
+		&.positive {
+			color: $color-positive;
+		}
+	}
+}

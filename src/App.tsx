@@ -11,13 +11,16 @@ import Login from "./Login";
 import { observer } from "mobx-react";
 import PrivateRoute from "./core/PrivateRoute";
 import { authStore } from "./store/AuthStore";
+import Notifications from "./shell/Notifications";
 
 @observer
 class App extends React.Component {
+
 	public render() {
 		return (
 			<BrowserRouter>
 				<div className="App">
+					<Notifications/>
 				{ authStore.isSignedIn ? <MainSidebar userStore={userStore} /> : null }
 					<main className={authStore.isSignedIn ? "" : "fullbleed"}>
 						<Route exact path="/" render={FilesRedirect} />
