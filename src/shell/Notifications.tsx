@@ -4,17 +4,26 @@ import * as React from "react";
 import { notificationStore, NotificationType } from "src/store/NotificationStore";
 import { observer } from "mobx-react";
 
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+
 @observer
 class Notifications extends React.Component {
-
 	public render() {
 		return (
 			<div className="notification-container">
-				{notificationStore.notifications.map((ntfn) =>
-					<div key={ntfn.id} className={`notification ${NotificationType[ntfn.type].toLowerCase()}`}>
-						<span className="notification-text">{ntfn.message}</span>
-					</div>,
-				)}
+				<TransitionGroup>
+					{notificationStore.notifications.map((ntfn) =>
+						<CSSTransition
+							key={ntfn.id}
+							classNames="notification-anim"
+							timeout={{ enter: 200, exit: 200 }}
+						>
+							<div className={`notification ${NotificationType[ntfn.type].toLowerCase()}`}>
+								<span className="notification-text">{ntfn.message} {ntfn.id}</span>
+							</div>
+						</CSSTransition>,
+					)}
+				</TransitionGroup>
 			</div>
 		);
 	}
