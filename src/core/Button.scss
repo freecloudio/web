@@ -10,6 +10,13 @@
 	font-weight: 500;
 	margin: $base-grid-size * 2 0;
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+
+	.icon {
+		margin-right: $base-grid-size * 2;
+		color: inherit;
+	}
 	
 	&.dark {
 		background: rgba(0, 0, 0, 0.1);
@@ -19,5 +26,10 @@
 	&.primary {
 		background: $color-primary;
 		color: $color-text-light-heavy;
+	}
+
+	&.primary-inverted {
+		color: $color-primary;
+		background: none;
 	}
 }

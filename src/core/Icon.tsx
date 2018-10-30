@@ -15,7 +15,7 @@ export enum IconStyle {
 interface Props {
 	name: string;
 	size?: number;
-	style: IconStyle;
+	color?: IconStyle;
 	className?: string;
 }
 
@@ -31,9 +31,15 @@ const IconColors: IconColorsDictionary = {
 class Icon extends React.Component<Props, object> {
 	public render() {
 		const iconName = "mdi" + this.props.name.charAt(0).toUpperCase() + this.props.name.substr(1);
+		const classes = [ "icon" ];
+		if (this.props.className) {
+			classes.push(...this.props.className.split(" "));
+		}
+
+		const color = (this.props.color !== undefined) ? IconColors[this.props.color] : "currentColor";
 
 		return (
-			<MDIcon.Icon className={this.props.className} path={Icons[iconName]} size={(this.props.size || 1) / 1.5} color={IconColors[this.props.style]}/>
+			<MDIcon.Icon className={classes.join(" ")} path={Icons[iconName]} size={(this.props.size || 1) / 1.5} color={color}/>
 		);
 	}
 }

@@ -17,7 +17,7 @@ class FileTableRow extends React.Component<Props, object> {
 			<tr>
 				<td>
 					<div className="cell-wrapper" onDoubleClick={this.onDoubleClick}>
-						<Icon name={("children" in file) ? "folderOutline" : "fileOutline"} size={1.5} style={IconStyle.Dark} className="icon" />
+						<Icon name={("children" in file) ? "folderOutline" : "fileOutline"} size={1.5} color={IconStyle.Dark} className="icon" />
 						<span>{file.name}</span>
 					</div>
 				</td>

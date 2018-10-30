@@ -25,14 +25,14 @@ class MainSidebar extends React.Component<Props, object> {
 						<Image className="logo" src={logo} />
 					</div>
 					<nav>
-						<NavLink className="app-link" to="/apps/files"><Icon name="folderOutline" style={IconStyle.White} size={1.5} /></NavLink>
-						<NavLink className="app-link" to="/apps/calendar"><Icon name="calendar" style={IconStyle.White} size={1.5} /></NavLink>
-						<NavLink className="app-link" to="/apps/images"><Icon name="imageOutline" style={IconStyle.White} size={1.5} /></NavLink>
-						<NavLink className="app-link" to="/apps/contacts"><Icon name="accountMultipleOutline" style={IconStyle.White} size={1.5} /></NavLink>
+						<NavLink className="app-link" to="/apps/files"><Icon name="folderOutline" color={IconStyle.White} size={1.5} /></NavLink>
+						<NavLink className="app-link" to="/apps/calendar"><Icon name="calendar" color={IconStyle.White} size={1.5} /></NavLink>
+						<NavLink className="app-link" to="/apps/images"><Icon name="imageOutline" color={IconStyle.White} size={1.5} /></NavLink>
+						<NavLink className="app-link" to="/apps/contacts"><Icon name="accountMultipleOutline" color={IconStyle.White} size={1.5} /></NavLink>
 					</nav>
 				</section>
 				<section className="bottom">
-					<NavLink className="app-link" to="/apps/settings"><Icon name="settingsOutline" style={IconStyle.White} size={1.5} /></NavLink>
+					<NavLink className="app-link" to="/apps/settings"><Icon name="settingsOutline" color={IconStyle.White} size={1.5} /></NavLink>
 					<Avatar name={this.props.userStore.currentUserInitials} size={3} />
 				</section>
 			</header>

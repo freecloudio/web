@@ -33,7 +33,7 @@ class Breadcrumbs extends React.Component<Props, object> {
 					}
 					{
 						idx < this.props.parts.length - 1 ?
-							<Icon className="icon" name="chevronRight" style={IconStyle.Dark} size={1.5}/>
+							<Icon className="icon" name="chevronRight" color={IconStyle.Dark} size={1.5}/>
 						:
 							null
 					}

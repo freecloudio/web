@@ -5,6 +5,7 @@ export enum ButtonStyle {
 	Dark,
 	Light,
 	Primary,
+	PrimaryInverted,
 }
 
 export interface Props {
@@ -20,6 +21,7 @@ const StyleClasses = {
 	[ButtonStyle.Dark]: "dark",
 	[ButtonStyle.Light]: "light",
 	[ButtonStyle.Primary]: "primary",
+	[ButtonStyle.PrimaryInverted]: "primary-inverted",
 };
 
 class Button extends React.Component<Props, object> {
