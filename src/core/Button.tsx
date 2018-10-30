@@ -8,9 +8,10 @@ export enum ButtonStyle {
 }
 
 export interface Props {
-	text: string;
+	text?: string;
 	style?: ButtonStyle;
 	onClick: ButtonClickHandler;
+	className?: string;
 }
 
 type ButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -27,11 +28,19 @@ class Button extends React.Component<Props, object> {
 	}
 
 	public render() {
-		const { text } = this.props;
+		const { text, children } = this.props;
 		const style = StyleClasses[this.props.style || ButtonStyle.Dark];
 
-	 return (
-			<button className={`btn ${style}`} onClick={this.onClick}>{text}</button>
+		const classes = ["btn"];
+		classes.push(style);
+		if (this.props.className) {
+			this.props.className.split(" ").forEach((cls) => {
+				classes.push(cls);
+			});
+		}
+
+		return (
+			<button className={classes.join(" ")} onClick={this.onClick}>{ children ? children : text }</button>
 		);
 	}
 
