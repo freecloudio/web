@@ -1,0 +1,22 @@
+.dropdown {
+	display: block;
+	background: rgba(255, 100, 30, 0.5);
+	border-radius: 5px;
+	padding: 1rem;
+	position: absolute;
+	box-shadow: 0 5px 14px rgba(0, 0, 0, 0.15);
+	background: #fff;
+	visibility: hidden;
+	pointer-events: none;
+	opacity: 0;
+	transition: all .2s ease-in-out;
+	transform: translateY(10px);
+	
+	&.visible {
+		z-index: 1;
+		visibility: visible;
+		pointer-events: all;
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

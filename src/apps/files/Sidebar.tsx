@@ -5,15 +5,20 @@ import Icon, { IconStyle } from "../../core/Icon";
 import { NavLink, match } from "react-router-dom";
 import { Location } from "history";
 import { Log } from "../../Log";
-import Button, { ButtonStyle } from "src/core/Button";
+import Button, { ButtonStyle } from "../../core/Button";
+import Dropdown from "../../core/Dropdown";
+import { observable } from "mobx";
+import { observer } from "mobx-react";
 
 interface Props {
 	// base path of the files app. This is used to generate sub-links like for shared files and trash.
 	base: string;
 }
 
+@observer
 class Sidebar extends React.Component<Props, object> {
 	private readonly log = new Log("Sidebar");
+	@observable private addDropdownVisible = false;
 
 	public render() {
 		const { base } = this.props;
@@ -24,8 +29,18 @@ class Sidebar extends React.Component<Props, object> {
 					<ul>
 						<li>
 							<Button className="add-button" onClick={this.onAddButtonClicked} style={ButtonStyle.PrimaryInverted}>
-								<Icon name="plus" size={1.5}/>Add
+								<Icon name="plus" size={1.5} />Add
 							</Button>
+							<Dropdown visible={this.addDropdownVisible} onClick={this.onAddButtonClicked}>
+								<ul>
+									<li>
+										Test1
+									</li>
+									<li>
+										Test2
+									</li>
+								</ul>
+							</Dropdown>
 						</li>
 						<li>
 							<NavLink to={{ pathname: base }} isActive={this.homeLinkIsActive}>
@@ -60,6 +75,7 @@ class Sidebar extends React.Component<Props, object> {
 
 	private onAddButtonClicked = () => {
 		this.log.debug("Add button clicked");
+		this.addDropdownVisible = !this.addDropdownVisible;
 	}
 }
 
