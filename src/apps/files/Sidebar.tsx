@@ -9,6 +9,7 @@ import Button, { ButtonStyle } from "../../core/Button";
 import Dropdown from "../../core/Dropdown";
 import { observable } from "mobx";
 import { observer } from "mobx-react";
+import DropdownContainer from "../../core/DropdownContainer";
 
 interface Props {
 	// base path of the files app. This is used to generate sub-links like for shared files and trash.
@@ -28,19 +29,25 @@ class Sidebar extends React.Component<Props, object> {
 				<nav>
 					<ul>
 						<li>
-							<Button className="add-button" onClick={this.onAddButtonClicked} style={ButtonStyle.PrimaryInverted}>
-								<Icon name="plus" size={1.5} />Add
+							<DropdownContainer
+								dropdown={
+									<Dropdown visible={this.addDropdownVisible} onClick={this.onAddButtonClicked} anchor="below">
+										<ul>
+											<li>
+												Test1
+										</li>
+											<li>
+												Test2
+										</li>
+										</ul>
+									</Dropdown>
+								}
+							>
+								<Button className="add-button" onClick={this.onAddButtonClicked} style={ButtonStyle.PrimaryInverted}>
+									<Icon name="plus" size={1.5} />New
 							</Button>
-							<Dropdown visible={this.addDropdownVisible} onClick={this.onAddButtonClicked}>
-								<ul>
-									<li>
-										Test1
-									</li>
-									<li>
-										Test2
-									</li>
-								</ul>
-							</Dropdown>
+
+							</DropdownContainer>
 						</li>
 						<li>
 							<NavLink to={{ pathname: base }} isActive={this.homeLinkIsActive}>

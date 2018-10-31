@@ -4,7 +4,7 @@ import * as React from "react";
 interface Props {
 	visible: boolean;
 	onClick?: () => void;
-	anchor?: "top" | "left" | "right" | "bottom" | "below" | "above";
+	anchor?: "top" | "left" | "right" | "bottom" | "below" | "above" | "toLeft" | "toRight";
 }
 
 class Dropdown extends React.Component<Props, object> {
