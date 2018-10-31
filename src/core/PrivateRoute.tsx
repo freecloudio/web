@@ -2,6 +2,11 @@ import * as React from "react";
 import { Route, Redirect } from "react-router";
 import { authStore } from "src/store/AuthStore";
 
+/**
+ * PrivateRoute is a wrapper around react-router's Route component.
+ * When matched, it checks whether the user is signed in, and if not, redirects
+ * to the login page.
+ */
 class PrivateRoute extends Route {
  public render() {
 	 if (!this.props.component) {
