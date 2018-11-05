@@ -10,8 +10,8 @@ commit_client_files() {
   git add --force --all build 
   MESSAGE="CI build: $(git log --format=%B -n 1 $TRAVIS_COMMIT)"
   git commit --message "$MESSAGE"
-  git remote add origin-pages https://${GH_TOKEN}@github.com/freecloudio/web.git > /dev/null 2&>1
-	git push --quiet origin master
+  git remote add origin-deploy https://${GH_TOKEN}@github.com/freecloudio/web.git > /dev/null 2>&1
+	git push --quiet origin-deploy master
 }
 
 setup_git
