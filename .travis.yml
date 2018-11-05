@@ -8,7 +8,7 @@ env:
 
 # Build the client to the build/ directory
 before_deploy:
-  - npm build
+  - npm run build
 
 deploy:
   provider: script
