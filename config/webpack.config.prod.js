@@ -15,6 +15,7 @@ const getClientEnvironment = require('./env');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const os = require("os");
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -283,7 +284,7 @@ module.exports = {
 			async: false,
 			tsconfig: paths.appTsProdConfig,
 			tslint: paths.appTsLint,
-			workers: 2,
+			workers: os.cpus().length,
 		}),
 	],
 	// Some libraries import Node modules but don't use them in the browser.
