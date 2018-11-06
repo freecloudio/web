@@ -7,6 +7,7 @@
     "jsx-boolean-value": false,
     "jsx-curly-spacing": "always",
     "jsx-no-multiline-js": false,
+    "max-classes-per-file": false,
     "max-line-length": [true, {"limit": 150, "ignore-pattern": "^import |^export {(.*?)}"}],
     "no-console": false,
     "no-string-throw": true,
@@ -18,7 +19,8 @@
     "exclude": [
       "config/**/*.js",
       "node_modules/**/*.ts",
-      "coverage/lcov-report/*.js"
+      "coverage/lcov-report/*.js",
+      "src/api/**/*"
     ]
   }
 }

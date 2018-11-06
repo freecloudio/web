@@ -1,8 +1,15 @@
 import { Log } from "../Log";
 import { computed, observable } from "mobx";
+import { AuthApi, User } from "src/api";
 
 // Name of the item in localStoage
 const AUTH_TOKEN_KEY = "fc-token";
+
+export class AuthError extends Error {
+	constructor(public msg: string) {
+		super(msg);
+	}
+}
 
 /**
  * An AuthStore is responsible for storing all authentication-related data in
@@ -18,6 +25,7 @@ export class AuthStore {
 	 */
 	@observable private authToken: string | null;
 	private readonly log = new Log("AuthStore");
+	private readonly authAPI = new AuthApi(undefined, "localhost:8080");
 
 	constructor() {
 		this.authToken = localStorage.getItem(AUTH_TOKEN_KEY);
@@ -35,20 +43,32 @@ export class AuthStore {
 	/**
 	 * signIn does a request to the server to sign in with the provided data.
 	 * The returned Promise will resolve, once the request was successful.
-	 * When the Promise resolves to true, the provided credentials were correct.
-	 * The Promise rejects on unsuccessful network requests.
+	 * The Promise rejects on unsuccessful network requests or invalid credentials.
 	 * @param email the user's email address
 	 * @param password the user's plaintext password
 	 */
-	public async signIn(email: string, password: string): Promise<boolean> {
+	public async signIn(email: string, password: string): Promise<void> {
 		this.log.info("Signing in");
-		return new Promise<boolean>((resolve, reject) => {
-			window.setTimeout(() => {
-				this.setAuthToken("testtoken");
-				this.log.debug("Signin successful, token is", this.authToken);
-				resolve(true);
-			}, Math.random() * 500 + 200);
-		});
+		const tkn = await this.authAPI.login({email, password});
+		if (!tkn.token) {
+			throw new AuthError("token is empty");
+		}
+		this.setAuthToken(tkn.token);
+		this.log.debug("Signin successful, token is", tkn.token);
+	}
+
+	/**
+	 * 
+	 */
+	public async signUp(firstName: string, lastName: string, email: string, password: string) {
+		this.log.info("Signing up");
+		const usr: User = {firstName, lastName, email, password};
+		const tkn = await this.authAPI.signup(usr);
+		if (!tkn.token) {
+			throw new AuthError("token is empty");
+		}
+		this.setAuthToken(tkn.token);
+		this.log.debug("Signup successful, token is", tkn.token);
 	}
 
 	/**

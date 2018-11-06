@@ -1,6 +1,8 @@
 import "./InputField.scss";
 
 import * as React from "react";
+import { observable } from "mobx";
+import { observer } from "mobx-react";
 
 export enum InputStyle {
 	Light,
@@ -9,18 +11,18 @@ export enum InputStyle {
 
 let nextTextFieldID = 0;
 
-interface State {
-	value: string;
-}
-
 interface Props {
 	label?: string;
 	style: InputStyle;
 	type: "text" | "number" | "email" | "password" | "tel" | "search";
 	autocomplete?: string;
+	observable?: string;
 }
 
-class InputField extends React.Component<Props, State> {
+@observer
+class InputField extends React.Component<Props, object> {
+	@observable public value: string;
+
 	private readonly id: number;
 
 	constructor(props: Props) {
@@ -29,10 +31,6 @@ class InputField extends React.Component<Props, State> {
 		this.state = {value: ""};
 		this.id = nextTextFieldID;
 		nextTextFieldID++;
-	}
-
-	public get value(): string {
-		return this.state.value;
 	}
 
 	public render() {
@@ -45,7 +43,7 @@ class InputField extends React.Component<Props, State> {
 				<input
 					id={`tf${this.id}`}
 					type={this.props.type}
-					value={this.state.value}
+					value={this.value}
 					onChange={this.onInput}
 					className={`input-field ${this.props.style === InputStyle.Dark ? "dark" : "light"}`}
 					autoComplete={this.props.autocomplete}
@@ -56,7 +54,7 @@ class InputField extends React.Component<Props, State> {
 	}
 
 	private onInput(event: React.FormEvent<HTMLInputElement>) {
-		this.setState({value: event.currentTarget.value});
+		this.value = event.currentTarget.value;
 	}
 }
 

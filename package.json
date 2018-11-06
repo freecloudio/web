@@ -23,6 +23,7 @@
     "mobx": "^5.5.2",
     "mobx-react": "^5.3.6",
     "object-assign": "^4.1.1",
+    "portable-fetch": "^3.0.0",
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-loader": "^3.0.0",
     "promise": "^8.0.2",
@@ -40,8 +41,7 @@
     "tslint-config-prettier": "^1.10.0",
     "tslint-react": "^3.2.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
-    "url-loader": "^1.1.2",
-    "whatwg-fetch": "^3.0.0"
+    "url-loader": "^1.1.2"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -70,7 +70,7 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}"
-		],
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.(j|t)s?(x)",
       "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
@@ -87,8 +87,8 @@
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
     ],
     "moduleNameMapper": {
-			"^react-native$": "react-native-web",
-			"src/(.*)$": "<rootDir>/src/$1"
+      "^react-native$": "react-native-web",
+      "src/(.*)$": "<rootDir>/src/$1"
     },
     "moduleFileExtensions": [
       "web.ts",
