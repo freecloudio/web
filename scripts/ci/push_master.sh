@@ -2,7 +2,7 @@
 
 echo "Github Token is: $1"
 
-GH_TOKEN="d87870d38f759311b3c970af4a966fb5af98822e"
+GH_TOKEN="8c00d1039eb9eb7de823c61f19d26eb53242f66b"
 
 git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis CI"
