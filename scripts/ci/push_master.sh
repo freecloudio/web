@@ -2,10 +2,10 @@
 
 echo "Github Token is: $1"
 
-GH_TOKEN="8c00d1039eb9eb7de823c61f19d26eb53242f66b"
+GH_TOKEN="6338a7404b1516c24a01fe588755f26734d08088"
 
-git config --global user.email "travis@travis-ci.org"
-git config --global user.name "Travis CI"
+git config --global user.email "freecloud.bot@gmail.com"
+git config --global user.name "freecloud-bot"
 
 git checkout -b master
 git add --force --all build 
