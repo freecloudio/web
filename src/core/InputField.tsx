@@ -16,19 +16,18 @@ interface Props {
 	style: InputStyle;
 	type: "text" | "number" | "email" | "password" | "tel" | "search";
 	autocomplete?: string;
-	observable?: string;
+	onChange?: (value: string) => void;
 }
 
 @observer
 class InputField extends React.Component<Props, object> {
-	@observable public value: string;
+	@observable private value: string = "";
 
 	private readonly id: number;
 
 	constructor(props: Props) {
 		super(props);
 		this.onInput = this.onInput.bind(this);
-		this.state = {value: ""};
 		this.id = nextTextFieldID;
 		nextTextFieldID++;
 	}
@@ -55,6 +54,9 @@ class InputField extends React.Component<Props, object> {
 
 	private onInput(event: React.FormEvent<HTMLInputElement>) {
 		this.value = event.currentTarget.value;
+		if (this.props.onChange) {
+			this.props.onChange(this.value);
+		}
 	}
 }
 

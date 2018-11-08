@@ -25,7 +25,10 @@ export class AuthStore {
 	 */
 	@observable private authToken: string | null;
 	private readonly log = new Log("AuthStore");
-	private readonly authAPI = new AuthApi(undefined, "localhost:8080");
+	private readonly authAPI = new AuthApi(
+		undefined,
+		window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/api/v1",
+	);
 
 	constructor() {
 		this.authToken = localStorage.getItem(AUTH_TOKEN_KEY);
