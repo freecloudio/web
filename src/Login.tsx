@@ -69,8 +69,8 @@ class Login extends React.Component {
 							<h1>Welcome back</h1>
 							{ /* tslint:disable-next-line */}
 							<form onSubmit={(event: React.FormEvent) => { event.preventDefault() }} className="form">
-								<InputField type="email" label="eMail" style={InputStyle.Dark} autocomplete="email" ref={this.loginEmail} />
-								<InputField type="password" label="password" style={InputStyle.Dark} autocomplete="password" ref={this.loginPassword} />
+								<InputField type="email" label="eMail" style={InputStyle.Dark} autocomplete="email" onChange={this.onLoginEmailChanged}/>
+								<InputField type="password" label="password" style={InputStyle.Dark} autocomplete="password" onChange={this.onLoginPasswordChanged} />
 								<Button style={ButtonStyle.Primary} text="Login" onClick={this.onLogin} />
 							</form>
 						</main>
@@ -101,6 +101,14 @@ class Login extends React.Component {
 
 	private onSignupConfirmPasswordChanged = (value: string) => {
 		this.signupConfirmPassword = value;
+	}
+
+	private onLoginEmailChanged = (value: string) => {
+		this.loginEmail = value;
+	}
+
+	private onLoginPasswordChanged = (value: string) => {
+		this.loginPassword = value;
 	}
 
 	private gotoSignup = (event: React.MouseEvent<HTMLAnchorElement>) => {

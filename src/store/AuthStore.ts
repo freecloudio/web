@@ -1,6 +1,6 @@
 import { Log } from "../Log";
 import { computed, observable } from "mobx";
-import { AuthApi, User } from "src/api";
+import { AuthApi, User, Configuration } from "src/api";
 
 // Name of the item in localStoage
 const AUTH_TOKEN_KEY = "fc-token";
@@ -25,13 +25,12 @@ export class AuthStore {
 	 */
 	@observable private authToken: string | null;
 	private readonly log = new Log("AuthStore");
-	private readonly authAPI = new AuthApi(
-		undefined,
-		window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/api/v1",
-	);
+	private authAPI: AuthApi;
 
 	constructor() {
 		this.authToken = localStorage.getItem(AUTH_TOKEN_KEY);
+		// In case there was a token already, use it
+		this.authAPI = this.makeAuthAPI(this.getAuthorizedAPIConfiguration());
 	}
 
 	/**
@@ -44,11 +43,23 @@ export class AuthStore {
 	}
 
 	/**
+	 * getAuthorizedAPIConfiguration returns a Configuration object containing the current auth token.
+	 * This should be used by other stores making calls to the API, to ensure that this store is the SPOT
+	 * considering the auth token.
+	 * @returns {Configuration} A Configuration object containing the auth token.
+	 */
+	public getAuthorizedAPIConfiguration(): Configuration {
+		return {
+			accessToken: this.authToken || "",
+		};
+	}
+
+	/**
 	 * signIn does a request to the server to sign in with the provided data.
 	 * The returned Promise will resolve, once the request was successful.
 	 * The Promise rejects on unsuccessful network requests or invalid credentials.
-	 * @param email the user's email address
-	 * @param password the user's plaintext password
+	 * @param {string} email the user's email address
+	 * @param {string} password the user's plaintext password
 	 */
 	public async signIn(email: string, password: string): Promise<void> {
 		this.log.info("Signing in");
@@ -57,11 +68,17 @@ export class AuthStore {
 			throw new AuthError("token is empty");
 		}
 		this.setAuthToken(tkn.token);
+		// Create a new AuthApi object with the authorized configuration
+		this.authAPI = this.makeAuthAPI(this.getAuthorizedAPIConfiguration());
 		this.log.debug("Signin successful, token is", tkn.token);
 	}
 
 	/**
-	 * 
+	 * signUp creates a new user account and a session for that user.
+	 * @param {string} firstName the user's first name
+	 * @param {string} lastName the user's last name
+	 * @param {string} email the user's email. No further validation is done before sending it to the server.
+	 * @param {string} password the user's password in cleartext. No further validation is done before sending it to the server.
 	 */
 	public async signUp(firstName: string, lastName: string, email: string, password: string) {
 		this.log.info("Signing up");
@@ -71,17 +88,45 @@ export class AuthStore {
 			throw new AuthError("token is empty");
 		}
 		this.setAuthToken(tkn.token);
+		// Create a new AuthApi object with the authorized configuration
+		this.authAPI = this.makeAuthAPI(this.getAuthorizedAPIConfiguration());
 		this.log.debug("Signup successful, token is", tkn.token);
+	}
+
+	/**
+	 * signOut ends the current active session by sending a sign out request to the server
+	 * (which invalidates the current session token), as well as deleting it from localStorage.
+	 * The result of the sign out request is not accounted for, as tokens should be extremely hard to guess (if not impossible),
+	 * so deleting it from the client should also suffice (old sessions are discarded by the server at some point anyway).
+	 */
+	public async signOut() {
+		this.log.info("Signing out");
+		this.setAuthToken(null);
+		try {
+			await this.authAPI.logout();
+		} catch (err) {
+			this.log.warn("Logout failed, still deleting token");
+		}
+		this.authAPI = this.makeAuthAPI();
 	}
 
 	/**
 	 * setAuthToken writes the given auth token to localStorage and the internal
 	 * authToken variable.
-	 * @param token the new auth token
+	 * @param {(string | null)} token the new auth token
 	 */
-	private setAuthToken(token: string) {
-		localStorage.setItem(AUTH_TOKEN_KEY, token);
+	private setAuthToken(token: string | null) {
+		if (!token) {
+			localStorage.removeItem(AUTH_TOKEN_KEY);
+		} else {
+			localStorage.setItem(AUTH_TOKEN_KEY, token);
+		}
 		this.authToken = token;
+	}
+
+	private makeAuthAPI(configuration?: Configuration): AuthApi {
+		const l = window.location;
+		return new AuthApi(configuration, l.protocol + "//" + l.hostname + ":" + l.port + "/api/v1");
 	}
 
 }

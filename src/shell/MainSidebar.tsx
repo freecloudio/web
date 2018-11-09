@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { observer } from "mobx-react";
 
 import "./MainSidebar.scss";
@@ -9,6 +9,10 @@ import Icon, { IconStyle } from "../core/Icon";
 import Avatar from "../core/Avatar";
 import Image from "../core/Image";
 import { UserStore } from "../store/UserStore";
+import DropdownContainer from "src/core/DropdownContainer";
+import Dropdown from "src/core/Dropdown";
+import { observable } from "mobx";
+import { authStore } from "src/store/AuthStore";
 
 interface Props {
 	userStore: UserStore;
@@ -16,6 +20,7 @@ interface Props {
 
 @observer
 class MainSidebar extends React.Component<Props, object> {
+	@observable private userAvatarDropdownVisible: boolean = false;
 
 	public render() {
 		return (
@@ -33,10 +38,33 @@ class MainSidebar extends React.Component<Props, object> {
 				</section>
 				<section className="bottom">
 					<NavLink className="app-link" to="/apps/settings"><Icon name="settingsOutline" color={IconStyle.White} size={1.5} /></NavLink>
-					<Avatar name={this.props.userStore.currentUserInitials} size={3} />
+					<DropdownContainer
+						dropdown={
+							<Dropdown visible={this.userAvatarDropdownVisible} onClick={this.onAvatarClicked} anchor="bottom">
+								<ul>
+									<li>
+										<Link to="/apps/profile">Your profile</Link>
+									</li>
+									<li>
+										<span onClick={this.onSignOutClicked}>Sign out</span>
+									</li>
+								</ul>
+							</Dropdown>
+						}
+					>
+						<Avatar name={this.props.userStore.currentUserInitials} size={3} onClick={this.onAvatarClicked} />
+					</DropdownContainer>
 				</section>
 			</header>
 		);
+	}
+
+	private onAvatarClicked = () => {
+		this.userAvatarDropdownVisible = !this.userAvatarDropdownVisible;
+	}
+
+	private onSignOutClicked() {
+		authStore.signOut();
 	}
 }
 
