@@ -35,10 +35,10 @@ class Sidebar extends React.Component<Props, object> {
 										<ul>
 											<li>
 												Test1
-										</li>
+											</li>
 											<li>
 												Test2
-										</li>
+											</li>
 										</ul>
 									</Dropdown>
 								}
