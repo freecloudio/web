@@ -30,7 +30,7 @@ export class AuthStore {
 	constructor() {
 		this.authToken = localStorage.getItem(AUTH_TOKEN_KEY);
 		// In case there was a token already, use it
-		this.authAPI = this.makeAuthAPI(this.getAuthorizedAPIConfiguration());
+		this.authAPI = this.makeAuthAPI(this.authorizedAPIConfiguration);
 	}
 
 	/**
@@ -48,7 +48,7 @@ export class AuthStore {
 	 * considering the auth token.
 	 * @returns {Configuration} A Configuration object containing the auth token.
 	 */
-	public getAuthorizedAPIConfiguration(): Configuration {
+	@computed public get authorizedAPIConfiguration(): Configuration {
 		return {
 			accessToken: this.authToken || "",
 		};
@@ -61,7 +61,7 @@ export class AuthStore {
 	 * @param {string} email the user's email address
 	 * @param {string} password the user's plaintext password
 	 */
-	public async signIn(email: string, password: string): Promise<void> {
+	public async login(email: string, password: string): Promise<void> {
 		this.log.info("Signing in");
 		const tkn = await this.authAPI.login({email, password});
 		if (!tkn.token) {
@@ -69,8 +69,8 @@ export class AuthStore {
 		}
 		this.setAuthToken(tkn.token);
 		// Create a new AuthApi object with the authorized configuration
-		this.authAPI = this.makeAuthAPI(this.getAuthorizedAPIConfiguration());
-		this.log.debug("Signin successful, token is", tkn.token);
+		this.authAPI = this.makeAuthAPI(this.authorizedAPIConfiguration);
+		this.log.debug("Login successful, token is", tkn.token);
 	}
 
 	/**
@@ -89,7 +89,7 @@ export class AuthStore {
 		}
 		this.setAuthToken(tkn.token);
 		// Create a new AuthApi object with the authorized configuration
-		this.authAPI = this.makeAuthAPI(this.getAuthorizedAPIConfiguration());
+		this.authAPI = this.makeAuthAPI(this.authorizedAPIConfiguration);
 		this.log.debug("Signup successful, token is", tkn.token);
 	}
 

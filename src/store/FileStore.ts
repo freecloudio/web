@@ -1,23 +1,39 @@
-import { observable } from "mobx";
-import { File, Directory } from "../models/File";
-import * as mgr from "../manager/FileManager";
-import { UserStore, userStore } from "./UserStore";
+import { autorun, observable } from "mobx";
+import { FileApi, PathInfo } from "src/api";
+import { authStore } from "./AuthStore";
+import { Log } from "src/Log";
 
 export class FileStore {
-	@observable public currentDirectoryContent: Array<File | Directory> = [];
+	private readonly log = new Log("FileStore");
+	private fileAPI: FileApi; 
+	@observable private readonly fileCache: { [path: string]: PathInfo } = {};
 
-	constructor(private users: UserStore) {
-
+	constructor() {
+		autorun(() => {
+			const l = window.location;
+			this.fileAPI = new FileApi(authStore.authorizedAPIConfiguration, l.protocol + "//" + l.hostname + ":" + l.port + "/api/v1");
+			this.log.debug("Created a new FileApi");
+		});
 	}
 
-	public async fetchCurrentDirectory(fullPath: string): Promise<void> {
-		this.currentDirectoryContent = await mgr.getDirectoryContent(fullPath) as Array<File | Directory>;
+	public async fetchPathInfo(fullPath: string): Promise<PathInfo> {
+		this.log.debug("Fetching path info for path", fullPath);
+		const pathInfo = await this.fileAPI.getPathInfo(fullPath);
+		this.fileCache[fullPath] = pathInfo;
+		this.log.debug("Got info for path", fullPath, "- cache updated");
+		return pathInfo;
+	}
 
-		for (const file of this.currentDirectoryContent) {
-			const fileOwner = await this.users.getUserByID(file.ownerID);
-			file.ownerName = fileOwner.name;
+	public async getPathInfo(fullPath: string) {
+		let cached = this.fileCache[fullPath];
+		if (!cached) {
+			this.log.debug("Cache miss for part", fullPath);
+			cached = await this.fetchPathInfo(fullPath);	
+			this.fileCache[fullPath] = cached;
 		}
+		return cached;
 	}
+
 }
 
-export const fileStore = new FileStore(userStore);
+export const fileStore = new FileStore();

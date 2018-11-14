@@ -15,7 +15,7 @@ class SettingsApp extends React.Component {
 		super(props);
 
 		const l = window.location;
-		this.systemAPI = new SystemApi(authStore.getAuthorizedAPIConfiguration(), l.protocol + "//" + l.hostname + ":" + l.port + "/api/v1");
+		this.systemAPI = new SystemApi(authStore.authorizedAPIConfiguration, l.protocol + "//" + l.hostname + ":" + l.port + "/api/v1");
 	}
 
 	public async componentDidMount() {

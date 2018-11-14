@@ -17,7 +17,7 @@ import * as url from "url";
 import * as portableFetch from "portable-fetch";
 import { Configuration } from "./configuration";
 
-const BASE_PATH = "http://localhost/api/v1".replace(/\/+$/, "");
+const BASE_PATH = "http://freecloud.glidingthrough.space/api/v1".replace(/\/+$/, "");
 
 /**
  *
@@ -76,6 +76,26 @@ export class RequiredError extends Error {
     constructor(public field: string, msg?: string) {
         super(msg);
     }
+}
+
+/**
+ * 
+ * @export
+ * @interface CreateFileRequest
+ */
+export interface CreateFileRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateFileRequest
+     */
+    fullPath?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateFileRequest
+     */
+    isDir?: boolean;
 }
 
 /**
@@ -277,6 +297,26 @@ export interface ModelError {
 /**
  * 
  * @export
+ * @interface PathInfo
+ */
+export interface PathInfo {
+    /**
+     * 
+     * @type {FileInfo}
+     * @memberof PathInfo
+     */
+    fileInfo?: FileInfo;
+    /**
+     * 
+     * @type {Array&lt;FileInfo&gt;}
+     * @memberof PathInfo
+     */
+    content?: Array<FileInfo>;
+}
+
+/**
+ * 
+ * @export
  * @interface PathList
  */
 export interface PathList {
@@ -286,6 +326,26 @@ export interface PathList {
      * @memberof PathList
      */
     paths?: Array<string>;
+}
+
+/**
+ * 
+ * @export
+ * @interface Principal
+ */
+export interface Principal {
+    /**
+     * 
+     * @type {Token}
+     * @memberof Principal
+     */
+    token?: Token;
+    /**
+     * 
+     * @type {User}
+     * @memberof Principal
+     */
+    user?: User;
 }
 
 /**
@@ -796,14 +856,14 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @summary Create new file/folder
-         * @param {FileInfo} fileInfo 
+         * @param {CreateFileRequest} createFileRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createFile(fileInfo: FileInfo, options: any = {}): FetchArgs {
-            // verify required parameter 'fileInfo' is not null or undefined
-            if (fileInfo === null || fileInfo === undefined) {
-                throw new RequiredError('fileInfo','Required parameter fileInfo was null or undefined when calling createFile.');
+        createFile(createFileRequest: CreateFileRequest, options: any = {}): FetchArgs {
+            // verify required parameter 'createFileRequest' is not null or undefined
+            if (createFileRequest === null || createFileRequest === undefined) {
+                throw new RequiredError('createFileRequest','Required parameter createFileRequest was null or undefined when calling createFile.');
             }
             const localVarPath = `/file`;
             const localVarUrlObj = url.parse(localVarPath, true);
@@ -826,8 +886,8 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"FileInfo" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.body =  needsSerialization ? JSON.stringify(fileInfo || {}) : (fileInfo || "");
+            const needsSerialization = (<any>"CreateFileRequest" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.body =  needsSerialization ? JSON.stringify(createFileRequest || {}) : (createFileRequest || "");
 
             return {
                 url: url.format(localVarUrlObj),
@@ -918,15 +978,15 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @summary Get fileInfo of requested path
-         * @param {string} path Path to requested fileInfo
+         * @summary Get pathInfo of requested path
+         * @param {string} path Requested path
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFileInfo(path: string, options: any = {}): FetchArgs {
+        getPathInfo(path: string, options: any = {}): FetchArgs {
             // verify required parameter 'path' is not null or undefined
             if (path === null || path === undefined) {
-                throw new RequiredError('path','Required parameter path was null or undefined when calling getFileInfo.');
+                throw new RequiredError('path','Required parameter path was null or undefined when calling getPathInfo.');
             }
             const localVarPath = `/file`;
             const localVarUrlObj = url.parse(localVarPath, true);
@@ -1294,16 +1354,16 @@ export const FileApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create new file/folder
-         * @param {FileInfo} fileInfo 
+         * @param {CreateFileRequest} createFileRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createFile(fileInfo: FileInfo, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
-            const localVarFetchArgs = FileApiFetchParamCreator(configuration).createFile(fileInfo, options);
+        createFile(createFileRequest: CreateFileRequest, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<FileInfo> {
+            const localVarFetchArgs = FileApiFetchParamCreator(configuration).createFile(createFileRequest, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
-                        return response;
+                        return response.json();
                     } else {
                         throw response;
                     }
@@ -1350,13 +1410,13 @@ export const FileApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get fileInfo of requested path
-         * @param {string} path Path to requested fileInfo
+         * @summary Get pathInfo of requested path
+         * @param {string} path Requested path
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFileInfo(path: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<FileInfo> {
-            const localVarFetchArgs = FileApiFetchParamCreator(configuration).getFileInfo(path, options);
+        getPathInfo(path: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<PathInfo> {
+            const localVarFetchArgs = FileApiFetchParamCreator(configuration).getPathInfo(path, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1531,12 +1591,12 @@ export const FileApiFactory = function (configuration?: Configuration, fetch?: F
         /**
          * 
          * @summary Create new file/folder
-         * @param {FileInfo} fileInfo 
+         * @param {CreateFileRequest} createFileRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createFile(fileInfo: FileInfo, options?: any) {
-            return FileApiFp(configuration).createFile(fileInfo, options)(fetch, basePath);
+        createFile(createFileRequest: CreateFileRequest, options?: any) {
+            return FileApiFp(configuration).createFile(createFileRequest, options)(fetch, basePath);
         },
         /**
          * 
@@ -1560,13 +1620,13 @@ export const FileApiFactory = function (configuration?: Configuration, fetch?: F
         },
         /**
          * 
-         * @summary Get fileInfo of requested path
-         * @param {string} path Path to requested fileInfo
+         * @summary Get pathInfo of requested path
+         * @param {string} path Requested path
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFileInfo(path: string, options?: any) {
-            return FileApiFp(configuration).getFileInfo(path, options)(fetch, basePath);
+        getPathInfo(path: string, options?: any) {
+            return FileApiFp(configuration).getPathInfo(path, options)(fetch, basePath);
         },
         /**
          * 
@@ -1661,13 +1721,13 @@ export class FileApi extends BaseAPI {
     /**
      * 
      * @summary Create new file/folder
-     * @param {} fileInfo 
+     * @param {} createFileRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FileApi
      */
-    public createFile(fileInfo: FileInfo, options?: any) {
-        return FileApiFp(this.configuration).createFile(fileInfo, options)(this.fetch, this.basePath);
+    public createFile(createFileRequest: CreateFileRequest, options?: any) {
+        return FileApiFp(this.configuration).createFile(createFileRequest, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1696,14 +1756,14 @@ export class FileApi extends BaseAPI {
 
     /**
      * 
-     * @summary Get fileInfo of requested path
-     * @param {} path Path to requested fileInfo
+     * @summary Get pathInfo of requested path
+     * @param {} path Requested path
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FileApi
      */
-    public getFileInfo(path: string, options?: any) {
-        return FileApiFp(this.configuration).getFileInfo(path, options)(this.fetch, this.basePath);
+    public getPathInfo(path: string, options?: any) {
+        return FileApiFp(this.configuration).getPathInfo(path, options)(this.fetch, this.basePath);
     }
 
     /**

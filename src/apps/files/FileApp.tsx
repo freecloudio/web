@@ -33,6 +33,8 @@ class FileApp extends React.Component<Props, object> {
 			: { name: part, href: `${base}/${type}${this.breadcrumbsParts(parts.slice(1, idx + 1))}` },
 		);
 
+		const currentPath = this.props.match.params["0"] || "/";
+
 		return (
 			<div className="file-app">
 				<Sidebar base={base} />
@@ -41,7 +43,7 @@ class FileApp extends React.Component<Props, object> {
 						<Breadcrumbs parts={breadcrumbs} />
 						<InputField type="text" style={InputStyle.Dark} />
 					</div>
-					<FileList base={base + "/" + type} fileStore={fileStore} currentPath="/" />
+					<FileList base={base + "/" + type} fileStore={fileStore} currentPath={currentPath} />
 				</div>
 			</div>
 		);

@@ -18,6 +18,10 @@ class Dropdown extends React.Component<Props, object> {
 		return (
 			<div className={classes.join(" ")} onClick={this.props.onClick}>
 				{this.props.children}
+				{ 
+					this.props.visible && 
+					<div className="dropdown-closer"/>
+				}
 			</div>
 		);
 	}

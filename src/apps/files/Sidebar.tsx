@@ -34,10 +34,10 @@ class Sidebar extends React.Component<Props, object> {
 									<Dropdown visible={this.addDropdownVisible} onClick={this.onAddButtonClicked} anchor="below">
 										<ul>
 											<li>
-												Test1
+												<span>Upload files</span>
 											</li>
 											<li>
-												Test2
+												<span>Create folder</span>
 											</li>
 										</ul>
 									</Dropdown>

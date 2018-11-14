@@ -12,13 +12,24 @@
 	transition: all .2s ease-in-out;
 	transform: translateY(-10px);
 	min-width: 200px;
-	
+	z-index: 100;
+
 	&.visible {
 		z-index: 1;
 		visibility: visible;
 		pointer-events: all;
 		opacity: 1;
 		transform: translateY(0);
+	}
+
+	.dropdown-closer {
+		background: transparentize($color: pink, $amount: .5);
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 1;
 	}
 
 	&.top {

@@ -1,12 +1,12 @@
-import { File, Directory } from "src/models/File";
 import * as React from "react";
 import { observer } from "mobx-react";
 import FileTableRow from "./FileTableRow";
 import { Route } from "react-router-dom";
+import { FileInfo } from "src/api";
 
 interface Props {
 	base: string;
-	files: Array<File | Directory>;
+	files: FileInfo[];
 }
 
 @observer

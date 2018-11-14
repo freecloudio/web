@@ -125,7 +125,7 @@ class Login extends React.Component {
 		this.log.debug("Login");
 		try {
 			// TODO: Investigate whether these are always != null
-			await authStore.signIn(this.loginEmail, this.loginPassword);
+			await authStore.login(this.loginEmail, this.loginPassword);
 			this.proceed = true;
 		} catch (err) {
 			this.log.error(err);
