@@ -99,7 +99,37 @@ $table-header-height: 3.25rem;
 
   tbody tr td .cell-wrapper {
     padding: $padding-small $padding-small $padding-small $padding-small;
-  }
+	}
+	
+	tbody tr.dropzone {
+		animation-name: drop-flash;
+		animation-duration: 1s;
+		animation-iteration-count: infinite;
+		animation-timing-function: ease-in-out;
+		animation-delay: 0s;
+		animation-play-state: running;
+		animation-fill-mode: forwards;
+		animation-direction: normal;
+		border-radius: 5px;
+
+		td {
+			background: transparent !important;
+		}
+	}
+
+	@keyframes drop-flash {
+		0% {
+			background-color: rgba(0, 0, 0, 0.05);
+		}
+
+		50% {
+			background-color: rgba(0, 0, 0, 0.075);
+		}
+
+		100% {
+			background-color: rgba(0, 0, 0, 0.05);
+		}
+	}
 
   tbody tr:last-child td {
     border-bottom: none;
