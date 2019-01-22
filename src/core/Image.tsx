@@ -30,9 +30,10 @@ class Image extends React.Component<Props, object> {
 	}
 
 	public render() {
-		const className = this.props.className || "";
+		const classes = [this.props.className, "img"];
+		if (this.loaded) { classes.push("loaded"); }
 		return (
-			<div className={`img ${this.loaded ? "loaded" : "" } ${className}`}>
+			<div className={classes.join(" ")}>
 				{this.loaded ? <img src={this.props.src} /> : null}
 			</div>
 		);
@@ -41,6 +42,7 @@ class Image extends React.Component<Props, object> {
 	private onLoad = () => {
 		this.log.debug(`Image ${this.props.src} loaded`);
 		this.loaded = true;
+		// If this wasn't already loaded from cache, put it there.
 	}
 }
 

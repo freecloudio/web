@@ -1,6 +1,6 @@
 @import "./variables.scss";
 
-.login-page {
+.login-page, .signup-page {
 	display: flex;
 	min-height: 100vh;
 	justify-content: center;
@@ -76,5 +76,33 @@
 				justify-content: center;
 			}
 		}
+	}
+}
+
+@media screen and (max-width: 1500px) {
+	.login-page, .signup-page {
+		.box {
+			width: 70vw;
+		}
+	}
+}
+
+@media screen and (max-width: 1100px) {
+	.login-page, .signup-page {
+		.box {
+			width: 90vw;
+		}
+	}
+}
+
+@media screen and (max-width: 850px) {
+	.slider {
+		display: none;
+	}
+	.login-page .box .login.inactive {
+		display: none;
+	}
+	.login-page .box .signup.inactive {
+		display: none;
 	}
 }
