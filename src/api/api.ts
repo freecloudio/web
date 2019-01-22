@@ -297,6 +297,20 @@ export interface ModelError {
 /**
  * 
  * @export
+ * @interface Path
+ */
+export interface Path {
+    /**
+     * 
+     * @type {string}
+     * @memberof Path
+     */
+    path?: string;
+}
+
+/**
+ * 
+ * @export
  * @interface PathInfo
  */
 export interface PathInfo {
@@ -360,6 +374,38 @@ export interface SearchRequest {
      * @memberof SearchRequest
      */
     keyword?: string;
+}
+
+/**
+ * 
+ * @export
+ * @interface ShareEntry
+ */
+export interface ShareEntry {
+    /**
+     * 
+     * @type {number}
+     * @memberof ShareEntry
+     */
+    ID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ShareEntry
+     */
+    fileID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ShareEntry
+     */
+    ownerID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ShareEntry
+     */
+    sharedWithID?: number;
 }
 
 /**
@@ -937,6 +983,44 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @summary Delete share entry by shareID
+         * @param {number} shareID ShareID to be deleted
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteShareEntryByID(shareID: number, options: any = {}): FetchArgs {
+            // verify required parameter 'shareID' is not null or undefined
+            if (shareID === null || shareID === undefined) {
+                throw new RequiredError('shareID','Required parameter shareID was null or undefined when calling deleteShareEntryByID.');
+            }
+            const localVarPath = `/file/share/{shareID}`
+                .replace(`{${"shareID"}}`, encodeURIComponent(String(shareID)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'DELETE' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication TokenAuth required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+				const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+					? configuration.accessToken("TokenAuth", ["user"])
+					: configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Downloads a file.
          * @param {string} path Path to the file to download
          * @param {*} [options] Override http request option.
@@ -947,7 +1031,7 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
             if (path === null || path === undefined) {
                 throw new RequiredError('path','Required parameter path was null or undefined when calling downloadFile.');
             }
-            const localVarPath = `/download`;
+            const localVarPath = `/file/download`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;
@@ -1019,12 +1103,82 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @summary Get share entry by shareID
+         * @param {number} shareID Requested shareID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getShareEntryByID(shareID: number, options: any = {}): FetchArgs {
+            // verify required parameter 'shareID' is not null or undefined
+            if (shareID === null || shareID === undefined) {
+                throw new RequiredError('shareID','Required parameter shareID was null or undefined when calling getShareEntryByID.');
+            }
+            const localVarPath = `/file/share/{shareID}`
+                .replace(`{${"shareID"}}`, encodeURIComponent(String(shareID)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication TokenAuth required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+				const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+					? configuration.accessToken("TokenAuth", ["user"])
+					: configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get starred files/folders infos
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStarredFileInfos(options: any = {}): FetchArgs {
+            const localVarPath = `/file/starred`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication TokenAuth required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+				const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+					? configuration.accessToken("TokenAuth", ["user"])
+					: configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Rescan own data folder
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         rescanCurrentUser(options: any = {}): FetchArgs {
-            const localVarPath = `/rescan/me`;
+            const localVarPath = `/file/rescan/me`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
@@ -1061,7 +1215,7 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling rescanUserByID.');
             }
-            const localVarPath = `/rescan/{id}`
+            const localVarPath = `/file/rescan/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
@@ -1099,7 +1253,7 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
             if (searchRequest === null || searchRequest === undefined) {
                 throw new RequiredError('searchRequest','Required parameter searchRequest was null or undefined when calling searchFile.');
             }
-            const localVarPath = `/search`;
+            const localVarPath = `/file/search`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;
@@ -1135,12 +1289,12 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareFile(shareRequest: ShareRequest, options: any = {}): FetchArgs {
+        shareFiles(shareRequest: ShareRequest, options: any = {}): FetchArgs {
             // verify required parameter 'shareRequest' is not null or undefined
             if (shareRequest === null || shareRequest === undefined) {
-                throw new RequiredError('shareRequest','Required parameter shareRequest was null or undefined when calling shareFile.');
+                throw new RequiredError('shareRequest','Required parameter shareRequest was null or undefined when calling shareFiles.');
             }
-            const localVarPath = `/share`;
+            const localVarPath = `/file/share/`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
@@ -1163,38 +1317,6 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
             const needsSerialization = (<any>"ShareRequest" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.body =  needsSerialization ? JSON.stringify(shareRequest || {}) : (shareRequest || "");
-
-            return {
-                url: url.format(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get starred files/folders
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        starredFiles(options: any = {}): FetchArgs {
-            const localVarPath = `/starred`;
-            const localVarUrlObj = url.parse(localVarPath, true);
-            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication TokenAuth required
-            // oauth required
-            if (configuration && configuration.accessToken) {
-				const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
-					? configuration.accessToken("TokenAuth", ["user"])
-					: configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
-            }
-
-            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
-            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-            delete localVarUrlObj.search;
-            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
 
             return {
                 url: url.format(localVarUrlObj),
@@ -1264,7 +1386,7 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
             if (path === null || path === undefined) {
                 throw new RequiredError('path','Required parameter path was null or undefined when calling uploadFile.');
             }
-            const localVarPath = `/upload`;
+            const localVarPath = `/file/upload`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
@@ -1313,7 +1435,7 @@ export const FileApiFetchParamCreator = function (configuration?: Configuration)
             if (paths === null || paths === undefined) {
                 throw new RequiredError('paths','Required parameter paths was null or undefined when calling zipFiles.');
             }
-            const localVarPath = `/zip`;
+            const localVarPath = `/file/zip`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
@@ -1391,6 +1513,25 @@ export const FileApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Delete share entry by shareID
+         * @param {number} shareID ShareID to be deleted
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteShareEntryByID(shareID: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
+            const localVarFetchArgs = FileApiFetchParamCreator(configuration).deleteShareEntryByID(shareID, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response;
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
          * @summary Downloads a file.
          * @param {string} path Path to the file to download
          * @param {*} [options] Override http request option.
@@ -1417,6 +1558,43 @@ export const FileApiFp = function(configuration?: Configuration) {
          */
         getPathInfo(path: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<PathInfo> {
             const localVarFetchArgs = FileApiFetchParamCreator(configuration).getPathInfo(path, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
+         * @summary Get share entry by shareID
+         * @param {number} shareID Requested shareID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getShareEntryByID(shareID: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<ShareEntry> {
+            const localVarFetchArgs = FileApiFetchParamCreator(configuration).getShareEntryByID(shareID, options);
+            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
+         * @summary Get starred files/folders infos
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStarredFileInfos(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<FileList> {
+            const localVarFetchArgs = FileApiFetchParamCreator(configuration).getStarredFileInfos(options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1490,30 +1668,12 @@ export const FileApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareFile(shareRequest: ShareRequest, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
-            const localVarFetchArgs = FileApiFetchParamCreator(configuration).shareFile(shareRequest, options);
+        shareFiles(shareRequest: ShareRequest, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
+            const localVarFetchArgs = FileApiFetchParamCreator(configuration).shareFiles(shareRequest, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
                         return response;
-                    } else {
-                        throw response;
-                    }
-                });
-            };
-        },
-        /**
-         * 
-         * @summary Get starred files/folders
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        starredFiles(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<FileList> {
-            const localVarFetchArgs = FileApiFetchParamCreator(configuration).starredFiles(options);
-            return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
-                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
-                    if (response.status >= 200 && response.status < 300) {
-                        return response.json();
                     } else {
                         throw response;
                     }
@@ -1567,12 +1727,12 @@ export const FileApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        zipFiles(paths: PathList, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
+        zipFiles(paths: PathList, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Path> {
             const localVarFetchArgs = FileApiFetchParamCreator(configuration).zipFiles(paths, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
-                        return response;
+                        return response.json();
                     } else {
                         throw response;
                     }
@@ -1610,6 +1770,16 @@ export const FileApiFactory = function (configuration?: Configuration, fetch?: F
         },
         /**
          * 
+         * @summary Delete share entry by shareID
+         * @param {number} shareID ShareID to be deleted
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteShareEntryByID(shareID: number, options?: any) {
+            return FileApiFp(configuration).deleteShareEntryByID(shareID, options)(fetch, basePath);
+        },
+        /**
+         * 
          * @summary Downloads a file.
          * @param {string} path Path to the file to download
          * @param {*} [options] Override http request option.
@@ -1627,6 +1797,25 @@ export const FileApiFactory = function (configuration?: Configuration, fetch?: F
          */
         getPathInfo(path: string, options?: any) {
             return FileApiFp(configuration).getPathInfo(path, options)(fetch, basePath);
+        },
+        /**
+         * 
+         * @summary Get share entry by shareID
+         * @param {number} shareID Requested shareID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getShareEntryByID(shareID: number, options?: any) {
+            return FileApiFp(configuration).getShareEntryByID(shareID, options)(fetch, basePath);
+        },
+        /**
+         * 
+         * @summary Get starred files/folders infos
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStarredFileInfos(options?: any) {
+            return FileApiFp(configuration).getStarredFileInfos(options)(fetch, basePath);
         },
         /**
          * 
@@ -1664,17 +1853,8 @@ export const FileApiFactory = function (configuration?: Configuration, fetch?: F
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareFile(shareRequest: ShareRequest, options?: any) {
-            return FileApiFp(configuration).shareFile(shareRequest, options)(fetch, basePath);
-        },
-        /**
-         * 
-         * @summary Get starred files/folders
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        starredFiles(options?: any) {
-            return FileApiFp(configuration).starredFiles(options)(fetch, basePath);
+        shareFiles(shareRequest: ShareRequest, options?: any) {
+            return FileApiFp(configuration).shareFiles(shareRequest, options)(fetch, basePath);
         },
         /**
          * 
@@ -1744,6 +1924,18 @@ export class FileApi extends BaseAPI {
 
     /**
      * 
+     * @summary Delete share entry by shareID
+     * @param {} shareID ShareID to be deleted
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FileApi
+     */
+    public deleteShareEntryByID(shareID: number, options?: any) {
+        return FileApiFp(this.configuration).deleteShareEntryByID(shareID, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
      * @summary Downloads a file.
      * @param {} path Path to the file to download
      * @param {*} [options] Override http request option.
@@ -1764,6 +1956,29 @@ export class FileApi extends BaseAPI {
      */
     public getPathInfo(path: string, options?: any) {
         return FileApiFp(this.configuration).getPathInfo(path, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @summary Get share entry by shareID
+     * @param {} shareID Requested shareID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FileApi
+     */
+    public getShareEntryByID(shareID: number, options?: any) {
+        return FileApiFp(this.configuration).getShareEntryByID(shareID, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @summary Get starred files/folders infos
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FileApi
+     */
+    public getStarredFileInfos(options?: any) {
+        return FileApiFp(this.configuration).getStarredFileInfos(options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1809,19 +2024,8 @@ export class FileApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FileApi
      */
-    public shareFile(shareRequest: ShareRequest, options?: any) {
-        return FileApiFp(this.configuration).shareFile(shareRequest, options)(this.fetch, this.basePath);
-    }
-
-    /**
-     * 
-     * @summary Get starred files/folders
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FileApi
-     */
-    public starredFiles(options?: any) {
-        return FileApiFp(this.configuration).starredFiles(options)(this.fetch, this.basePath);
+    public shareFiles(shareRequest: ShareRequest, options?: any) {
+        return FileApiFp(this.configuration).shareFiles(shareRequest, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -2219,12 +2423,12 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCurrentUser(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<User> {
+        deleteCurrentUser(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
             const localVarFetchArgs = UserApiFetchParamCreator(configuration).deleteCurrentUser(options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
-                        return response.json();
+                        return response;
                     } else {
                         throw response;
                     }
@@ -2238,12 +2442,12 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteUserByID(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<User> {
+        deleteUserByID(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
             const localVarFetchArgs = UserApiFetchParamCreator(configuration).deleteUserByID(id, options);
             return (fetch: FetchAPI = portableFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
-                        return response.json();
+                        return response;
                     } else {
                         throw response;
                     }
