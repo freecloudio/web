@@ -15,7 +15,6 @@ import Notifications from "./shell/Notifications";
 
 @observer
 class App extends React.Component {
-
 	public render() {
 		return (
 			<BrowserRouter>
@@ -24,16 +23,14 @@ class App extends React.Component {
 				{ authStore.isSignedIn ? <MainSidebar userStore={userStore} /> : null }
 					<main className={authStore.isSignedIn ? "" : "fullbleed"}>
 						<Route exact path="/" render={FilesRedirect} />
-						{ /* tslint:disable */}
 						<PrivateRoute exact path="/apps/files" component={FileApp} />
 						<PrivateRoute exact path="/apps/files/:type" component={FileApp} />
 						<PrivateRoute path="/apps/files/:type/*" component={FileApp} />
-						{ /* tslint:enable */}
 
 						<PrivateRoute path="/apps/calendar" component={CalendarApp} />
 						<PrivateRoute path="/apps/settings" component={SettingsApp} />
 
-						<Route path="/login" component={Login} />
+						<Route path="/auth" component={Login} />
 					</main>
 				</div>
 			</BrowserRouter>

@@ -1,5 +1,6 @@
 import "./Login.scss";
 import * as React from "react";
+import { Link } from "react-router-dom";
 import { Log } from "./Log";
 import InputField, { InputStyle } from "./core/InputField";
 
@@ -10,14 +11,13 @@ import { observable } from "mobx";
 import Button, { ButtonStyle } from "./core/Button";
 import Image from "./core/Image";
 import { authStore } from "./store/AuthStore";
-import { Redirect } from "react-router";
+import { Redirect, RouteComponentProps } from "react-router";
 import { notificationStore, NotificationType } from "./store/NotificationStore";
 
 @observer
-class Login extends React.Component {
+class Login extends React.Component<RouteComponentProps, object> {
 
 	private readonly log = new Log("Login");
-	@observable private isLogin = true;
 	@observable private proceed = false;
 	private signupFirstName: string;
 	private signupLastName: string;
@@ -27,7 +27,14 @@ class Login extends React.Component {
 	private loginEmail: string;
 	private loginPassword: string;
 
+	constructor(props: RouteComponentProps) {
+		super(props);
+		this.log.debug("Created");
+	}
+
 	public render() {
+		const isLogin = this.props.location.pathname.includes("login");
+		this.log.debug("Rerendering, isLogin is", isLogin);
 		if (this.proceed) {
 			// TODO: Are we coming from somewhere? Redirect there
 			return (
@@ -37,10 +44,10 @@ class Login extends React.Component {
 		return (
 			<div className="login-page">
 				<div className="box">
-					<div className={this.isLogin ? "slider" : "slider right"}>
+					<div className={isLogin ? "slider" : "slider right"}>
 						<Image src={cover} className="cover-img" />
 					</div>
-					<div className="signup">
+					<div className={ isLogin ? "signup inactive" : "signup"}>
 						<header><Image src={logo} /> freecloud</header>
 						<main>
 							<h1>Sign up for freecloud</h1>
@@ -60,10 +67,10 @@ class Login extends React.Component {
 							</form>
 						</main>
 						<footer>
-							<a href="" onClick={this.gotoLogin}>I already have an account.</a>
+							<Link to="/auth/login">I already have an account.</Link>
 						</footer>
 					</div>
-					<div className="login">
+					<div className={ isLogin ? "login" : "login inactive" }>
 						<header><Image src={logo} /> freecloud</header>
 						<main>
 							<h1>Welcome back</h1>
@@ -75,7 +82,7 @@ class Login extends React.Component {
 							</form>
 						</main>
 						<footer>
-							<a href="" onClick={this.gotoSignup}>I don't have an account yet.</a>
+							<Link to="/auth/signup">I don't have an account yet.</Link>
 						</footer>
 					</div>
 				</div>
@@ -111,16 +118,6 @@ class Login extends React.Component {
 		this.loginPassword = value;
 	}
 
-	private gotoSignup = (event: React.MouseEvent<HTMLAnchorElement>) => {
-		event.preventDefault();
-		this.isLogin = false;
-	}
-
-	private gotoLogin = (event: React.MouseEvent<HTMLAnchorElement>) => {
-		event.preventDefault();
-		this.isLogin = true;
-	}
-
 	private onLogin = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		this.log.debug("Login");
 		try {
@@ -139,6 +136,7 @@ class Login extends React.Component {
 			return;
 		}
 		try {
+
 			await authStore.signUp(
 				this.signupFirstName,
 				this.signupLastName,
