@@ -3,7 +3,8 @@
 aside.settings-sidebar {
   background: $color-background-grey;
   height: 100vh;
-  padding: 0 1rem 0 1rem;
+	padding: 0 1rem 0 1rem;
+	overflow-y: auto;
 
   h1 {
     margin: $pageborder-y 0 $pageborder-y 0;

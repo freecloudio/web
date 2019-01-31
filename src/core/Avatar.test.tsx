@@ -1,10 +1,16 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+
+import {mount} from 'enzyme';
+
 import Avatar from "./Avatar";
 
 it("renders with a name", () => {
-	const div = document.createElement("div");
-	ReactDOM.render(<Avatar name="John Doe"/>, div);
+	const component = mount(<Avatar name='John Doe'/>);
 
-	ReactDOM.unmountComponentAtNode(div);
+	expect(component
+		.find('span')
+		.getDOMNode()
+		.innerHTML).toBe('John Doe');
+
+	component.unmount();
 });

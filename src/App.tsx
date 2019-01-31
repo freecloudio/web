@@ -12,6 +12,7 @@ import { observer } from "mobx-react";
 import PrivateRoute from "./core/PrivateRoute";
 import { authStore } from "./store/AuthStore";
 import Notifications from "./shell/Notifications";
+import paths from "./paths";
 
 @observer
 class App extends React.Component {
@@ -20,17 +21,17 @@ class App extends React.Component {
 			<BrowserRouter>
 				<div className="App">
 					<Notifications/>
-				{ authStore.isSignedIn ? <MainSidebar userStore={userStore} /> : null }
+					{ authStore.isSignedIn ? <MainSidebar userStore={userStore} /> : null }
 					<main className={authStore.isSignedIn ? "" : "fullbleed"}>
 						<Route exact path="/" render={FilesRedirect} />
-						<PrivateRoute exact path="/apps/files" component={FileApp} />
-						<PrivateRoute exact path="/apps/files/:type" component={FileApp} />
-						<PrivateRoute path="/apps/files/:type/*" component={FileApp} />
+						<PrivateRoute exact path={paths.APPS.FILES} component={FileApp} />
+						<PrivateRoute exact path={paths.APPS.FILES + '/:type'} component={FileApp} />
+						<PrivateRoute path={paths.APPS.FILES + '/:type/*'} component={FileApp} />
 
-						<PrivateRoute path="/apps/calendar" component={CalendarApp} />
-						<PrivateRoute path="/apps/settings" component={SettingsApp} />
+						<PrivateRoute path={paths.APPS.CALENDAR} component={CalendarApp} />
+						<PrivateRoute path={paths.APPS.SETTINGS} component={SettingsApp} />
 
-						<Route path="/auth" component={Login} />
+						<Route path={paths.AUTH} component={Login} />
 					</main>
 				</div>
 			</BrowserRouter>

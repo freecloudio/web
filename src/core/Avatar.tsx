@@ -9,18 +9,13 @@ interface Props {
 	onClick?: (event: React.MouseEvent) => void;
 }
 
-class Avatar extends React.Component<Props, object> {
-
-	public render() {
-		const { imageSrc, name, size } = this.props;
-
-		return (
-			<div className="avatar" style={{ width: `${(size || 2)}rem`, height: `${(size || 2)}rem` }} onClick={this.props.onClick}>
-				{ imageSrc ? <img src={imageSrc} /> : <span>{name}</span> }
-			</div>
-		);
-	}
-
-}
+const Avatar: React.FunctionComponent<Props> = ({imageSrc, size, name, onClick}) => {
+	const s = size || 2;
+	return (
+		<div className="avatar" style={{ width: `${s}rem`, height: `${s}rem` }} onClick={onClick}>
+			{ imageSrc ? <img src={imageSrc} /> : <span>{name}</span> }
+		</div>
+	);
+};
 
 export default Avatar;

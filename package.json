@@ -50,11 +50,14 @@
     "test-ci": "node scripts/test.js --env=jsdom --all --ci"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.16",
     "@types/jest": "^23.3.13",
     "@types/node": "^10.12.18",
     "@types/react": "^16.7.20",
     "@types/react-dom": "^16.0.11",
     "@types/react-router-dom": "^4.3.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.8.0",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
@@ -107,7 +110,8 @@
       "ts-jest": {
         "tsConfigFile": "tsconfig.test.json"
       }
-    }
+		},
+		"setupFiles": [ "./src/setupTests.js" ]
   },
   "babel": {
     "presets": [

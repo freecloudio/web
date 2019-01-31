@@ -6,19 +6,20 @@ import { NavLink, match } from "react-router-dom";
 import { Location } from "history";
 import { Log } from "../../Log";
 import Button, { ButtonStyle } from "../../core/Button";
-import Dropdown from "../../core/Dropdown";
+import Popover from "../../core/Popover";
 import { observable } from "mobx";
 import { observer } from "mobx-react";
-import DropdownContainer from "../../core/DropdownContainer";
+import PopoverContainer from "../../core/PopoverContainer";
 
 interface Props {
 	// base path of the files app. This is used to generate sub-links like for shared files and trash.
 	base: string;
 }
 
+const log = new Log("Sidebar");
+
 @observer
 class Sidebar extends React.Component<Props, object> {
-	private readonly log = new Log("Sidebar");
 	@observable private addDropdownVisible = false;
 
 	public render() {
@@ -29,9 +30,9 @@ class Sidebar extends React.Component<Props, object> {
 				<nav>
 					<ul>
 						<li>
-							<DropdownContainer
-								dropdown={
-									<Dropdown visible={this.addDropdownVisible} onClick={this.onAddButtonClicked} anchor="below">
+							<PopoverContainer
+								popover={
+									<Popover visible={this.addDropdownVisible} onClick={this.onAddButtonClicked} anchor="below">
 										<ul>
 											<li>
 												<span>Upload files</span>
@@ -40,14 +41,14 @@ class Sidebar extends React.Component<Props, object> {
 												<span>Create folder</span>
 											</li>
 										</ul>
-									</Dropdown>
+									</Popover>
 								}
 							>
 								<Button className="add-button" onClick={this.onAddButtonClicked} style={ButtonStyle.PrimaryInverted}>
 									<Icon name="plus" size={1.5} />New
-							</Button>
+								</Button>
 
-							</DropdownContainer>
+							</PopoverContainer>
 						</li>
 						<li>
 							<NavLink to={{ pathname: base }} isActive={this.homeLinkIsActive}>
@@ -76,12 +77,12 @@ class Sidebar extends React.Component<Props, object> {
 	}
 
 	private homeLinkIsActive = (m: match, location: Location): boolean => {
-		this.log.debug(m.url, this.props.base, m);
+		log.debug(m.url, this.props.base, m);
 		return (m.url === this.props.base || m.url.includes(this.props.base + "/d"));
 	}
 
 	private onAddButtonClicked = () => {
-		this.log.debug("Add button clicked");
+		log.debug("Add button clicked");
 		this.addDropdownVisible = !this.addDropdownVisible;
 	}
 }

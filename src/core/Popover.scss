@@ -1,6 +1,6 @@
-.dropdown {
+.popover {
 	display: block;
-	background: rgba(255, 100, 30, 0.5);
+	background: white;
 	border-radius: 5px;
 	padding: 1rem;
 	position: absolute;
@@ -22,14 +22,14 @@
 		transform: translateY(0);
 	}
 
-	.dropdown-closer {
-		background: transparentize($color: pink, $amount: .5);
+	.popover-closer {
+		background: transparent;
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
-		z-index: 1;
+		z-index: -1;
 	}
 
 	&.top {

@@ -1,6 +1,6 @@
 {
   "extends": ["tslint:recommended", "tslint-react"],
-  "default-severity": "warning",
+  "defaultSeverity": "warning",
   "rules": {
     "indent": [true, "tabs", 2],
     "interface-name": [true, "never-prefix"],
@@ -13,7 +13,8 @@
     "no-string-throw": true,
     "no-trailing-whitespace": false,
     "object-literal-sort-keys": false,
-    "ordered-imports": false
+		"ordered-imports": false,
+		"quotemark": [ "single", "jsx-double", "avoid-escape" ]
   },
   "linterOptions": {
     "exclude": [

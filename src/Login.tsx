@@ -13,23 +13,23 @@ import Image from "./core/Image";
 import { authStore } from "./store/AuthStore";
 import { Redirect, RouteComponentProps } from "react-router";
 import { notificationStore, NotificationType } from "./store/NotificationStore";
+import paths from "./paths";
 
 @observer
 class Login extends React.Component<RouteComponentProps, object> {
 
 	private readonly log = new Log("Login");
 	@observable private proceed = false;
-	private signupFirstName: string;
-	private signupLastName: string;
-	private signupEmail: string;
-	private signupPassword: string;
-	private signupConfirmPassword: string;
-	private loginEmail: string;
-	private loginPassword: string;
+	@observable private signupFirstName = '';
+	@observable private signupLastName = '';
+	@observable private signupEmail = '';
+	@observable private signupPassword = '';
+	@observable private signupConfirmPassword = '';
+	@observable private loginEmail = '';
+	@observable private loginPassword = '';
 
 	constructor(props: RouteComponentProps) {
 		super(props);
-		this.log.debug("Created");
 	}
 
 	public render() {
@@ -52,22 +52,51 @@ class Login extends React.Component<RouteComponentProps, object> {
 						<main>
 							<h1>Sign up for freecloud</h1>
 							<form className="form">
-								<InputField type="text" label="first name" style={InputStyle.Dark} autocomplete="first name" onChange={this.onSignupFirstNameChanged} />
-								<InputField type="text" label="last name" style={InputStyle.Dark} autocomplete="last name" onChange={this.onSignupLastNameChanged} />
-								<InputField type="email" label="eMail" style={InputStyle.Dark} autocomplete="email" onChange={this.onSignupEmailChanged} />
-								<InputField type="password" label="password" style={InputStyle.Dark} autocomplete="password" onChange={this.onSignupPasswordChanged} />
+								<InputField
+									type="text"
+									label="first name"
+									style={InputStyle.Dark}
+									autocomplete="first name"
+									onChange={this.onSignupFirstNameChanged}
+									value={this.signupFirstName}
+								/>
+								<InputField
+									type="text"
+									label="last name"
+									style={InputStyle.Dark}
+									autocomplete="last name"
+									onChange={this.onSignupLastNameChanged}
+									value={this.signupLastName}
+								/>
+								<InputField
+									type="email"
+									label="eMail"
+									style={InputStyle.Dark}
+									autocomplete="email"
+									onChange={this.onSignupEmailChanged}
+									value={this.signupEmail}
+								/>
+								<InputField
+									type="password"
+									label="password"
+									style={InputStyle.Dark}
+									autocomplete="password"
+									onChange={this.onSignupPasswordChanged}
+									value={this.signupPassword}
+								/>
 								<InputField
 									type="password"
 									label="confirm password"
 									style={InputStyle.Dark}
 									autocomplete="password"
 									onChange={this.onSignupConfirmPasswordChanged}
+									value={this.signupConfirmPassword}
 								/>
-								<Button text="Signup" style={ButtonStyle.Primary} onClick={this.onSignup} />
+								<Button style={ButtonStyle.Primary} onClick={this.onSignup}>Signup</Button>
 							</form>
 						</main>
 						<footer>
-							<Link to="/auth/login">I already have an account.</Link>
+							<Link to={paths.LOGIN}>I already have an account.</Link>
 						</footer>
 					</div>
 					<div className={ isLogin ? "login" : "login inactive" }>
@@ -76,13 +105,27 @@ class Login extends React.Component<RouteComponentProps, object> {
 							<h1>Welcome back</h1>
 							{ /* tslint:disable-next-line */}
 							<form onSubmit={(event: React.FormEvent) => { event.preventDefault() }} className="form">
-								<InputField type="email" label="eMail" style={InputStyle.Dark} autocomplete="email" onChange={this.onLoginEmailChanged}/>
-								<InputField type="password" label="password" style={InputStyle.Dark} autocomplete="password" onChange={this.onLoginPasswordChanged} />
-								<Button style={ButtonStyle.Primary} text="Login" onClick={this.onLogin} />
+								<InputField
+									type="email"
+									label="eMail"
+									style={InputStyle.Dark}
+									autocomplete="email"
+									onChange={this.onLoginEmailChanged}
+									value={this.loginEmail}
+								/>
+								<InputField
+									type="password"
+									label="password"
+									style={InputStyle.Dark}
+									autocomplete="password"
+									onChange={this.onLoginPasswordChanged}
+									value={this.loginPassword}
+								/>
+								<Button style={ButtonStyle.Primary} onClick={this.onLogin}>Login</Button>
 							</form>
 						</main>
 						<footer>
-							<Link to="/auth/signup">I don't have an account yet.</Link>
+							<Link to={paths.SIGNUP}>I don't have an account yet.</Link>
 						</footer>
 					</div>
 				</div>
@@ -90,41 +133,41 @@ class Login extends React.Component<RouteComponentProps, object> {
 		);
 	}
 
-	private onSignupFirstNameChanged = (value: string) => {
-		this.signupFirstName = value;
+	private onSignupFirstNameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+		this.signupFirstName = event.target.value;
 	}
 
-	private onSignupLastNameChanged = (value: string) => {
-		this.signupLastName = value;
+	private onSignupLastNameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+		this.signupLastName = event.target.value;
 	}
 
-	private onSignupEmailChanged = (value: string) => {
-		this.signupEmail = value;
+	private onSignupEmailChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+		this.signupEmail = event.target.value;
 	}
 
-	private onSignupPasswordChanged = (value: string) => {
-		this.signupPassword = value;
+	private onSignupPasswordChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+		this.signupPassword = event.target.value;
 	}
 
-	private onSignupConfirmPasswordChanged = (value: string) => {
-		this.signupConfirmPassword = value;
+	private onSignupConfirmPasswordChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+		this.signupConfirmPassword = event.target.value;
 	}
 
-	private onLoginEmailChanged = (value: string) => {
-		this.loginEmail = value;
+	private onLoginEmailChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+		this.loginEmail = event.target.value;
 	}
 
-	private onLoginPasswordChanged = (value: string) => {
-		this.loginPassword = value;
+	private onLoginPasswordChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+		this.loginPassword = event.target.value;
 	}
 
 	private onLogin = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		this.log.debug("Login");
 		try {
-			// TODO: Investigate whether these are always != null
 			await authStore.login(this.loginEmail, this.loginPassword);
 			this.proceed = true;
 		} catch (err) {
+			notificationStore.sendNotification('Login failed, please check your email and password.', NotificationType.NEGATIVE);
 			this.log.error(err);
 		}
 	}

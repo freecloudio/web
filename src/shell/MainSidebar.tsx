@@ -9,8 +9,8 @@ import Icon, { IconStyle } from "../core/Icon";
 import Avatar from "../core/Avatar";
 import Image from "../core/Image";
 import { UserStore } from "../store/UserStore";
-import DropdownContainer from "src/core/DropdownContainer";
-import Dropdown from "src/core/Dropdown";
+import PopoverContainer from "src/core/PopoverContainer";
+import Popover from "src/core/Popover";
 import { observable } from "mobx";
 import { authStore } from "src/store/AuthStore";
 
@@ -38,9 +38,9 @@ class MainSidebar extends React.Component<Props, object> {
 				</section>
 				<section className="bottom">
 					<NavLink className="app-link" to="/apps/settings"><Icon name="settingsOutline" color={IconStyle.White} size={1.5} /></NavLink>
-					<DropdownContainer
-						dropdown={
-							<Dropdown visible={this.userAvatarDropdownVisible} onClick={this.onAvatarClicked} anchor="bottom">
+					<PopoverContainer
+						popover={
+							<Popover visible={this.userAvatarDropdownVisible} onClick={this.onAvatarClicked} anchor="bottom">
 								<ul>
 									<li>
 										<Link to="/apps/profile">Your profile</Link>
@@ -49,11 +49,11 @@ class MainSidebar extends React.Component<Props, object> {
 										<span onClick={this.onSignOutClicked}>Sign out</span>
 									</li>
 								</ul>
-							</Dropdown>
+							</Popover>
 						}
 					>
 						<Avatar name={this.props.userStore.currentUserInitials} size={3} onClick={this.onAvatarClicked} />
-					</DropdownContainer>
+					</PopoverContainer>
 				</section>
 			</header>
 		);

@@ -9,7 +9,6 @@ export enum ButtonStyle {
 }
 
 export interface Props {
-	text?: string;
 	style?: ButtonStyle;
 	onClick: ButtonClickHandler;
 	className?: string;
@@ -24,32 +23,17 @@ const StyleClasses = {
 	[ButtonStyle.PrimaryInverted]: "primary-inverted",
 };
 
-class Button extends React.Component<Props, object> {
-	constructor(props: Props) {
-		super(props);
-	}
+const Button: React.FunctionComponent<Props> = ({children, style, onClick, className}) => {
+	const styleClass = StyleClasses[style || ButtonStyle.Dark];
 
-	public render() {
-		const { text, children } = this.props;
-		const style = StyleClasses[this.props.style || ButtonStyle.Dark];
-
-		const classes = ["btn"];
-		classes.push(style);
-		if (this.props.className) {
-			this.props.className.split(" ").forEach((cls) => {
-				classes.push(cls);
-			});
-		}
-
-		return (
-			<button className={classes.join(" ")} onClick={this.onClick}>{ children ? children : text }</button>
-		);
-	}
-
-	private onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+	function preventDefault(event: React.MouseEvent<HTMLButtonElement>) {
 		event.preventDefault();
-		this.props.onClick(event);
+		onClick(event);
 	}
-}
+
+	return (
+		<button className={`btn ${styleClass}${className ? ' ' + className : ''}`} onClick={preventDefault}>{children}</button>
+	);
+};
 
 export default Button;
