@@ -1,14 +1,19 @@
 import "./SettingsSidebar.scss";
 import * as React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, match } from "react-router-dom";
 import Icon, { IconStyle } from "src/core/Icon";
 import paths from "src/paths";
+import { Location } from "history";
 
 interface Props {
 	isAdmin: boolean;
 }
 
 const SettingsSidebar: React.FunctionComponent<Props> = ({isAdmin}) => {
+	function isNavLinkActive(path: string) {
+		return (_: match, l: Location)	=> (l && l.pathname === path);
+	}
+
 	return (
 		<aside className="settings-sidebar">
 			<h1>Settings</h1>	
@@ -16,17 +21,17 @@ const SettingsSidebar: React.FunctionComponent<Props> = ({isAdmin}) => {
 			<nav>
 				<ul>
 					<li>
-						<NavLink to={paths.APPS.SETTINGS}>
+						<NavLink to={paths.APPS.SETTINGS} isActive={isNavLinkActive(paths.APPS.SETTINGS)}>
 							<Icon name="accountOutline" size={1.5} color={IconStyle.Dark} />Profile
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to={paths.APPS.SETTINGS + "/personal/security" }>
+						<NavLink to={paths.APPS.SETTINGS + "/personal/security" } isActive={isNavLinkActive(paths.APPS.SETTINGS + '/personal/security')}>
 							<Icon name="lockOutline" size={1.5} color={IconStyle.Dark} />Security
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to={paths.APPS.SETTINGS + "/personal/sharing" }>
+						<NavLink to={paths.APPS.SETTINGS + "/personal/sharing" } isActive={isNavLinkActive(paths.APPS.SETTINGS + '/personal/sharing')}>
 							<Icon name="shareVariant" size={1.5} color={IconStyle.Dark} />Sharing
 						</NavLink>
 					</li>
@@ -37,17 +42,17 @@ const SettingsSidebar: React.FunctionComponent<Props> = ({isAdmin}) => {
 				<nav>
 					<ul>
 						<li>
-							<NavLink to={ paths.APPS.SETTINGS + "/system/dashboard" }>
+							<NavLink to={ paths.APPS.SETTINGS + "/system/dashboard" } isActive={isNavLinkActive(paths.APPS.SETTINGS + '/system/dashboard')}>
 								<Icon name="viewDashboardOutline" size={1.5} color={IconStyle.Dark}/>Dashboard
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to={ paths.APPS.SETTINGS + "/system/storage"}>
+							<NavLink to={ paths.APPS.SETTINGS + "/system/storage"} isActive={isNavLinkActive(paths.APPS.SETTINGS + '/system/storage')}>
 								<Icon name="sd" size={1.5} color={IconStyle.Dark}/>Storage
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to={ paths.APPS.SETTINGS + "/system/users"}>
+							<NavLink to={ paths.APPS.SETTINGS + "/system/users"} isActive={isNavLinkActive(paths.APPS.SETTINGS + '/system/users')}>
 								<Icon name="accountOutline" size={1.5} color={IconStyle.Dark}/>Users
 							</NavLink>
 						</li>
