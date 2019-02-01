@@ -1,6 +1,7 @@
 import "./Login.scss";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { parse as parseQueryParams } from "querystring";
 import { Log } from "./Log";
 import InputField, { InputStyle } from "./core/InputField";
 
@@ -36,7 +37,15 @@ class Login extends React.Component<RouteComponentProps, object> {
 		const isLogin = this.props.location.pathname.includes("login");
 		this.log.debug("Rerendering, isLogin is", isLogin);
 		if (this.proceed) {
-			// TODO: Are we coming from somewhere? Redirect there
+			if (this.props.location.search) {
+				const searchString = this.props.location.search.substring(1);
+				const queryParams = parseQueryParams(searchString);
+				if (queryParams.to && typeof(queryParams.to) === 'string') {
+					return (
+						<Redirect to={decodeURIComponent(queryParams.to as string)} />
+					);					
+				}
+			}
 			return (
 				<Redirect to="/" />
 			);
