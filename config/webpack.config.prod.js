@@ -284,7 +284,7 @@ module.exports = {
 			async: false,
 			tsconfig: paths.appTsProdConfig,
 			tslint: paths.appTsLint,
-			workers: os.cpus().length,
+			workers: ForkTsCheckerWebpackPlugin.TWO_CPUS_FREE,
 		}),
 	],
 	// Some libraries import Node modules but don't use them in the browser.

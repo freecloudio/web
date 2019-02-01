@@ -1,9 +1,9 @@
-import { User } from "src/models/User";
+import { User } from "src/api";
 
 export async function getCurrentUser(): Promise<User> {
 	return new Promise<User>((resolve, reject) => {
 		window.setTimeout(() => {
-			resolve({name: "Pascal Riesinger", id: 0});
+			resolve({firstName: "Pascal", lastName: "Riesinger", ID: 0});
 		}, 3000);
 	});
 }
@@ -11,7 +11,7 @@ export async function getCurrentUser(): Promise<User> {
 export async function getUserByID(userID: number): Promise<User> {
 	return new Promise<User>((resolve, reject) => {
 		window.setTimeout(() => {
-			resolve({name: `User ${userID}`, id: userID});
+			resolve({firstName: `First${userID}`, lastName: "User", ID: userID});
 		}, Math.random() * 500);
 	});
 }

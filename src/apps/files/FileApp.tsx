@@ -10,7 +10,6 @@ import { RouteComponentProps } from "react-router";
 import { observer } from "mobx-react";
 import { observable } from "mobx";
 import paths from "src/paths";
-import { Log } from "src/Log";
 
 interface RouterParams {
 	type?: string;
@@ -20,15 +19,11 @@ interface RouterParams {
 interface Props extends RouteComponentProps<RouterParams> {
 }
 
-const log = new Log('FileApp');
-
 @observer
 class FileApp extends React.Component<Props, object> {
 	@observable private searchValue: string;
 
 	public render() {
-		log.debug('match, location', this.props.match, this.props.location);
-		
 		const type = this.props.match.params.type ? this.props.match.params.type : "d";
 		const loc = `Home/${this.props.match.params["0"] ? this.props.match.params["0"] : ""}`;
 
