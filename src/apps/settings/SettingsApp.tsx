@@ -1,10 +1,10 @@
-import "./SettingsApp.scss";
-import * as React from "react";
-import { SystemApi, SystemStats } from "src/api";
-import { authStore } from "src/store/AuthStore";
-import { observable } from "mobx";
-import { observer } from "mobx-react";
-import SettingsSidebar from "./SettingsSidebar";
+import './SettingsApp.scss';
+import * as React from 'react';
+import { SystemApi, SystemStats } from 'src/api';
+import { authStore } from 'src/store/AuthStore';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+import SettingsSidebar from './SettingsSidebar';
 
 @observer
 class SettingsApp extends React.Component {
@@ -15,7 +15,7 @@ class SettingsApp extends React.Component {
 		super(props);
 
 		const l = window.location;
-		this.systemAPI = new SystemApi(authStore.authorizedAPIConfiguration, l.protocol + "//" + l.hostname + ":" + l.port + "/api/v1");
+		this.systemAPI = new SystemApi(authStore.authorizedAPIConfiguration, l.protocol + '//' + l.hostname + ':' + l.port + '/api/v1');
 	}
 
 	public async componentDidMount() {

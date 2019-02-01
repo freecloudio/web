@@ -1,5 +1,5 @@
-import { observable, computed } from "mobx";
-import { Log } from "src/Log";
+import { observable, computed } from 'mobx';
+import { Log } from 'src/Log';
 
 export enum NotificationType {
 	DEFAULT,
@@ -23,7 +23,7 @@ const NOTIFICATION_TIMEOUT = 3000;
  * A NotificationStore manages notifications to show to the user.
  */
 class NotificationStore {
-	private readonly log = new Log("NotificationStore");
+	private readonly log = new Log('NotificationStore');
 	// this is where notifications get stored. Made accessible by the accompanying 
 	// get function
 	@observable private internalNotifications: Notification[] = [];

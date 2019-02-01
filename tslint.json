@@ -14,14 +14,15 @@
     "no-trailing-whitespace": false,
     "object-literal-sort-keys": false,
 		"ordered-imports": false,
-		"quotemark": [ "single", "jsx-double", "avoid-escape" ]
+		"quotemark": [ true, "single", "jsx-double", "avoid-escape" ]
   },
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js",
-      "src/api/**/*"
+			"src/api/**/*",
+			"**/*.js"
     ]
   }
 }

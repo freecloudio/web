@@ -1,9 +1,9 @@
-import { Log } from "../Log";
-import { computed, observable } from "mobx";
-import { AuthApi, User, Configuration } from "src/api";
+import { Log } from '../Log';
+import { computed, observable } from 'mobx';
+import { AuthApi, User, Configuration } from 'src/api';
 
 // Name of the item in localStoage
-const AUTH_TOKEN_KEY = "fc-token";
+const AUTH_TOKEN_KEY = 'fc-token';
 
 export class AuthError extends Error {
 	constructor(public msg: string) {
@@ -24,7 +24,7 @@ export class AuthStore {
 	 * localStorage.
 	 */
 	@observable private authToken: string | null;
-	private readonly log = new Log("AuthStore");
+	private readonly log = new Log('AuthStore');
 	private authAPI: AuthApi;
 
 	constructor() {
@@ -50,7 +50,7 @@ export class AuthStore {
 	 */
 	@computed public get authorizedAPIConfiguration(): Configuration {
 		return {
-			accessToken: this.authToken || "",
+			accessToken: this.authToken || '',
 		};
 	}
 
@@ -62,15 +62,15 @@ export class AuthStore {
 	 * @param {string} password the user's plaintext password
 	 */
 	public async login(email: string, password: string): Promise<void> {
-		this.log.info("Signing in");
+		this.log.info('Signing in');
 		const tkn = await this.authAPI.login({email, password});
 		if (!tkn.token) {
-			throw new AuthError("token is empty");
+			throw new AuthError('token is empty');
 		}
 		this.setAuthToken(tkn.token);
 		// Create a new AuthApi object with the authorized configuration
 		this.authAPI = this.makeAuthAPI(this.authorizedAPIConfiguration);
-		this.log.debug("Login successful, token is", tkn.token);
+		this.log.debug('Login successful, token is', tkn.token);
 	}
 
 	/**
@@ -81,16 +81,16 @@ export class AuthStore {
 	 * @param {string} password the user's password in cleartext. No further validation is done before sending it to the server.
 	 */
 	public async signUp(firstName: string, lastName: string, email: string, password: string) {
-		this.log.info("Signing up");
+		this.log.info('Signing up');
 		const usr: User = {firstName, lastName, email, password};
 		const tkn = await this.authAPI.signup(usr);
 		if (!tkn.token) {
-			throw new AuthError("token is empty");
+			throw new AuthError('token is empty');
 		}
 		this.setAuthToken(tkn.token);
 		// Create a new AuthApi object with the authorized configuration
 		this.authAPI = this.makeAuthAPI(this.authorizedAPIConfiguration);
-		this.log.debug("Signup successful, token is", tkn.token);
+		this.log.debug('Signup successful, token is', tkn.token);
 	}
 
 	/**
@@ -100,12 +100,12 @@ export class AuthStore {
 	 * so deleting it from the client should also suffice (old sessions are discarded by the server at some point anyway).
 	 */
 	public async signOut() {
-		this.log.info("Signing out");
+		this.log.info('Signing out');
 		this.setAuthToken(null);
 		try {
 			await this.authAPI.logout();
 		} catch (err) {
-			this.log.warn("Logout failed, still deleting token");
+			this.log.warn('Logout failed, still deleting token');
 		}
 		this.authAPI = this.makeAuthAPI();
 	}
@@ -126,7 +126,7 @@ export class AuthStore {
 
 	private makeAuthAPI(configuration?: Configuration): AuthApi {
 		const l = window.location;
-		return new AuthApi(configuration, l.protocol + "//" + l.hostname + ":" + l.port + "/api/v1");
+		return new AuthApi(configuration, l.protocol + '//' + l.hostname + ':' + l.port + '/api/v1');
 	}
 
 }

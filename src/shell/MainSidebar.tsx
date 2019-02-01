@@ -1,18 +1,18 @@
-import * as React from "react";
-import { NavLink, Link } from "react-router-dom";
-import { observer } from "mobx-react";
+import * as React from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import { observer } from 'mobx-react';
 
-import "./MainSidebar.scss";
+import './MainSidebar.scss';
 
-import logo from "../res/img/logo_white_nopadding.svg";
-import Icon, { IconStyle } from "../core/Icon";
-import Avatar from "../core/Avatar";
-import Image from "../core/Image";
-import { UserStore } from "../store/UserStore";
-import PopoverContainer from "src/core/PopoverContainer";
-import Popover from "src/core/Popover";
-import { observable } from "mobx";
-import { authStore } from "src/store/AuthStore";
+import logo from '../res/img/logo_white_nopadding.svg';
+import Icon, { IconStyle } from '../core/Icon';
+import Avatar from '../core/Avatar';
+import Image from '../core/Image';
+import { UserStore } from '../store/UserStore';
+import PopoverContainer from 'src/core/PopoverContainer';
+import Popover from 'src/core/Popover';
+import { observable } from 'mobx';
+import { authStore } from 'src/store/AuthStore';
 
 interface Props {
 	userStore: UserStore;

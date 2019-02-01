@@ -1,10 +1,10 @@
-import "./Notifications.scss";
+import './Notifications.scss';
 
-import * as React from "react";
-import { notificationStore, NotificationType } from "src/store/NotificationStore";
-import { observer } from "mobx-react";
+import * as React from 'react';
+import { notificationStore, NotificationType } from 'src/store/NotificationStore';
+import { observer } from 'mobx-react';
 
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 @observer
 class Notifications extends React.Component {
