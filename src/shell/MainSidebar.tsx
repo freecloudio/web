@@ -52,7 +52,12 @@ class MainSidebar extends React.Component<Props, object> {
 							</Popover>
 						}
 					>
-						<Avatar name={this.props.userStore.currentUserInitials} size={3} onClick={this.onAvatarClicked} />
+						<Avatar 
+							firstName={this.props.userStore.currentUser.firstName || ''}
+							lastName={this.props.userStore.currentUser.lastName || ''}
+							size={3}
+							onClick={this.onAvatarClicked}
+						/>
 					</PopoverContainer>
 				</section>
 			</header>

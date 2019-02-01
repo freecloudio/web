@@ -1,11 +1,11 @@
-import { observable, computed } from "mobx";
+import { observable } from "mobx";
 import * as mgr from "../manager/UserManager";
-import { User } from "../models/User";
+import { User } from "../api";
 import { Log } from "../Log";
 
 export class UserStore {
 
-	@observable public currentUser: User = { name: "", id: -1 };
+	@observable public currentUser: User = { firstName: '', lastName: '', ID: -1 };
 	@observable public users: { [userID: number]: User } = {};
 
 	private readonly log = new Log("UserStore");
@@ -23,13 +23,6 @@ export class UserStore {
 			return usr;
 		}
 		return u;
-	}
-
-	@computed get currentUserInitials(): string {
-		if (this.currentUser.name === "") {
-			return "";
-		}
-		return this.currentUser.name.split(" ").map((part, idx) => idx >= 2 ? "" : part[0].toUpperCase()).join("");
 	}
 
 	public async fetchCurrentUser(): Promise<void> {

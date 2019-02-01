@@ -35,7 +35,7 @@ class Login extends React.Component<RouteComponentProps, object> {
 
 	public render() {
 		const isLogin = this.props.location.pathname.includes("login");
-		this.log.debug("Rerendering, isLogin is", isLogin);
+		this.log.debug(`Rerendering ${isLogin ? 'login' : 'signup'} page`);
 		if (this.proceed) {
 			if (this.props.location.search) {
 				const searchString = this.props.location.search.substring(1);

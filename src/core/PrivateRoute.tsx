@@ -2,13 +2,10 @@ import * as React from 'react';
 import { Route, Redirect, RouteProps } from 'react-router';
 import { authStore } from 'src/store/AuthStore';
 import paths from 'src/paths';
-import { Log } from 'src/Log';
 
 interface Props extends RouteProps {
 	component: React.ComponentClass;
 }
-
-const log = new Log('PrivateRoute');
 
 /**
  * PrivateRoute is a wrapper around react-router's Route component.
@@ -22,7 +19,6 @@ const PrivateRoute = ({ component, ...rest }: Props) => {
 			{...rest}
 			// tslint:disable-next-line
 			render={({ match, location }) => {
-				log.debug('match, location', match, location);
 				return (!authStore.isSignedIn) ? (
 					// tslint:disable-next-line
 					<Route {...rest} render={() => (<Redirect to={{ pathname: paths.LOGIN, search: match.url ? `to=${encodeURIComponent(match.url)}` : '' }} />)} />
