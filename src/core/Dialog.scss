@@ -1,0 +1,80 @@
+@import '../variables.scss';
+
+.dialog-container {
+	&.open {
+		.dialog-shade {
+			opacity: .2;
+			pointer-events: all;
+		}
+
+		.dialog {
+			visibility: visible;
+			pointer-events: all;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	.dialog-shade {
+		background: black;
+		opacity: 0;
+		z-index: 70;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100vw;
+		height: 100vh;
+		transition: opacity .2s ease-in-out;
+		pointer-events: none;
+	}
+
+	.dialog {
+		// @todo Check dialog min-sizes on mobile
+		min-width: 200px;
+		min-height: 100px;
+		background: white;
+		position: fixed;
+		top: 50vh;
+		left: 50vw;
+		z-index: 90;
+		border-radius: 5px;
+		display: flex;
+		flex-direction: column;
+		max-width: 90vw;
+		max-height: 90vh;
+		overflow: hidden;
+		transition: all .2s ease-in-out;
+		pointer-events: none;
+		visibility: hidden;
+		transform: translate(-50%, -60%);
+
+		.dialog-content {
+			flex: 1;
+			overflow: auto;
+			padding: $base-grid-size * 2;
+			// In case the buttons take up more space than the actual content,
+			// center the content
+			margin: 0 auto;
+		}
+
+		.dialog-footer {
+			display: flex;
+			background: $color-background-grey;
+			padding: 0 $base-grid-size * 2; // buttons have plenty of vertical margin
+			justify-content: flex-end;	
+			width: 100%;
+			box-sizing: border-box;
+			border-bottom-right-radius: 5px;
+			border-bottom-left-radius: 5px;
+
+			.dialog-button {
+				margin-left: 1rem;
+			}
+		}
+
+	}
+
+
+}
+
