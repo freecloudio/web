@@ -1,25 +1,25 @@
-import "./Login.scss";
-import * as React from "react";
-import { Link } from "react-router-dom";
-import { parse as parseQueryParams } from "querystring";
-import { Log } from "./Log";
-import InputField, { InputStyle } from "./core/InputField";
+import './Login.scss';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { parse as parseQueryParams } from 'querystring';
+import { Log } from './Log';
+import InputField, { InputStyle } from './core/InputField';
 
-import * as cover from "./res/img/upload_cover.svg";
-import * as logo from "./res/img/logo_color.svg";
-import { observer } from "mobx-react";
-import { observable } from "mobx";
-import Button, { ButtonStyle } from "./core/Button";
-import Image from "./core/Image";
-import { authStore } from "./store/AuthStore";
-import { Redirect, RouteComponentProps } from "react-router";
-import { notificationStore, NotificationType } from "./store/NotificationStore";
-import paths from "./paths";
+import * as cover from './res/img/upload_cover.svg';
+import * as logo from './res/img/logo_color.svg';
+import { observer } from 'mobx-react';
+import { observable } from 'mobx';
+import Button, { ButtonStyle } from './core/Button';
+import Image from './core/Image';
+import { authStore } from './store/AuthStore';
+import { Redirect, RouteComponentProps } from 'react-router';
+import { notificationStore, NotificationType } from './store/NotificationStore';
+import paths from './paths';
 
 @observer
 class Login extends React.Component<RouteComponentProps, object> {
 
-	private readonly log = new Log("Login");
+	private readonly log = new Log('Login');
 	@observable private proceed = false;
 	@observable private signupFirstName = '';
 	@observable private signupLastName = '';
@@ -34,7 +34,7 @@ class Login extends React.Component<RouteComponentProps, object> {
 	}
 
 	public render() {
-		const isLogin = this.props.location.pathname.includes("login");
+		const isLogin = this.props.location.pathname.includes('login');
 		this.log.debug(`Rerendering ${isLogin ? 'login' : 'signup'} page`);
 		if (this.proceed) {
 			if (this.props.location.search) {
@@ -53,10 +53,10 @@ class Login extends React.Component<RouteComponentProps, object> {
 		return (
 			<div className="login-page">
 				<div className="box">
-					<div className={isLogin ? "slider" : "slider right"}>
+					<div className={isLogin ? 'slider' : 'slider right'}>
 						<Image src={cover} className="cover-img" />
 					</div>
-					<div className={ isLogin ? "signup inactive" : "signup"}>
+					<div className={ isLogin ? 'signup inactive' : 'signup'}>
 						<header><Image src={logo} /> freecloud</header>
 						<main>
 							<h1>Sign up for freecloud</h1>
@@ -108,7 +108,7 @@ class Login extends React.Component<RouteComponentProps, object> {
 							<Link to={paths.LOGIN}>I already have an account.</Link>
 						</footer>
 					</div>
-					<div className={ isLogin ? "login" : "login inactive" }>
+					<div className={ isLogin ? 'login' : 'login inactive' }>
 						<header><Image src={logo} /> freecloud</header>
 						<main>
 							<h1>Welcome back</h1>
@@ -171,7 +171,7 @@ class Login extends React.Component<RouteComponentProps, object> {
 	}
 
 	private onLogin = async (event: React.MouseEvent<HTMLButtonElement>) => {
-		this.log.debug("Login");
+		this.log.debug('Login');
 		try {
 			await authStore.login(this.loginEmail, this.loginPassword);
 			this.proceed = true;
@@ -182,7 +182,7 @@ class Login extends React.Component<RouteComponentProps, object> {
 	}
 
 	private onSignup = async (event: React.MouseEvent<HTMLButtonElement>) => {
-		this.log.debug("Signup");
+		this.log.debug('Signup');
 		if (this.signupPassword !== this.signupConfirmPassword) {
 			notificationStore.sendNotification("The passwords you entered don't match", NotificationType.NEGATIVE);
 			return;

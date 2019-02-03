@@ -1,12 +1,12 @@
-import "./FileList.scss";
+import './FileList.scss';
 
-import * as React from "react";
-import { FileStore } from "src/store/FileStore";
-import { observer } from "mobx-react";
-import { observable } from "mobx";
-import FileTableBody from "./FileTableBody";
-import { PathInfo } from "src/api";
-import { Log } from "src/Log";
+import * as React from 'react';
+import { FileStore } from 'src/store/FileStore';
+import { observer } from 'mobx-react';
+import { observable } from 'mobx';
+import FileTableBody from './FileTableBody';
+import { PathInfo } from 'src/api';
+import { Log } from 'src/Log';
 
 interface Props {
 	base: string;
@@ -17,7 +17,7 @@ interface Props {
 @observer
 class FileList extends React.Component<Props, object> {
 
-	private readonly log = new Log("FileList");
+	private readonly log = new Log('FileList');
 	@observable private listScrolled: boolean = false;
 	@observable private currentDir: PathInfo = {};
 
@@ -32,7 +32,7 @@ class FileList extends React.Component<Props, object> {
 
 	public async componentDidUpdate(prevProps: Props) {
 		if (prevProps.currentPath !== this.props.currentPath) {
-			this.log.debug("Updating file list");
+			this.log.debug('Updating file list');
 			this.currentDir = await this.props.fileStore.getPathInfo(this.props.currentPath);
 		}
 	}
@@ -40,7 +40,7 @@ class FileList extends React.Component<Props, object> {
 	public render() {
 		return (
 			<div className="file-list">
-				<div className={`file-table-shadow-shim${this.listScrolled ? " scrolled" : ""}`} />
+				<div className={`file-table-shadow-shim${this.listScrolled ? ' scrolled' : ''}`} />
 				<div className="file-table-wrapper" onScroll={this.onTableScrolled}>
 					{
 						this.currentDir && this.currentDir.content ?

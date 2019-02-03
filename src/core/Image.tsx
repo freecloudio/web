@@ -1,8 +1,8 @@
-import "./Image.scss";
-import * as React from "react";
-import { Log } from "src/Log";
-import { observable } from "mobx";
-import { observer } from "mobx-react";
+import './Image.scss';
+import * as React from 'react';
+import { Log } from 'src/Log';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 
 interface Props {
 	src: string;
@@ -19,21 +19,21 @@ interface Props {
 @observer
 class Image extends React.Component<Props, object> {
 
-	private readonly log = new Log("Image");
+	private readonly log = new Log('Image');
 	@observable private loaded = false;
 
 	public componentDidMount() {
 		this.log.debug(`Loading image '${this.props.src}'`);
-		const img = document.createElement("img");
+		const img = document.createElement('img');
 		img.onload = this.onLoad;
 		img.src = this.props.src;
 	}
 
 	public render() {
-		const classes = [this.props.className, "img"];
-		if (this.loaded) { classes.push("loaded"); }
+		const classes = [this.props.className, 'img'];
+		if (this.loaded) { classes.push('loaded'); }
 		return (
-			<div className={classes.join(" ")}>
+			<div className={classes.join(' ')}>
 				{this.loaded ? <img src={this.props.src} /> : null}
 			</div>
 		);

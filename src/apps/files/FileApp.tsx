@@ -1,19 +1,19 @@
-import "./FileApp.scss";
+import './FileApp.scss';
 
-import * as React from "react";
-import Sidebar from "./Sidebar";
-import FileList from "./FileList";
-import { fileStore } from "../../store/FileStore";
-import Breadcrumbs from "../../core/Breadcrumbs";
-import InputField, { InputStyle } from "../../core/InputField";
-import { RouteComponentProps } from "react-router";
-import { observer } from "mobx-react";
-import { observable } from "mobx";
-import paths from "src/paths";
+import * as React from 'react';
+import Sidebar from './Sidebar';
+import FileList from './FileList';
+import { fileStore } from '../../store/FileStore';
+import Breadcrumbs from '../../core/Breadcrumbs';
+import InputField, { InputStyle } from '../../core/InputField';
+import { RouteComponentProps } from 'react-router';
+import { observer } from 'mobx-react';
+import { observable } from 'mobx';
+import paths from 'src/paths';
 
 interface RouterParams {
 	type?: string;
-	"0"?: string;
+	'0'?: string;
 }
 
 interface Props extends RouteComponentProps<RouterParams> {
@@ -24,18 +24,18 @@ class FileApp extends React.Component<Props, object> {
 	@observable private searchValue: string;
 
 	public render() {
-		const type = this.props.match.params.type ? this.props.match.params.type : "d";
-		const loc = `Home/${this.props.match.params["0"] ? this.props.match.params["0"] : ""}`;
+		const type = this.props.match.params.type ? this.props.match.params.type : 'd';
+		const loc = `Home/${this.props.match.params['0'] ? this.props.match.params['0'] : ''}`;
 
 		// Split by slashes, remove all null elements, replace 0th element with "Home",
 		// recusively build all other parts
-		const breadcrumbs = loc.split("/").filter((part) => !!part).map((part, idx, parts) =>
+		const breadcrumbs = loc.split('/').filter((part) => !!part).map((part, idx, parts) =>
 			idx === 0
-			? { name: "Home", href: `${paths.APPS.FILES}/${type}`}
+			? { name: 'Home', href: `${paths.APPS.FILES}/${type}`}
 			: { name: part, href: `${paths.APPS.FILES}/${type}${this.breadcrumbsParts(parts.slice(1, idx + 1))}` },
 		);
 
-		const currentPath = this.props.match.params["0"] || "/";
+		const currentPath = this.props.match.params['0'] || '/';
 
 		return (
 			<div className="file-app">
@@ -45,7 +45,7 @@ class FileApp extends React.Component<Props, object> {
 						<Breadcrumbs parts={breadcrumbs} />
 						<InputField type="text" style={InputStyle.Dark} value={this.searchValue} onChange={this.onSearchChanged}/>
 					</div>
-					<FileList base={paths.APPS.FILES + "/" + type} fileStore={fileStore} currentPath={currentPath} />
+					<FileList base={paths.APPS.FILES + '/' + type} fileStore={fileStore} currentPath={currentPath} />
 				</div>
 			</div>
 		);
@@ -56,7 +56,7 @@ class FileApp extends React.Component<Props, object> {
 	}
 
 	private breadcrumbsParts = (parts: string[]): string =>
-		parts.length <= 0 ? "" : "/" + parts[0] + this.breadcrumbsParts(parts.slice(1))
+		parts.length <= 0 ? '' : '/' + parts[0] + this.breadcrumbsParts(parts.slice(1))
 }
 
 export default FileApp;

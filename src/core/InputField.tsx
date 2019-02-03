@@ -1,6 +1,6 @@
-import "./InputField.scss";
+import './InputField.scss';
 
-import * as React from "react";
+import * as React from 'react';
 
 export enum InputStyle {
 	Light,
@@ -12,7 +12,7 @@ let nextTextFieldID = 0;
 interface Props {
 	label?: string;
 	style?: InputStyle;
-	type: "text" | "number" | "email" | "password" | "tel" | "search";
+	type: 'text' | 'number' | 'email' | 'password' | 'tel' | 'search';
 	autocomplete?: string;
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	value: string | number;

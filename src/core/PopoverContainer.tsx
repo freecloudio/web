@@ -1,6 +1,6 @@
-import "./PopoverContainer.scss";
+import './PopoverContainer.scss';
 
-import * as React from "react";
+import * as React from 'react';
 
 interface Props {
 	popover: JSX.Element;

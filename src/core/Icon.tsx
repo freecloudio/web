@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 
-import * as MDIcon from "@mdi/react";
+import * as MDIcon from '@mdi/react';
 
 // TODO: We should only include icons we use. This is for faster development
-import * as Icons from "@mdi/js";
+import * as Icons from '@mdi/js';
 
 export enum IconStyle {
 	Dark,
@@ -20,10 +20,10 @@ interface Props {
 }
 
 const IconColors: {[Style in IconStyle]: string} = {
-	[IconStyle.Dark]: "rgba(0, 0, 0, 0.81)",
-	[IconStyle.Light]: "rgba(255, 255, 255, 0.81)",
-	[IconStyle.Black]: "rgba(0, 0, 0, 1)",
-	[IconStyle.White]: "rgba(255, 255, 255, 1)",
+	[IconStyle.Dark]: 'rgba(0, 0, 0, 0.81)',
+	[IconStyle.Light]: 'rgba(255, 255, 255, 0.81)',
+	[IconStyle.Black]: 'rgba(0, 0, 0, 1)',
+	[IconStyle.White]: 'rgba(255, 255, 255, 1)',
 };
 
 const Icon: React.FunctionComponent<Props> = ({name, size, color, className}) => {
