@@ -1,5 +1,7 @@
 # freecloud web
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/freecloudio/web.svg)](https://greenkeeper.io/)
+
 This is the official freecloud web client, written in React + Typescript.
 
 ## Contributing
