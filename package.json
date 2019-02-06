@@ -8,6 +8,7 @@
   "dependencies": {
     "@mdi/js": "^3.3.92",
     "@mdi/react": "^1.1.0",
+    "@types/classnames": "^2.2.7",
     "@types/react-transition-group": "^2.0.15",
     "autoprefixer": "^9.4.6",
     "babel-jest": "^24.0.0",
@@ -15,6 +16,7 @@
     "babel-preset-react-app": "^7.0.0",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "chalk": "^2.4.2",
+    "classnames": "^2.2.6",
     "css-loader": "^2.1.0",
     "dotenv": "^6.2.0",
     "dotenv-expand": "^4.2.0",

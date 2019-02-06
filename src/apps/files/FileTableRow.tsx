@@ -5,6 +5,7 @@ import { RouteComponentProps } from 'react-router';
 import { FileInfo } from 'src/api';
 import { Log } from 'src/Log';
 import { observable } from 'mobx';
+import * as classNames from 'classnames';
 
 interface Props extends RouteComponentProps {
 	base: string;
@@ -20,7 +21,7 @@ class FileTableRow extends React.Component<Props, object> {
 	public render() {
 		const { file } = this.props;
 		return (
-			<tr onDrop={this.onDrop} onDragOver={this.onDragOver} onDragLeaveCapture={this.onDragLeave} className={this.isDraggedOver ? 'dropzone' : ''}>
+			<tr onDrop={this.onDrop} onDragOver={this.onDragOver} onDragLeaveCapture={this.onDragLeave} className={classNames({dropzone: this.isDraggedOver})}>
 				<td>
 					<div className="cell-wrapper" onDoubleClick={this.onDoubleClick}>
 						<Icon name={(file.isDir) ? 'folderOutline' : 'fileOutline'} size={1.5} color={IconStyle.Dark} className="icon" />
