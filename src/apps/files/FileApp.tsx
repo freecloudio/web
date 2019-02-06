@@ -23,7 +23,7 @@ interface Props extends RouteComponentProps<RouterParams> {
 @observer
 class FileApp extends React.Component<Props, object> {
 	@observable private searchValue: string;
-	@observable private dialogIsOpen: boolean = true;
+	@observable private dialogIsOpen: boolean = false;
 	@observable private newFolderName: string = 'New folder'; 
 
 	public render() {

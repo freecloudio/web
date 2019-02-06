@@ -18,10 +18,17 @@ export class FileStore {
 
 	public async fetchPathInfo(fullPath: string): Promise<PathInfo> {
 		this.log.debug('Fetching path info for path', fullPath);
-		const pathInfo = await this.fileAPI.getPathInfo(fullPath);
-		this.fileCache[fullPath] = pathInfo;
-		this.log.debug('Got info for path', fullPath, '- cache updated');
-		return pathInfo;
+		try {
+			const pathInfo = await this.fileAPI.getPathInfo(fullPath);
+			this.fileCache[fullPath] = pathInfo;
+			this.log.debug('Got info for path', fullPath, '- cache updated');
+			return pathInfo;
+		} catch (response) {
+			if (authStore.checkAuthorizedAPIResponse(response)) {
+				this.log.debug('Error getting file info, but was authorized', response);
+			} 
+			throw response;
+		}
 	}
 
 	public async getPathInfo(fullPath: string) {

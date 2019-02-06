@@ -94,6 +94,18 @@ export class AuthStore {
 	}
 
 	/**
+	 * Checks whether the given response indicates that the user is authenticated.
+	 * @param response true if user is authenticated, false if user is unauthenticated
+	 */
+	public checkAuthorizedAPIResponse(response: Response): boolean {
+		if (response.status === 401) {
+			this.signOut();
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * signOut ends the current active session by sending a sign out request to the server
 	 * (which invalidates the current session token), as well as deleting it from localStorage.
 	 * The result of the sign out request is not accounted for, as tokens should be extremely hard to guess (if not impossible),
