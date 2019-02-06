@@ -1,6 +1,7 @@
 import './InputField.scss';
 
 import * as React from 'react';
+import * as classNames from 'classnames';
 
 export enum InputStyle {
 	Light,
@@ -21,8 +22,6 @@ interface Props {
 const InputField = ({label, style, type, autocomplete, onChange, value}: Props) => {
 	const id = nextTextFieldID;
 	nextTextFieldID++;	
-	const classes = [ 'input-field' ];
-	classes.push((style === InputStyle.Light) ? 'light' : 'dark');
 
 	return (
 		<div className="inputfield-container">
@@ -32,7 +31,7 @@ const InputField = ({label, style, type, autocomplete, onChange, value}: Props) 
 				type={type}
 				value={value}
 				onChange={onChange}
-				className={classes.join(' ')}
+				className={classNames('input-field', (style === InputStyle.Light) ? 'light' : 'dark')}
 				autoComplete={autocomplete}
 			/>
 		</div>

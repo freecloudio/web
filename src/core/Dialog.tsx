@@ -3,6 +3,7 @@ import Button, { ButtonStyle } from './Button';
 
 import './Dialog.scss';
 import { Log } from 'src/Log';
+import * as classNames from 'classnames';
 
 interface DialogAction {
 	// The name of the action, will be passed in the onActionTrigger callback
@@ -29,13 +30,8 @@ const Dialog: React.FunctionComponent<Props> = ({ children, actions, onActionTri
 		};
 	}
 
-	const classes = [ 'dialog-container' ];
-	if (open) {
-		classes.push('open');
-	}
-
 	return (
-		<div className={ classes.join(' ') }>
+		<div className={classNames('dialog-container', {open})}>
 			<div className="dialog-shade" />
 			<div className="dialog">
 				<div className="dialog-content">

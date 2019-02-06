@@ -1,5 +1,6 @@
 import './Popover.scss';
 import * as React from 'react';
+import * as classNames from 'classnames';
 
 interface Props {
 	visible: boolean;
@@ -8,13 +9,8 @@ interface Props {
 }
 
 const Popover: React.FunctionComponent<Props> = ({visible, onClick, anchor, children}) => {
-	const classes = [ 'popover' ];
-	if (visible) {
-		classes.push('visible');
-	}
-	classes.push(anchor || 'below');
 	return (
-		<div className={classes.join(' ')} onClick={onClick}>
+		<div className={classNames('popover', {visible}, anchor || 'below')} onClick={onClick}>
 			{ children }	
 			{ visible && (<div className="popover-closer" />)}
 		</div>

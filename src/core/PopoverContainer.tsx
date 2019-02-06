@@ -1,6 +1,7 @@
 import './PopoverContainer.scss';
 
 import * as React from 'react';
+import * as classNames from 'classnames';
 
 interface Props {
 	popover: JSX.Element;
@@ -14,7 +15,7 @@ interface Props {
  */
 const PopoverContainer: React.FunctionComponent<Props> = ({ popover, className, children }) => {
 	return (
-		<div className={`popover-container${className ? ' ' + className : ''}`}>
+		<div className={classNames('popover-container', className)}>
 			{ popover }
 			{ children }
 		</div>

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Log } from 'src/Log';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
+import * as classNames from 'classnames';
 
 interface Props {
 	src: string;
@@ -30,10 +31,8 @@ class Image extends React.Component<Props, object> {
 	}
 
 	public render() {
-		const classes = [this.props.className, 'img'];
-		if (this.loaded) { classes.push('loaded'); }
 		return (
-			<div className={classes.join(' ')}>
+			<div className={classNames('img', this.props.className, { loaded: this.loaded })}>
 				{this.loaded ? <img src={this.props.src} /> : null}
 			</div>
 		);

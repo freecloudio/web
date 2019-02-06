@@ -1,5 +1,6 @@
 import './Button.scss';
 import * as React from 'react';
+import classNames from 'classnames';
 
 export type ButtonStyle = 'dark' | 'light' | 'primary' | 'primary-inverted' | 'positive' | 'negative';
 
@@ -18,8 +19,10 @@ const Button: React.FunctionComponent<Props> = ({children, style, onClick, class
 		onClick(event);
 	}
 
+	const styleClass = style || 'dark';
+
 	return (
-		<button className={`btn ${style || 'dark'}${className ? ' ' + className : ''}`} onClick={preventDefault}>{children}</button>
+		<button className={classNames('btn', styleClass, className)} onClick={preventDefault}>{children}</button>
 	);
 };
 

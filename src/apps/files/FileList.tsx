@@ -1,6 +1,7 @@
 import './FileList.scss';
 
 import * as React from 'react';
+import classNames from 'classnames';
 import { FileStore } from 'src/store/FileStore';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
@@ -40,7 +41,7 @@ class FileList extends React.Component<Props, object> {
 	public render() {
 		return (
 			<div className="file-list">
-				<div className={`file-table-shadow-shim${this.listScrolled ? ' scrolled' : ''}`} />
+				<div className={classNames('file-table-shadow-shim', { scrolled: this.listScrolled })} />
 				<div className="file-table-wrapper" onScroll={this.onTableScrolled}>
 					{
 						this.currentDir && this.currentDir.content ?
