@@ -1,6 +1,6 @@
-import "./Avatar.scss";
+import './Avatar.scss';
 
-import * as React from "react";
+import * as React from 'react';
 
 interface Props {
 	imageSrc?: string;

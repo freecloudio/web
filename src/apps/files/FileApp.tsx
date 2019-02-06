@@ -10,6 +10,7 @@ import { RouteComponentProps } from 'react-router';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
 import paths from 'src/paths';
+import Dialog from 'src/core/Dialog';
 
 interface RouterParams {
 	type?: string;
@@ -22,6 +23,8 @@ interface Props extends RouteComponentProps<RouterParams> {
 @observer
 class FileApp extends React.Component<Props, object> {
 	@observable private searchValue: string;
+	@observable private dialogIsOpen: boolean = true;
+	@observable private newFolderName: string = 'New folder'; 
 
 	public render() {
 		const type = this.props.match.params.type ? this.props.match.params.type : 'd';
@@ -40,6 +43,14 @@ class FileApp extends React.Component<Props, object> {
 		return (
 			<div className="file-app">
 				<Sidebar base={paths.APPS.FILES} />
+				<Dialog 
+					actions={[{name: 'cancel', text: 'Cancel'}, {name: 'create', text: 'Create file', type: 'primary'}]} 
+					onActionTriggered={this.onDialogActionTriggered} 
+					open={this.dialogIsOpen}
+				>
+					<span>Enter a name for the new folder:</span>
+					<InputField type="text" value={this.newFolderName} onChange={this.onNewFolderNameChanged}/>
+				</Dialog>
 				<div className="files">
 					<div className="files-header">
 						<Breadcrumbs parts={breadcrumbs} />
@@ -57,6 +68,19 @@ class FileApp extends React.Component<Props, object> {
 
 	private breadcrumbsParts = (parts: string[]): string =>
 		parts.length <= 0 ? '' : '/' + parts[0] + this.breadcrumbsParts(parts.slice(1))
+
+	private onDialogActionTriggered = (actionName: string) => {
+		switch (actionName) {
+			case 'cancel':
+				this.dialogIsOpen = false;
+				break;
+		}
+	}
+
+	private onNewFolderNameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+		this.newFolderName = event.target.value.toString();	
+	}
+
 }
 
 export default FileApp;

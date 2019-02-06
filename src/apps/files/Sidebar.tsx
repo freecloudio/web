@@ -4,7 +4,7 @@ import './Sidebar.scss';
 import Icon, { IconStyle } from '../../core/Icon';
 import { NavLink, match } from 'react-router-dom';
 import { Log } from '../../Log';
-import Button, { ButtonStyle } from '../../core/Button';
+import Button from '../../core/Button';
 import Popover from '../../core/Popover';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
@@ -46,7 +46,7 @@ class Sidebar extends React.Component<Props, object> {
 									</Popover>
 								}
 							>
-								<Button className="add-button" onClick={this.onAddButtonClicked} style={ButtonStyle.PrimaryInverted}>
+								<Button className="add-button" onClick={this.onAddButtonClicked} style="primary-inverted">
 									<Icon name="plus" size={1.5} />New
 								</Button>
 

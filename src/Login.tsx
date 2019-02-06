@@ -9,7 +9,7 @@ import * as cover from './res/img/upload_cover.svg';
 import * as logo from './res/img/logo_color.svg';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
-import Button, { ButtonStyle } from './core/Button';
+import Button from './core/Button';
 import Image from './core/Image';
 import { authStore } from './store/AuthStore';
 import { Redirect, RouteComponentProps } from 'react-router';
@@ -101,7 +101,7 @@ class Login extends React.Component<RouteComponentProps, object> {
 									onChange={this.onSignupConfirmPasswordChanged}
 									value={this.signupConfirmPassword}
 								/>
-								<Button style={ButtonStyle.Primary} onClick={this.onSignup}>Signup</Button>
+								<Button style="primary" onClick={this.onSignup}>Signup</Button>
 							</form>
 						</main>
 						<footer>
@@ -130,7 +130,7 @@ class Login extends React.Component<RouteComponentProps, object> {
 									onChange={this.onLoginPasswordChanged}
 									value={this.loginPassword}
 								/>
-								<Button style={ButtonStyle.Primary} onClick={this.onLogin}>Login</Button>
+								<Button style="primary" onClick={this.onLogin}>Login</Button>
 							</form>
 						</main>
 						<footer>
