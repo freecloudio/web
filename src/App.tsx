@@ -23,11 +23,9 @@ class App extends React.Component {
 					<Notifications/>
 					{ authStore.isSignedIn ? <MainSidebar userStore={userStore} /> : null }
 					<main className={authStore.isSignedIn ? '' : 'fullbleed'}>
+						{ /* Default to the Files App */ }
 						<Route exact path="/" render={FilesRedirect} />
-						<PrivateRoute exact path={paths.APPS.FILES} component={FileApp} />
-						<PrivateRoute exact path={paths.APPS.FILES + '/:type'} component={FileApp} />
-						<PrivateRoute path={paths.APPS.FILES + '/:type/*'} component={FileApp} />
-
+						<PrivateRoute path={paths.APPS.FILES} component={FileApp}/>
 						<PrivateRoute path={paths.APPS.CALENDAR} component={CalendarApp} />
 						<PrivateRoute path={paths.APPS.SETTINGS} component={SettingsApp} />
 

@@ -3,101 +3,86 @@ import * as React from 'react';
 import './Sidebar.scss';
 import Icon, { IconStyle } from '../../core/Icon';
 import { NavLink, match } from 'react-router-dom';
-import { Log } from '../../Log';
 import Button from '../../core/Button';
 import Popover from '../../core/Popover';
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
 import PopoverContainer from '../../core/PopoverContainer';
 import paths from 'src/paths';
 import { Location } from 'history';
 
 interface Props {
-	// base path of the files app. This is used to generate sub-links like for shared files and trash.
-	base: string;
+	// Called when a new folder is to be created
+	onCreateFolder: () => void;
 }
 
-const log = new Log('Sidebar');
+function homeLinkIsActive(_: match, l: Location): boolean {
+	return (l && (l.pathname === paths.APPS.FILES || l.pathname.includes(paths.APPS.FILES + '/d')));
+}
 
-@observer
-class Sidebar extends React.Component<Props, object> {
+function sharedLinkIsActive(_: match, l: Location): boolean {
+	return (l && l.pathname.includes(paths.APPS.FILES + '/shared'));
+}
 
-	@observable private addDropdownVisible = false;
+function starredLinkIsActive(_: match, l: Location): boolean {
+	return (l && l.pathname.includes(paths.APPS.FILES + '/starred'));
+}
 
-	public render() {
-		const { base } = this.props;
-		return (
-			<aside className="files-sidebar">
-				<h1>Files</h1>
-				<nav>
-					<ul>
-						<li>
-							<PopoverContainer
-								popover={
-									<Popover visible={this.addDropdownVisible} onClick={this.onAddButtonClicked} anchor="below">
-										<ul>
-											<li>
-												<span>Upload files</span>
-											</li>
-											<li>
-												<span>Create folder</span>
-											</li>
-										</ul>
-									</Popover>
-								}
-							>
-								<Button className="add-button" onClick={this.onAddButtonClicked} style="primary-inverted">
-									<Icon name="plus" size={1.5} />New
+function trashLinkIsActive(_: match, l: Location): boolean {
+	return (l && l.pathname.includes(paths.APPS.FILES + '/trash'));
+}
+
+const Sidebar: React.FunctionComponent<Props> = ({ onCreateFolder }) => {
+	const [addDropdownVisible, setAddDropdownVisible] = React.useState(false);
+
+	return (
+		<aside className="files-sidebar">
+			<h1>Files</h1>
+			<nav>
+				<ul>
+					<li>
+						<PopoverContainer
+							popover={
+								<Popover visible={addDropdownVisible} onClick={() => setAddDropdownVisible(false)} anchor="below">
+									<ul>
+										<li>
+											<span>Upload files</span>
+										</li>
+										<li>
+											<span onClick={onCreateFolder}>Create folder</span>
+										</li>
+									</ul>
+								</Popover>
+							}
+						>
+							<Button className="add-button" onClick={() => setAddDropdownVisible(true)} style="primary-inverted">
+								<Icon name="plus" size={1.5} />New
 								</Button>
 
-							</PopoverContainer>
-						</li>
-						<li>
-							<NavLink to={{ pathname: base }} isActive={this.homeLinkIsActive}>
-								<Icon name="homeOutline" size={1.5} color={IconStyle.Dark} />Your files
+						</PopoverContainer>
+					</li>
+					<li>
+						<NavLink to={{ pathname: paths.APPS.FILES }} isActive={homeLinkIsActive}>
+							<Icon name="homeOutline" size={1.5} color={IconStyle.Dark} />Your files
 							</NavLink>
-						</li>
-						<li>
-							<NavLink to={{ pathname: base + '/shared' }} isActive={this.sharedLinkIsActive}>
-								<Icon name="shareVariant" size={1.5} color={IconStyle.Dark} />Shared
+					</li>
+					<li>
+						<NavLink to={{ pathname: paths.APPS.FILES + '/shared' }} isActive={sharedLinkIsActive}>
+							<Icon name="shareVariant" size={1.5} color={IconStyle.Dark} />Shared
 							</NavLink>
-						</li>
-						<li>
-							<NavLink to={{ pathname: base + '/starred' }} isActive={this.starredLinkIsActive}>
-								<Icon name="starOutline" size={1.5} color={IconStyle.Dark} />Starred
+					</li>
+					<li>
+						<NavLink to={{ pathname: paths.APPS.FILES + '/starred' }} isActive={starredLinkIsActive}>
+							<Icon name="starOutline" size={1.5} color={IconStyle.Dark} />Starred
 							</NavLink>
-						</li>
-						<li>
-							<NavLink to={{ pathname: base + '/trash' }} isActive={this.trashLinkIsActive}>
-								<Icon name="deleteOutline" size={1.5} color={IconStyle.Dark} />Trash
+					</li>
+					<li>
+						<NavLink to={{ pathname: paths.APPS.FILES + '/trash' }} isActive={trashLinkIsActive}>
+							<Icon name="deleteOutline" size={1.5} color={IconStyle.Dark} />Trash
 							</NavLink>
-						</li>
-					</ul>
-				</nav>
-			</aside>
-		);
-	}
-
-	private homeLinkIsActive(_: match, l: Location): boolean {
-		return (l && (l.pathname === paths.APPS.FILES || l.pathname.includes(paths.APPS.FILES + '/d')));
-	}
-
-	private sharedLinkIsActive(_: match, l: Location): boolean {
-		return (l && l.pathname.includes(paths.APPS.FILES + '/shared'));
-	}
-
-	private starredLinkIsActive(_: match, l: Location): boolean {
-		return (l && l.pathname.includes(paths.APPS.FILES + '/starred'));
-	}
-
-	private trashLinkIsActive(_: match, l: Location): boolean {
-		return (l && l.pathname.includes(paths.APPS.FILES + '/trash'));
-	}
-
-	private onAddButtonClicked = () => {
-		log.debug('Add button clicked');
-		this.addDropdownVisible = !this.addDropdownVisible;
-	}
-}
+					</li>
+				</ul>
+			</nav>
+		</aside>
+	);
+};
 
 export default Sidebar;
