@@ -5,6 +5,7 @@ import { notificationStore, NotificationType } from 'src/store/NotificationStore
 import { observer } from 'mobx-react';
 
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import * as classNames from 'classnames';
 
 @observer
 class Notifications extends React.Component {
@@ -18,7 +19,7 @@ class Notifications extends React.Component {
 							classNames="notification-anim"
 							timeout={{ enter: 200, exit: 200 }}
 						>
-							<div className={`notification ${NotificationType[ntfn.type].toLowerCase()}`}>
+							<div className={classNames('notification', NotificationType[ntfn.type].toLowerCase())}>
 								<span className="notification-text">{ntfn.message}</span>
 							</div>
 						</CSSTransition>,
