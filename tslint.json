@@ -5,7 +5,7 @@
     "indent": [true, "tabs", 2],
     "interface-name": [true, "never-prefix"],
     "jsx-boolean-value": false,
-		"jsx-curly-spacing": "always",
+    "jsx-curly-spacing": "always",
 		"jsx-no-lambda": false,
     "jsx-no-multiline-js": false,
     "max-classes-per-file": false,
