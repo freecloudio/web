@@ -10,11 +10,11 @@ const log = new Log('FileApp');
 
 const FileApp: React.FunctionComponent<RouteComponentProps> = ({match}) => {
 	const [ creatingFolder, setCreatingFolder ] = React.useState(false);
+	log.debug('rendering');
 	return (
 		<div className="file-app">
 			<Sidebar
 				onCreateFolder={() => {
-				log.debug('true');
 				setCreatingFolder(true);
 			}}
 			/>

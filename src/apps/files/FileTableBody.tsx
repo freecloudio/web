@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { observer } from 'mobx-react';
 import FileTableRow from './FileTableRow';
 import { Route } from 'react-router-dom';
 import { FileInfo } from 'src/api';
@@ -9,7 +8,6 @@ interface Props {
 	files: FileInfo[];
 }
 
-@observer
 class FileTableBody extends React.Component<Props, object> {
 	public render() {
 		return (

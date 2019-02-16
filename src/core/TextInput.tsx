@@ -1,4 +1,4 @@
-import './InputField.scss';
+import './TextInput.scss';
 
 import * as React from 'react';
 import * as classNames from 'classnames';
@@ -13,15 +13,19 @@ let nextTextFieldID = 0;
 interface Props {
 	label?: string;
 	style?: InputStyle;
-	type: 'text' | 'number' | 'email' | 'password' | 'tel' | 'search';
+	type: 'text' | 'email' | 'password' | 'search';
 	autocomplete?: string;
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	onChange: (value: string) => void;
 	value: string | number;
 }
 
-const InputField = ({label, style, type, autocomplete, onChange, value}: Props) => {
+const TextInput = ({label, style, type, autocomplete, onChange, value}: Props) => {
 	const id = nextTextFieldID;
 	nextTextFieldID++;	
+
+	function onChangeWrapper(event: React.ChangeEvent<HTMLInputElement>) {
+		onChange(event.target.value.toString());
+	}
 
 	return (
 		<div className="inputfield-container">
@@ -30,7 +34,7 @@ const InputField = ({label, style, type, autocomplete, onChange, value}: Props) 
 				id={`tf${id}`}
 				type={type}
 				value={value}
-				onChange={onChange}
+				onChange={onChangeWrapper}
 				className={classNames('input-field', (style === InputStyle.Light) ? 'light' : 'dark')}
 				autoComplete={autocomplete}
 			/>
@@ -38,4 +42,4 @@ const InputField = ({label, style, type, autocomplete, onChange, value}: Props) 
 	);
 };
 
-export default InputField;
+export default TextInput;

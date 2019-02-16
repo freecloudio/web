@@ -1,11 +1,10 @@
-import { observer } from 'mobx-react';
 import * as React from 'react';
 import Icon, { IconStyle } from '../../core/Icon';
 import { RouteComponentProps } from 'react-router';
 import { FileInfo } from 'src/api';
 import { Log } from 'src/Log';
-import { observable } from 'mobx';
 import * as classNames from 'classnames';
+import paths from 'src/paths';
 
 interface Props extends RouteComponentProps {
 	base: string;
@@ -14,46 +13,43 @@ interface Props extends RouteComponentProps {
 
 const log = new Log('FileTableRow');
 
-@observer
-class FileTableRow extends React.Component<Props, object> {
-	@observable private isDraggedOver = false;
+const FileTableRow: React.FunctionComponent<Props> = ({ file, history }) => {
 
-	public render() {
-		const { file } = this.props;
-		return (
-			<tr onDrop={this.onDrop} onDragOver={this.onDragOver} onDragLeaveCapture={this.onDragLeave} className={classNames({dropzone: this.isDraggedOver})}>
-				<td>
-					<div className="cell-wrapper" onDoubleClick={this.onDoubleClick}>
-						<Icon name={(file.isDir) ? 'folderOutline' : 'fileOutline'} size={1.5} color={IconStyle.Dark} className="icon" />
-						<span>{file.name}</span>
-					</div>
-				</td>
-				<td><div className="cell-wrapper">{file.ownerID ? file.ownerID : '...'}</div></td>
-				<td><div className="cell-wrapper">{file.size}</div></td>
+	const [ isDraggedOver, setIsDraggedOver ] = React.useState(false);
 
-			</tr>
-		);
-	}
+	const onDoubleClick = () => {
+		history.push(paths.APPS.FILES + file.path + file.name);
+	};
 
-	private onDoubleClick = () => {
-		this.props.history.push(this.props.base + this.props.file.path + this.props.file.name);
-	}
-
-	private onDrop = (event: React.DragEvent) => {
+	const onDrop = (event: React.DragEvent) => {
 		event.preventDefault();
 		const files = Array.from(event.dataTransfer.files);
-		log.debug('Files', files.map((f: File) => f.name), 'dropped to folder', `${this.props.file.path}${this.props.file.name}`);
-	}
+		log.debug('Files', files.map((f: File) => f.name), 'dropped to folder', `${file.path}${file.name}`);
+	};
 
-	private onDragOver = (event: React.DragEvent) => {
+	const onDragOver = (event: React.DragEvent) => {
 		event.preventDefault();
-		this.isDraggedOver = true;
-	}
+		setIsDraggedOver(true);
+	};
 
-	private onDragLeave = (event: React.DragEvent) => {
+	const onDragLeave = (event: React.DragEvent) => {
 		event.preventDefault();
-		this.isDraggedOver = false;
-	}
-}
+		setIsDraggedOver(true);
+	};
+
+	return (
+		<tr onDrop={onDrop} onDragOver={onDragOver} onDragLeaveCapture={onDragLeave} className={classNames({dropzone: isDraggedOver})}>
+			<td>
+				<div className="cell-wrapper" onDoubleClick={onDoubleClick}>
+					<Icon name={(file.isDir) ? 'folderOutline' : 'fileOutline'} size={1.5} color={IconStyle.Dark} className="icon" />
+					<span>{file.name}</span>
+				</div>
+			</td>
+			<td><div className="cell-wrapper">{file.ownerID ? file.ownerID : '...'}</div></td>
+			<td><div className="cell-wrapper">{file.size}</div></td>
+
+		</tr>
+	);
+};
 
 export default FileTableRow;
