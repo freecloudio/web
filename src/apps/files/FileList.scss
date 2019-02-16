@@ -1,12 +1,12 @@
 @import "../../variables.scss";
 
-$padding-small: 1rem;
+$padding-small: 1.5rem;
 
 $table-header-height: 3.25rem;
 
 .file-list {
   max-height: calc(100% - #{$file-app-header-height} - 2 * 1rem);
-  padding: 1rem 0;
+  padding: $padding-small 0;
   border-radius: 5px;
   box-sizing: border-box;
   flex: 1;
@@ -98,7 +98,8 @@ $table-header-height: 3.25rem;
   }
 
   tbody tr td .cell-wrapper {
-    padding: $padding-small $padding-small $padding-small $padding-small;
+		padding: 1rem $padding-small 1rem 1rem;
+		border-radius: 5px;
 	}
 	
 	tbody tr.dropzone {

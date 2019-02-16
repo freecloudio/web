@@ -11,25 +11,32 @@ import PopoverContainer from 'src/core/PopoverContainer';
 import Popover from 'src/core/Popover';
 import { connect } from 'react-redux';
 import { Store } from '../store';
-import { bindActionCreators, Dispatch } from 'redux';
+import * as userActions from '../actions/userActions';
 import * as authActions from '../actions/authActions';
 import { User } from 'src/api';
+import { ThunkDispatch } from 'redux-thunk';
+import { Action } from 'src/actions';
 
 interface Props {
 	currentUser: User;
-	actions: typeof authActions;
+	getCurrentUser: typeof userActions.getCurrentUser;
+	signOut: typeof authActions.signOut;
 	
 }
 
-const MainSidebar: React.FunctionComponent<Props> = ({currentUser, actions}) => {
+const MainSidebar: React.FunctionComponent<Props> = ({currentUser, getCurrentUser, signOut}) => {
 	const [userAvatarDropdownVisible, setUserDropdownVisible] = React.useState(false);
+
+	React.useEffect(() => {
+		getCurrentUser();
+	}, []);
 
 	function onAvatarClicked() {
 		setUserDropdownVisible(!userAvatarDropdownVisible);
 	}
 
 	function onSignOutClicked() {
-		actions.signOut();
+		signOut();
 	}
 	return (
 		<header className="mainsidebar">
@@ -79,9 +86,10 @@ function mapStateToProps(state: Store) {
 	};
 }
 
-function mapDispatchToProps(dispatch: Dispatch) {
+function mapDispatchToProps(dispatch: ThunkDispatch<Store, null, Action>) {
 	return {
-		actions: bindActionCreators(authActions, dispatch),
+		getCurrentUser: () => dispatch(userActions.getCurrentUser()	),
+		signOut: () => dispatch(authActions.signOut()),
 	};
 }
 
