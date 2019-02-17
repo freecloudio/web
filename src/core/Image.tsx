@@ -1,14 +1,14 @@
 import './Image.scss';
 import * as React from 'react';
 import { Log } from 'src/Log';
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
 import * as classNames from 'classnames';
 
 interface Props {
 	src: string;
 	className?: string;
 }
+
+const log = new Log('Image');
 
 /**
  * The Image component lazy-loads images.
@@ -17,32 +17,26 @@ interface Props {
  * and giving it the desired source. After the image 'load' event fires,
  * we rely on the browser's cache to put the same src into the real <img> element.
  */
-@observer
-class Image extends React.Component<Props, object> {
+const Image: React.FunctionComponent<Props> = ({ src, className }) => {
+	const [loaded, setLoaded] = React.useState(false);
 
-	private readonly log = new Log('Image');
-	@observable private loaded = false;
-
-	public componentDidMount() {
-		this.log.debug(`Loading image '${this.props.src}'`);
+	React.useEffect(() => {
+		log.debug(`Loading image '${src}'`);
 		const img = document.createElement('img');
-		img.onload = this.onLoad;
-		img.src = this.props.src;
-	}
+		img.onload = onLoad;
+		img.src = src;
+	}, []);
 
-	public render() {
-		return (
-			<div className={classNames('img', this.props.className, { loaded: this.loaded })}>
-				{this.loaded ? <img src={this.props.src} /> : null}
-			</div>
-		);
-	}
+	const onLoad = () => {
+		log.debug(`Image ${src} loaded`);
+		setLoaded(true);
+	};
 
-	private onLoad = () => {
-		this.log.debug(`Image ${this.props.src} loaded`);
-		this.loaded = true;
-		// If this wasn't already loaded from cache, put it there.
-	}
-}
+	return (
+		<div className={classNames('img', className, { loaded })}>
+			{loaded ? <img src={src} /> : null}
+		</div>
+	);
+};
 
 export default Image;

@@ -2,77 +2,81 @@ import './FileList.scss';
 
 import * as React from 'react';
 import classNames from 'classnames';
-import { FileStore } from 'src/store/FileStore';
-import { observer } from 'mobx-react';
-import { observable } from 'mobx';
 import FileTableBody from './FileTableBody';
-import { PathInfo } from 'src/api';
 import { Log } from 'src/Log';
+import { connect } from 'react-redux';
+import { Store } from 'src/store';
+import { FileState } from 'src/store/fileStore';
+import paths from 'src/paths';
+import * as fileActions from 'src/actions/fileActions';
+import { ThunkDispatch } from 'redux-thunk';
+import { Action } from 'src/actions';
 
 interface Props {
-	base: string;
-	fileStore: FileStore;
 	currentPath: string;
+	files: FileState;
+	getPathInfo: typeof fileActions.getPathInfo;
 }
 
-@observer
-class FileList extends React.Component<Props, object> {
+const log = new Log('FileList');
 
-	private readonly log = new Log('FileList');
-	@observable private listScrolled: boolean = false;
-	@observable private currentDir: PathInfo = {};
+const FileList: React.FunctionComponent<Props> = ({currentPath, files, getPathInfo}) => {
+	
+	const [ listScrolled, setListScrolled ] = React.useState(false);
 
-	constructor(props: Props) {
-		super(props);
-		this.onTableScrolled = this.onTableScrolled.bind(this);
-	}
-
-	public async componentDidMount() {
-		this.currentDir = await this.props.fileStore.getPathInfo(this.props.currentPath);
-	}
-
-	public async componentDidUpdate(prevProps: Props) {
-		if (prevProps.currentPath !== this.props.currentPath) {
-			this.log.debug('Updating file list');
-			this.currentDir = await this.props.fileStore.getPathInfo(this.props.currentPath);
-		}
-	}
-
-	public render() {
-		return (
-			<div className="file-list">
-				<div className={classNames('file-table-shadow-shim', { scrolled: this.listScrolled })} />
-				<div className="file-table-wrapper" onScroll={this.onTableScrolled}>
-					{
-						this.currentDir && this.currentDir.content ?
-							<table className="file-table">
-								<thead>
-									<tr>
-										<th>Name<span>Name</span></th>
-										<th>Owner<span>Owner</span></th>
-										<th>Size<span>Size</span></th>
-									</tr>
-								</thead>
-								<FileTableBody base={this.props.base} files={this.currentDir.content} />
-							</table>
-							:
-							<span>No files yet</span>
-					}
-				</div>
-			</div>
-		);
-	}
-
-	private onTableScrolled(event: React.UIEvent): void {
+	function onTableScrolled(event: React.UIEvent): void {
 		if (!event.nativeEvent.srcElement) {
 			return;
 		}
 		if (event.nativeEvent.srcElement.scrollTop > 0) {
-			this.listScrolled = true;
+			setListScrolled(true);
 		} else {
-			this.listScrolled = false;
+			setListScrolled(false);
 		}
 	}
+
+	// TODO: Improve the whole loading setup
+
+	if (!files.files[currentPath]) {
+		log.debug('Loading info for path', currentPath);
+		getPathInfo(currentPath);
+		return (<div className="file-list">Loading...</div>);
+	}
+
+	return (
+		<div className="file-list">
+			<div className={classNames('file-table-shadow-shim', { scrolled: listScrolled })} />
+			<div className="file-table-wrapper" onScroll={onTableScrolled}>
+				{
+					files.files[currentPath] && files.files[currentPath].content ?
+						<table className="file-table">
+							<thead>
+								<tr>
+									<th>Name<span>Name</span></th>
+									<th>Owner<span>Owner</span></th>
+									<th>Size<span>Size</span></th>
+								</tr>
+							</thead>
+							<FileTableBody base={paths.APPS.FILES} files={files.files[currentPath].content!} />
+						</table>
+						:
+						<span>No files yet</span>
+				}
+			</div>
+		</div>
+	);
+};
+
+function mapStateToProps(state: Store) {
+	return {
+		files: state.files,
+	};
 }
 
-export default FileList;
+function mapDispatchToProps(dispatch: ThunkDispatch<Store, null, Action>) {
+	return {
+		getPathInfo: (path: string) => dispatch(fileActions.getPathInfo(path)),
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileList);

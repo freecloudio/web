@@ -1,11 +1,10 @@
 import * as React from 'react';
 import Dialog from 'src/core/Dialog';
-import InputField, { InputStyle } from 'src/core/InputField';
+import TextInput, { InputStyle } from 'src/core/TextInput';
 import Breadcrumbs from 'src/core/Breadcrumbs';
 import FileList from 'src/apps/files/FileList';
 import paths from 'src/paths';
 import { type } from 'os';
-import { fileStore } from 'src/store/FileStore';
 import { RouteComponentProps } from 'react-router';
 import { Log } from 'src/Log';
 
@@ -30,7 +29,7 @@ const FileListPage: React.FunctionComponent<Props> = ({ match, isCreatingNewFold
 	const [searchValue, setSearchValue] = React.useState('');
 	const [newFolderName, setNewFolderName] = React.useState('New folder');
 
-	const locationType = match.params.type || 'd';
+	// const locationType = match.params.type || 'd';
 	const location = match.params['0'] || '/';
 
 	function dialogActionTriggered(actionName: string) {
@@ -63,25 +62,23 @@ const FileListPage: React.FunctionComponent<Props> = ({ match, isCreatingNewFold
 				open={isCreatingNewFolder}
 			>
 				<span>Enter a name for the new folder:</span>
-				<InputField
+				<TextInput
 					type="text"
 					value={newFolderName}
-					// tslint:disable-next-line:jsx-no-lambda
-					onChange={(event) => setNewFolderName(event.target.value.toString())}
+					onChange={setNewFolderName}
 				/>
 			</Dialog>
 			<div className="files">
 				<div className="files-header">
 					<Breadcrumbs parts={breadcrumbs} />
-					<InputField
+					<TextInput
 						type="text"
 						style={InputStyle.Dark}
 						value={searchValue}
-						// tslint:disable-next-line:jsx-no-lambda
-						onChange={(event) => setSearchValue(event.target.value.toString())}
+						onChange={setSearchValue}
 					/>
 				</div>
-				<FileList base={paths.APPS.FILES + '/' + locationType} fileStore={fileStore} currentPath={location} />
+				<FileList currentPath={location} />
 			</div>
 
 		</div>
