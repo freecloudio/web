@@ -24,6 +24,56 @@ aside.files-sidebar {
       font-size: 1.375rem;
       height: 3.25rem;
 
+			.popover {
+				ul {
+					margin: 0;
+					padding: 0;
+					list-style-type: none;
+				}
+
+				li {
+					line-height: 3.25rem;
+					font-size: 1.375rem;
+					height: 3.25rem;
+
+					a, span {
+						border-radius: 5px;
+						padding: 0 1rem 0 1rem;
+						display: flex;
+						align-items: center;
+						text-decoration: none;
+						transition: color .15s ease-in-out, background .15s ease-in-out;
+						font-size: inherit;
+						margin: 0;
+						height: 3.25rem;
+						color: inherit;
+						cursor: pointer;
+
+						&:hover {
+							color: $color-text-heavy;
+
+							svg path {
+								fill: $color-text-heavy !important;
+							}
+						}
+
+						&.active {
+							background: rgba(0, 0, 0, 0.06);
+							color: $color-primary;
+
+							svg path {
+								fill: $color-primary !important;
+							}
+						}
+
+						svg {
+							margin-right: 1rem;
+						}
+					}
+
+				}
+			}
+
       a, .add-button {
         border-radius: 5px;
         padding: 0 1rem 0 1rem;

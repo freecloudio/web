@@ -3,7 +3,7 @@
 .btn {
 	border-radius: 5px;
 	padding: $base-grid-size * 1 $base-grid-size * 4;
-	outline: none; 
+	outline: none;
 	border: none;
 	font-family: $font-stack;
 	font-size: 1rem;
@@ -17,7 +17,7 @@
 		margin-right: $base-grid-size * 2;
 		color: inherit;
 	}
-	
+
 	&.dark {
 		background: rgba(0, 0, 0, 0.1);
 		color: $color-text;
@@ -31,5 +31,15 @@
 	&.primary-inverted {
 		color: $color-primary;
 		background: none;
+	}
+
+	&.text {
+		color: inherit;
+		border-radius: inherit;
+		font-size: inherit;
+		margin: inherit;
+		padding: inherit;
+		background: inherit;
+
 	}
 }

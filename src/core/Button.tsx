@@ -2,7 +2,7 @@ import './Button.scss';
 import * as React from 'react';
 import classNames from 'classnames';
 
-export type ButtonStyle = 'dark' | 'light' | 'primary' | 'primary-inverted' | 'positive' | 'negative';
+export type ButtonStyle = 'dark' | 'light' | 'primary' | 'primary-inverted' | 'positive' | 'negative' | 'text';
 
 export interface Props {
 	// Changes the appearance of the button. Will default to 'dark'

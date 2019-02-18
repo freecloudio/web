@@ -33,6 +33,9 @@ function trashLinkIsActive(_: match, l: Location): boolean {
 const Sidebar: React.FunctionComponent<Props> = ({ onCreateFolder }) => {
 	const [addDropdownVisible, setAddDropdownVisible] = React.useState(false);
 
+	// @todo: Convert all span's to buttons
+	// @body: We currently have some spans, which act as buttons (namely here and in MainSidebar).
+	// This is pretty ugly. We should therefore convert those to <Button>s
 	return (
 		<aside className="files-sidebar">
 			<h1>Files</h1>
