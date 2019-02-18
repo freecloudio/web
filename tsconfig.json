@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-	  "paths": { "*": ["node_modules/redux-persist/types/*"] },
     "baseUrl": ".",
     "outDir": "build/dist",
     "module": "esnext",

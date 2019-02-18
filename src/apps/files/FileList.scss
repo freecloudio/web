@@ -61,7 +61,7 @@ $table-header-height: 3.25rem;
         display: block;
         height: $table-header-height;
         background: #fff;
-        padding: 0 $padding-small;
+        padding: 0 1rem;
         top: $padding-small;
         color: $color-text;
         box-sizing: border-box;
@@ -101,7 +101,7 @@ $table-header-height: 3.25rem;
 		padding: 1rem $padding-small 1rem 1rem;
 		border-radius: 5px;
 	}
-	
+
 	tbody tr.dropzone {
 		animation-name: drop-flash;
 		animation-duration: 1s;

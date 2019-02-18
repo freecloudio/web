@@ -2,6 +2,8 @@ import { User, UserApiFp } from 'src/api';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { Store } from 'src/store';
 import { getAPIBasePath } from 'src/utils/getBasePath';
+import { isUnauthorized } from 'src/utils/apiRequests';
+import { signOut } from 'src/actions/authActions';
 
 export type Action = {
 	type: 'FETCH_CURRENT_USER',
@@ -45,6 +47,9 @@ export function getCurrentUser(): ThunkAction<void, Store, null, Action> {
 			const user = await UserApiFp({ accessToken: authToken }).getCurrentUser()(undefined, getAPIBasePath());
 			dispatch(fetchCurrentUserDone(user));
 		} catch (response) {
+			if (isUnauthorized(response)) {
+				dispatch(signOut());
+			}
 			dispatch(fetchCurrentUserError(response));
 		}
 	};

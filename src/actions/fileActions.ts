@@ -2,6 +2,8 @@ import { PathInfo, FileApiFp } from 'src/api';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { Store } from 'src/store';
 import { getAPIBasePath } from 'src/utils/getBasePath';
+import { signOut } from './authActions';
+import { isUnauthorized } from 'src/utils/apiRequests';
 
 export type Action = {
 	type: 'FETCH_PATH_INFO',
@@ -51,6 +53,9 @@ export function getPathInfo(path: string): ThunkAction<void, Store, null, Action
 			const pathInfo = await FileApiFp({ accessToken: authToken }).getPathInfo(path)(undefined, getAPIBasePath());
 			dispatch(fetchPathInfoDone(path, pathInfo));
 		} catch (response) {
+			if (isUnauthorized(response)) {
+				dispatch(signOut());
+			}
 			dispatch(fetchPathInfoError(path, response));
 		}
 	};
