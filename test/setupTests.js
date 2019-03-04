@@ -1,3 +1,4 @@
+require('jest-enzyme');
 const configure = require("enzyme").configure;
 const Adapter = require("enzyme-adapter-react-16");
 
