@@ -3,6 +3,9 @@ import { FileState } from 'src/store/fileStore';
 
 const initialState: FileState = {
 	files: {},
+	appState: {
+		dialogOpen: false,
+	},
 };
 
 export default function fileReducer(state: FileState = initialState, action: Action): FileState {
@@ -36,6 +39,13 @@ export default function fileReducer(state: FileState = initialState, action: Act
 					},
 				},
 			};	
+		case 'FILES_APP_DIALOG_CHANGE':
+			return {
+				...state,
+				appState: {
+					dialogOpen: action.open,
+				},
+			};
 		default:
 			return state;
 	}

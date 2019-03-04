@@ -5,7 +5,7 @@ import './Dialog.scss';
 import { Log } from 'src/Log';
 import * as classNames from 'classnames';
 
-interface DialogAction {
+export interface DialogAction {
 	// The name of the action, will be passed in the onActionTrigger callback
 	name: string;
 	// The text to show on the action's button

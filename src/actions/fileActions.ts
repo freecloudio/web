@@ -16,6 +16,9 @@ export type Action = {
 	type: 'FETCH_PATH_INFO_ERROR',
 	path: string,
 	response: Response,
+} | {
+	type: 'FILES_APP_DIALOG_CHANGE',
+	open: boolean,
 };
 
 function fetchPathInfo(path: string): Action {
@@ -58,5 +61,12 @@ export function getPathInfo(path: string): ThunkAction<void, Store, null, Action
 			}
 			dispatch(fetchPathInfoError(path, response));
 		}
+	};
+}
+
+export function changeDialogState(open: boolean): Action {
+	return {
+		type: 'FILES_APP_DIALOG_CHANGE',
+		open,
 	};
 }

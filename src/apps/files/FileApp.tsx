@@ -9,17 +9,12 @@ import { Log } from 'src/Log';
 const log = new Log('FileApp');
 
 const FileApp: React.FunctionComponent<RouteComponentProps> = ({match}) => {
-	const [ creatingFolder, setCreatingFolder ] = React.useState(false);
 	log.debug('rendering');
 	return (
 		<div className="file-app">
-			<Sidebar
-				onCreateFolder={() => {
-				setCreatingFolder(true);
-			}}
-			/>
-			<Route path={match.path + '/'} exact render={(props) => <FileListPage isCreatingNewFolder={creatingFolder} {...props} />} />
-			<Route path={match.path + '/d/*'} exact render={(props) => <FileListPage isCreatingNewFolder={creatingFolder} {...props} />} />
+			<Sidebar />
+			<Route path={match.path + '/'} exact component={FileListPage} />
+			<Route path={match.path + '/d/*'} exact component={FileListPage} />
 			<Route path={match.path + '/shared'} exact component={FileListPage} />
 			<Route path={match.path + '/starred'} exact component={FileListPage} />
 			<Route path={match.path + '/trash'} exact component={FileListPage} />

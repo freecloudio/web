@@ -10,4 +10,7 @@ interface FilesByPath { [path: string]: FilePathInfo; }
 
 export interface FileState {
 	files: FilesByPath;
+	appState: {
+		dialogOpen: boolean,
+	};
 }

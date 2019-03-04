@@ -13,6 +13,17 @@ export type Action = {
 } | {
 	type: 'FETCH_CURRENT_USER_ERROR',
 	response: Response,
+} | {
+	type: 'FETCH_USER',
+	id: number,
+} | { 
+	type: 'FETCH_USER_DONE',
+	id: number,
+	user: User,
+} | {
+	type: 'FETCH_USER_ERROR',
+	id: number,
+	response: Response,
 };
 
 function fetchCurrentUser(): Action {
@@ -51,6 +62,48 @@ export function getCurrentUser(): ThunkAction<void, Store, null, Action> {
 				dispatch(signOut());
 			}
 			dispatch(fetchCurrentUserError(response));
+		}
+	};
+}
+
+function fetchUser(id: number): Action {
+	return {
+		type: 'FETCH_USER',
+		id,
+	};
+}
+
+function fetchUserDone(id: number, user: User): Action {
+	return {
+		type: 'FETCH_USER_DONE',
+		id,
+		user,
+	};
+}
+
+function fetchUserError(id: number, response: Response): Action {
+	return {
+		type: 'FETCH_USER_ERROR',
+		id,
+		response,
+	};
+}
+
+export function getUserByID(id: number): ThunkAction<void, Store, null, Action> {
+	return async (dispatch: ThunkDispatch<Store, null, Action>, getStore) => {
+		const authToken = getStore().auth.sessionToken;
+		if (!authToken) {
+			throw new Error('Unauthorized');
+		}
+		dispatch(fetchUser(id));
+		try {
+			const user = await UserApiFp({ accessToken: authToken }).getUserByID(id)(undefined, getAPIBasePath());
+			dispatch(fetchUserDone(id, user));
+		} catch (response) {
+			if (isUnauthorized(response)) {
+				dispatch(signOut());
+			}
+			dispatch(fetchUserError(id, response));
 		}
 	};
 }

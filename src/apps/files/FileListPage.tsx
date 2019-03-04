@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Dialog from 'src/core/Dialog';
+import Dialog, { DialogAction } from 'src/core/Dialog';
 import TextInput, { InputStyle } from 'src/core/TextInput';
 import Breadcrumbs from 'src/core/Breadcrumbs';
 import FileList from 'src/apps/files/FileList';
@@ -7,6 +7,11 @@ import paths from 'src/paths';
 import { type } from 'os';
 import { RouteComponentProps } from 'react-router';
 import { Log } from 'src/Log';
+import { connect } from 'react-redux';
+import { Store } from 'src/store';
+import { Dispatch } from 'redux';
+
+import * as fileActions from 'src/actions/fileActions';
 
 interface RouteProps {
 	'0'?: string;
@@ -16,16 +21,18 @@ interface RouteProps {
 const log = new Log('FileListPage');
 
 interface Props extends RouteComponentProps<RouteProps> {
-	isCreatingNewFolder: boolean;
+	dialogIsOpen: boolean;
+	setDialogOpen: typeof fileActions.changeDialogState;
 }
+
+const DIALOG_ACTION_CANCEL: DialogAction = { name: 'cancel', text: 'Cancel' };
+const DIALOG_ACTION_CREATE: DialogAction = { name: 'create', text: 'Create Folder', type: 'primary' };
 
 function breadcrumbsParts(parts: string[]): string {
 	return parts.length <= 0 ? '' : '/' + parts[0] + breadcrumbsParts(parts.slice(1));
 }
 
-const FileListPage: React.FunctionComponent<Props> = ({ match, isCreatingNewFolder }) => {
-	console.log(isCreatingNewFolder);
-
+const FileListPage: React.FunctionComponent<Props> = ({ match, dialogIsOpen, setDialogOpen }) => {
 	const [searchValue, setSearchValue] = React.useState('');
 	const [newFolderName, setNewFolderName] = React.useState('New folder');
 
@@ -34,10 +41,12 @@ const FileListPage: React.FunctionComponent<Props> = ({ match, isCreatingNewFold
 
 	function dialogActionTriggered(actionName: string) {
 		switch (actionName) {
-			case 'create':
+			case DIALOG_ACTION_CREATE.name:
 				log.debug('Creating new folder with name', newFolderName);
+				setDialogOpen(false);
 				break;
-			case 'close':
+			case DIALOG_ACTION_CANCEL.name:
+				setDialogOpen(false);
 				break;
 			default:
 				log.error(`Dialog triggered action '${actionName}', which is unknown`);
@@ -57,9 +66,9 @@ const FileListPage: React.FunctionComponent<Props> = ({ match, isCreatingNewFold
 	return (
 		<div className="filepage">
 			<Dialog
-				actions={[{ name: 'cancel', text: 'Cancel' }, { name: 'create', text: 'Create Folder', type: 'primary' }]}
+				actions={[ DIALOG_ACTION_CANCEL, DIALOG_ACTION_CREATE ]}
 				onActionTriggered={dialogActionTriggered}
-				open={isCreatingNewFolder}
+				open={dialogIsOpen}
 			>
 				<span>Enter a name for the new folder:</span>
 				<TextInput
@@ -85,4 +94,16 @@ const FileListPage: React.FunctionComponent<Props> = ({ match, isCreatingNewFold
 	);
 };
 
-export default FileListPage;
+function mapStateToProps(state: Store) {
+	return {
+		dialogIsOpen: state.files.appState.dialogOpen,
+	};
+}
+
+function mapDispatchToProps(dispatch: Dispatch) {
+	return {
+		setDialogOpen: (open: boolean) => dispatch(fileActions.changeDialogState(open)),
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileListPage);

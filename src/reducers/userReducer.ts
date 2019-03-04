@@ -16,6 +16,12 @@ export default function userReducer(state: UserState = initialState, action: Act
 		case 'FETCH_CURRENT_USER_ERROR':
 			// TODO: Error handling
 			return { ...state, isCurrentUserLoading: false, currentUser: {} };
+		case 'FETCH_USER':
+			return { ...state, users: { ...state.users, [action.id]: { isLoading: true }}};
+		case 'FETCH_USER_DONE':
+			return { ...state, users: { ...state.users, [action.id]: { isLoading: false, ...action.user }}};
+		case 'FETCH_USER_ERROR':
+			return { ...state, users: { ...state.users, [action.id]: { isLoading: false }}};
 		default:
 			return state;
 	}

@@ -5,4 +5,3 @@ export function isUnauthorized(response: Response) {
 export function isForbidden(response: Response) {
 	return response.status === 403;
 }
-

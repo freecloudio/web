@@ -8,10 +8,14 @@ import Popover from '../../core/Popover';
 import PopoverContainer from '../../core/PopoverContainer';
 import paths from 'src/paths';
 import { Location } from 'history';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+
+import * as fileActions from 'src/actions/fileActions';
 
 interface Props {
 	// Called when a new folder is to be created
-	onCreateFolder: () => void;
+	setDialogOpen: typeof fileActions.changeDialogState;
 }
 
 function homeLinkIsActive(_: match, l: Location): boolean {
@@ -30,8 +34,12 @@ function trashLinkIsActive(_: match, l: Location): boolean {
 	return (l && l.pathname.includes(paths.APPS.FILES + '/trash'));
 }
 
-const Sidebar: React.FunctionComponent<Props> = ({ onCreateFolder }) => {
+const Sidebar: React.FunctionComponent<Props> = ({ setDialogOpen }) => {
 	const [addDropdownVisible, setAddDropdownVisible] = React.useState(false);
+
+	function onCreateFolder() {
+		setDialogOpen(true);
+	}
 
 	// @todo: Convert all span's to buttons
 	// @body: We currently have some spans, which act as buttons (namely here and in MainSidebar).
@@ -88,4 +96,10 @@ const Sidebar: React.FunctionComponent<Props> = ({ onCreateFolder }) => {
 	);
 };
 
-export default Sidebar;
+function mapDispatchToProps(dispatch: Dispatch) {
+	return {
+		setDialogOpen: (open: boolean) => dispatch(fileActions.changeDialogState(open)),
+	};
+}
+
+export default connect(undefined, mapDispatchToProps)(Sidebar);

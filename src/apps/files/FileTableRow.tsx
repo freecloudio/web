@@ -5,6 +5,7 @@ import { FileInfo } from 'src/api';
 import { Log } from 'src/Log';
 import * as classNames from 'classnames';
 import paths from 'src/paths';
+import UserNameByID from 'src/core/UserNameByID';
 
 interface Props extends RouteComponentProps {
 	base: string;
@@ -45,8 +46,8 @@ const FileTableRow: React.FunctionComponent<Props> = ({ file, history }) => {
 					<span>{file.name}</span>
 				</div>
 			</td>
-			<td><div className="cell-wrapper">{file.ownerID ? file.ownerID : '...'}</div></td>
-			<td><div className="cell-wrapper">{file.size}</div></td>
+			<td><div className="cell-wrapper"><UserNameByID id={file.ownerID!} /></div></td>
+			<td><div className="cell-wrapper">{file.size || '-'}</div></td>
 
 		</tr>
 	);
