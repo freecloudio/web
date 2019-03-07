@@ -1,6 +1,7 @@
+dist: xenial
 language: node_js
 node_js:
-- '11'
+- '11.10.1'
 env:
   global:
   - secure: caFrDv25yuFVANtHHprrnLlhcLoVL6UBk+eQUKGdZFb6NUUF3VJ5sUU024oHy+eGDxcKRZLR+lu9h5FMIChTD7UGyHCd7aUUDtbz9sWGqnvGxKs4GEhySTVwIFvb2/9bI8danQuNrjgYWK4PqmeN3TZ6POg9s5dF7Nszne8FDVfdOZjDmb79TmXBUUE93Zil38VLJBE0rEmuM52M6eqE+NjtH5nqMRq+nFuBVJdLLoT5BHZFA2Zgnyw4pF51hxdFLSaMNsuLqMF/DK4jGfvxHpCN0OvuDyicWjoGgeMrYb1F+gpIF979URz/Iop8axMV6V8sWgm4AA3GzCwVr/FVcESIaFORYlLKrWUAb6TI+vrhpC9oW38Tg0oQrTxz8pjP8iNCM3gKfxP8hUAsgwuxM/DdbFapbN7vM5CtXbYvRbLXgMO/whlZnZ6WXA+wgier4ElgeFYdDwN2uneLsPwdaUQRqwJkII0sVLT0qamyW7efjyqJwQFxglAry7JTQzu5vxpMJ1WiaJQkwKza13L3SzL0+tZzPoxoaqNpeJPJFD8Jes31/BFYWZk6+kV+iMT606ZWaXhfCuGePr4m/5Z27ZtlDuWS49dIvPaUs4Yddz8kL7IVJBSoIXeOuqpW89wPN65eOz4AbcU5IGj6+Z7/zJx9hjWvAiV4wpBfU2CH8Qc=
@@ -11,7 +12,7 @@ deploy:
     branch: release
     condition: "$TRAVIS_EVENT_TYPE = push"
   script:
-  - bash ./scripts/ci/push_master.sh $GH_TOKEN
+    - bash ./scripts/ci/push_master.sh $GH_TOKEN
 notifications:
   email: false
   slack:
