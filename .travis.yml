@@ -1,3 +1,4 @@
+dist: xenial
 language: node_js
 node_js:
 - '11'
@@ -11,7 +12,7 @@ deploy:
     branch: release
     condition: "$TRAVIS_EVENT_TYPE = push"
   script:
-  - bash ./scripts/ci/push_master.sh $GH_TOKEN
+    - bash ./scripts/ci/push_master.sh $GH_TOKEN
 notifications:
   email: false
   slack:
