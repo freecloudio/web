@@ -48,7 +48,7 @@
     "babel-loader": "^8.0.5",
     "babel-preset-react-app": "^7.0.1",
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.0.0",
     "dotenv-expand": "^5.0.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
