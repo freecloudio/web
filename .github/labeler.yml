@@ -1,0 +1,11 @@
+app/files:
+- src/apps/files/**/*
+
+app/settings:
+- src/apps/settings/**/*
+
+app/calendar:
+- src/apps/calendar/**/*
+
+app/contacts:
+- src/apps/contacts/**/*
