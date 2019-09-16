@@ -6,7 +6,7 @@
     "label": "type/deps"
   },
   "dependencies": {
-    "@mdi/js": "^4.0.96",
+    "@mdi/js": "^4.4.95",
     "@mdi/react": "^1.1.0",
     "chalk": "^2.4.2",
     "classnames": "^2.2.6",
