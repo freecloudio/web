@@ -43,7 +43,7 @@
     "@types/react-redux": "^7.0.1",
     "@types/react-router-dom": "^4.3.5",
     "@types/react-transition-group": "^2.0.16",
-    "autoprefixer": "^9.4.9",
+    "autoprefixer": "^9.6.1",
     "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
     "babel-preset-react-app": "^9.0.1",
