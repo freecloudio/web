@@ -1,0 +1,11 @@
+:root {
+	--main-bg-color: rgb(240, 240, 240);
+	--main-text-color: rgb(50, 50, 50);
+	--main-font-size-smaller: 9px;
+	--main-font-size-smaller: 12px;
+	--main-font-size-base: 16px;
+	--main-font-size-larger: 20px;
+	--main-font-size-large: 25px;
+	--main-font-size-huge: 31px; /* 31.25 floored */
+}
+
