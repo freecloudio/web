@@ -1,12 +1,13 @@
 import React from 'react';
+import './index.css';
 import './App.css';
 
-import Button from './lib/Button';
+import Button from './components/Button';
 
 function App() {
   return (
     <div className="App">
-			<Button text="Hello World" />
+			<Button primary>Hello World!</Button>
 		</div>
   );
 }

@@ -1,11 +1,25 @@
 :root {
-	--main-bg-color: rgb(240, 240, 240);
-	--main-text-color: rgb(50, 50, 50);
 	--main-font-size-smaller: 9px;
 	--main-font-size-smaller: 12px;
 	--main-font-size-base: 16px;
 	--main-font-size-larger: 20px;
 	--main-font-size-large: 25px;
 	--main-font-size-huge: 31px; /* 31.25 floored */
+
+	--color-primary: hsl(214, 84%, 56%);
+	--color-primary-muted: hsl(214, 84%, 44%);
+	--color-primary-accent: hsl(214, 84%, 91%);
+	--color-primary-shadow: hsla(214, 84%, 44%, 0.3);
+
+	--color-negative: hsl(360, 95%, 42%);
+	--color-negative-accent: hsl(360, 95%, 94%);
+	--color-negative-shadow: hsla(360, 95%, 42%, 0.3);
+
+	--color-dark-text: hsl(0, 0%, 36%);
+	--color-dark-text-muted: hsl(0, 0%, 14%);
+	--color-dark-text-shadow: hsla(0, 0%, 36%, 0.3);
+
+	--color-light-bg: hsl(0, 0%, 96%);
+	--color-light-bg-muted: hsl(0, 0%, 90%);
 }
 
