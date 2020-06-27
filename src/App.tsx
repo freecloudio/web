@@ -2,12 +2,14 @@ import React from 'react';
 import './index.css';
 import './App.css';
 
-import Button from './components/Button';
+import Files from './apps/files/Files';
+import Headerbar from './components/Headerbar';
 
 function App() {
   return (
     <div className="App">
-			<Button primary>Hello World!</Button>
+			<Headerbar />
+			<Files />
 		</div>
   );
 }

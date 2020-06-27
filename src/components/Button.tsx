@@ -16,6 +16,9 @@ const Button = styled.button<Colorizable & Sizable>`
 	line-height: ${props => sizes(props, '1.5em', '2.25em', '3em')};
 	box-shadow: 2px 2px 6px ${props => getShadowColor(props, '--color-dark-text-shadow')};
 	font-size: ${props => sizes(props, '.75em', '1em', '1.25em')};
+	box-sizing: border-box;
+	font-family: inherit;
+	font-weight: inherit;
 `;
 
 export default Button;
