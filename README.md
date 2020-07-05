@@ -1,44 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# freecloud web
 
-## Available Scripts
+This is the official freecloud web client, written in React + Typescript.
 
-In the project directory, you can run:
+## Contributing
 
-### `npm start`
+So you want to contribute to freecloud web? That's super awesome!
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+There are multiple ways to contribute:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- By fixing bugs
+- Developing cool new features
+- Cleaning up the code
+- Writing and improving translations
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Development Setup
 
-### `npm run build`
+To get your machine setup for contributing to freecloud web, install the latest versions of [NodeJS](https://nodejs.org) and [NPM](https://npmjs.com).
+Then clone the repository and run `npm install` to install all dependencies.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+We provide several scripts which will make development easier.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```sh
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This will start the development server, so you can start hacking right away.
 
-### `npm run eject`
+```sh
+npm test
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This runs the unit tests by starting `jest`. For more info on how to use jest, see: [jestjs.io](https://jestjs.io/).
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```sh
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This does a production build of the client. This build is optimized for performance and therefore should not be used during development.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
