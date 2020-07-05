@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import FlexBox from '../../components/FlexBox';
 import FilesSidebar from './FilesSidebar';
+import Spinner from '../../components/Spinner';
 
 const Container = styled(FlexBox)`
 	padding-top: 2rem;
@@ -15,7 +16,9 @@ function Files() {
 	return (
 		<Container>
 			<FilesSidebar />
-			<main></main>
+			<main>
+				<Spinner />
+			</main>
 		</Container>
 	)
 }
