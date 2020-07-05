@@ -1,2 +1,3 @@
 todo:
   label: "type/todo"
+  keyword: [ "TODO", "FIXME", "@todo", "@fixme" ]
