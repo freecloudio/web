@@ -1,49 +1,45 @@
-import './App.scss';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import * as React from 'react';
-import { connect } from 'react-redux';
+import React, { Suspense } from 'react';
+import './index.css';
+import styled from 'styled-components';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import apps from './appindex';
+import Headerbar from './components/Headerbar';
+import Spinner from './components/Spinner';
+import FlexBox from './components/FlexBox';
 
-import MainSidebar from './shell/MainSidebar';
-import FileApp from './apps/files/FileApp';
-import CalendarApp from './apps/calendar/CalendarApp';
-import SettingsApp from './apps/settings/SettingsApp';
-import Login from './Login';
-import PrivateRoute from './core/PrivateRoute';
-import { AuthState } from './store/authStore';
-import Notifications from './shell/Notifications';
-import paths from './paths';
-import { Store } from './store';
+const Files = React.lazy(() => import('./apps/files/Files'));
 
-interface Props {
-	auth: AuthState;
-}
+const Main = styled.main`
+	overflow-x: hidden;
+	overflow-y: auto;
+	min-height: 100%;
+	width: 100%;
+`;
 
-const App: React.FunctionComponent<Props> = ({ auth }) => {
+const WholeScreenSpinner = () => (
+	<FlexBox style={{width: '100%', height: '100%'}} justify="center" items="center">
+		<Spinner large />
+	</FlexBox>
+);
+
+function App() {
 	return (
-		<BrowserRouter>
-			<div className="App">
-				<Notifications />
-				{auth.isSignedIn ? <MainSidebar /> : null}
-				<main className={auth.isSignedIn ? '' : 'fullbleed'}>
-					{ /* Default to the Files App */}
-					<Route exact path="/" render={FilesRedirect} />
-					<PrivateRoute path={paths.APPS.FILES} component={FileApp} isSignedIn={auth.isSignedIn} />
-					<PrivateRoute path={paths.APPS.CALENDAR} component={CalendarApp} isSignedIn={auth.isSignedIn} />
-					<PrivateRoute path={paths.APPS.SETTINGS} component={SettingsApp} isSignedIn={auth.isSignedIn} />
-
-					<Route path={paths.AUTH} component={Login} />
-				</main>
-			</div>
-		</BrowserRouter>
+		<Router>
+			<Headerbar />
+			<Main>
+				<Switch>
+					<Route path={apps.files.routePrefix}>
+						<Suspense fallback={<WholeScreenSpinner />}>
+							<Files />
+						</Suspense>
+					</Route>
+					<Route path="/">
+						<Redirect to={{pathname: apps.files.routePrefix}} />
+					</Route>
+				</Switch>
+			</Main>
+		</Router>
 	);
-};
-
-const FilesRedirect = () => (<Redirect to="/apps/files" />);
-
-function mapStateToProps(state: Store) {
-	return {
-		auth: state.auth,
-	};
 }
 
-export default connect(mapStateToProps)(App);
+export default App;
