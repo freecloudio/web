@@ -9,8 +9,9 @@ const UploadButton = styled(Button)`
 `;
 
 const StyledAside = styled.aside`
-	height: 100%;
+	height: 100vh;
 	width: 14rem;
+	background: var(--color-background-alt);
 `;
 
 const ButtonPlus = styled(Plus)`

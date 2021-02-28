@@ -4,21 +4,22 @@ import FlexBox from '../../components/FlexBox';
 import FilesSidebar from './FilesSidebar';
 import Spinner from '../../components/Spinner';
 
-const Container = styled(FlexBox)`
-	padding-top: 2rem;
-	width: 100%;
-	height: 100%;
+const Main = styled.main`
+	background: var(--color-background);
+	flex: 1;
+	height: 100vh;
+	overflow: hidden;
 `;
 
 
 function Files() {
 	return (
-		<Container>
+		<FlexBox>
 			<FilesSidebar />
-			<main>
+			<Main>
 				<Spinner />
-			</main>
-		</Container>
+			</Main>
+		</FlexBox>
 	)
 }
 

@@ -12,7 +12,6 @@ const IconButton = styled.button<{toggled?: boolean}>`
 	appearance: none;
 	cursor: pointer;
 	box-sizing: border-box;
-	margin-right: 1rem;
 	font-family: inherit;
 	font-weight: inherit;
 	text-align: left;

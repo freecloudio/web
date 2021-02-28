@@ -16,4 +16,8 @@ code {
   overflow: hidden;
   box-sizing: border-box;
   background: var(--color-light-bg);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 }

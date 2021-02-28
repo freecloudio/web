@@ -6,8 +6,8 @@
 	--main-font-size-large: 25px;
 	--main-font-size-huge: 31px; /* 31.25 floored */
 
-	--color-primary: hsl(214, 84%, 56%);
-	--color-primary-muted: hsl(214, 84%, 44%);
+	--color-primary: hsl(235.7, 100%, 67.3%);
+	--color-primary-muted: hsl(235.7, 100%, 62.3%);
 	--color-primary-accent: hsl(214, 84%, 91%);
 	--color-primary-shadow: hsla(214, 84%, 44%, 0.3);
 
@@ -19,7 +19,18 @@
 	--color-dark-text-muted: hsl(0, 0%, 14%);
 	--color-dark-text-shadow: hsla(0, 0%, 36%, 0.3);
 
-	--color-light-bg: hsl(0, 0%, 96%);
-	--color-light-bg-muted: hsl(0, 0%, 90%);
+	--color-light-background: hsl(216, 38.5%, 97.5%);
+	--color-light-background-alt: hsl(216, 38.5%, 100%);
+	--color-dark-background: hsl(216, 38.5%, 8.5%);
+	--color-dark-background-alt: hsl(216, 38.5%, 10.5%);
+
+	--color-background: var(--color-light-background);
+	--color-background-alt: var(--color-light-background-alt);
 }
 
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-background: var(--color-dark-background);
+		--color-background-alt: var(--color-dark-background-alt);
+	}
+}
