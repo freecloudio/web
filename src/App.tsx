@@ -3,7 +3,7 @@ import './index.css';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import apps from './appindex';
-import Headerbar from './components/Headerbar';
+import AppBar from './components/AppBar';
 import Spinner from './components/Spinner';
 import FlexBox from './components/FlexBox';
 
@@ -25,19 +25,19 @@ const WholeScreenSpinner = () => (
 function App() {
 	return (
 		<Router>
-			<Headerbar />
-			<Main>
 				<Switch>
 					<Route path={apps.files.routePrefix}>
-						<Suspense fallback={<WholeScreenSpinner />}>
-							<Files />
-						</Suspense>
+						<AppBar />
+						<Main>
+							<Suspense fallback={<WholeScreenSpinner />}>
+								<Files />
+							</Suspense>
+						</Main>
 					</Route>
 					<Route path="/">
 						<Redirect to={{pathname: apps.files.routePrefix}} />
 					</Route>
-				</Switch>
-			</Main>
+			</Switch>
 		</Router>
 	);
 }

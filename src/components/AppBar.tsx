@@ -6,42 +6,52 @@ import apps from '../appindex';
 import {Link, useLocation} from 'react-router-dom';
 import Avatar from './Avatar';
 
-const StyledHeaderbar = styled.header`
+const StyledAppBar = styled.header`
 	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	background: var(--color-primary);
 	color: white;
-	width: 100vw;
-	height: 4rem;
+	height: 100vh;
+	width: 5rem;
 	line-height: 4rem;
 	box-sizing: border-box;
-	padding: 0 2rem;
+	padding: 1rem 0;
 	align-items: center;
 `;
 
 const IconNav = styled.nav`
-	display: flex;
-	align-items: center;
-	margin-right: auto;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	text-align: center;
 `;
 
 // TODO: These are shifted down by 1px for some reason
 const L = styled.a`
-	display: inline-block;
 	width: 3rem;
 	height: 3rem;
-	margin-right: 1rem;
 `;
 
-const StyledLogo = styled(Logo)`
-	margin-right: 1rem;
-	padding-right: .5rem;
+const LogoContainer = styled.div`
+	width: 3rem;
+	height: 3rem;
+	background: #fff;
+	border-radius: 2rem;
+	color: var(--color-primary);
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
-export default function Headerbar() {
+export default function AppBar() {
 	const location = useLocation();
 	return (
-		<StyledHeaderbar>
-			<StyledLogo height="1.5rem" />
+		<StyledAppBar>
+			<LogoContainer>
+				<Logo height="2rem"/>
+			</LogoContainer>
 			<IconNav>
 				{ Object.entries(apps).map(([ app, config ]) => (
 					<Link to={config.routePrefix} component={L} key={app}>
@@ -52,6 +62,6 @@ export default function Headerbar() {
 				)) }
 			</IconNav>
 			<Avatar name="John Doe" imageSrc="https://randomuser.me/api/portraits/men/17.jpg"/>
-		</StyledHeaderbar>
+		</StyledAppBar>
 	);
 }
