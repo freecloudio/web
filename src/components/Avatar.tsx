@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
@@ -36,7 +35,7 @@ function getAvatarName(fullname: string) {
 	return initials.reduce((name, part, index) => (index >= 2) ? name : name + part, '');
 }
 
-const Avatar: React.FC<Props> = (props) => (
+const Avatar = (props: Props) => (
 	<StyledAvatar {...props}>
 		{ props.imageSrc ? <AvatarImage src={props.imageSrc}/> : getAvatarName(props.name) }
 	</StyledAvatar>

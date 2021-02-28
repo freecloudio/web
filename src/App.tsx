@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import './index.css';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
@@ -7,7 +7,7 @@ import Headerbar from './components/Headerbar';
 import Spinner from './components/Spinner';
 import FlexBox from './components/FlexBox';
 
-const Files = React.lazy(() => import('./apps/files/Files'));
+const Files = lazy(() => import('./apps/files/Files'));
 
 const Main = styled.main`
 	overflow-x: hidden;

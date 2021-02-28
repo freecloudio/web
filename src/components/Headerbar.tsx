@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import IconButton from './IconButton';
 import Logo from './Logo';
@@ -55,4 +54,4 @@ export default function Headerbar() {
 			<Avatar name="John Doe" imageSrc="https://randomuser.me/api/portraits/men/17.jpg"/>
 		</StyledHeaderbar>
 	);
-};
+}

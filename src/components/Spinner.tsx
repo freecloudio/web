@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import {Sizable} from '../style/modifiers';
 import {sizes} from '../style/utils';
@@ -19,7 +18,7 @@ const StyledSVG = styled.svg<Sizable>`
 * Simple loading indicator.
 * This indicator was graciously provided by Sam Herbert at https://github.com/SamHerbert/SVG-Loaders
 */
-const Spinner: React.FC<Sizable> = (props) => (
+const Spinner = (props: Sizable) => (
 	<Container {...props}>
 		<StyledSVG viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="var(--color-primary)" {...props}>
 			<g fill="none" fillRule="evenodd">
