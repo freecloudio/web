@@ -1,38 +1,36 @@
 import styled from "styled-components";
-import { Colorizable, Sizable } from "../style/modifiers";
-import {
-	getBackgroundColor,
-	getForegroundColor,
-	sizes,
-	getShadowColor,
-} from "../style/utils";
 
-const Button = styled.button<Colorizable & Sizable>`
-	display: inline-flex;
-	background: ${(props) => getBackgroundColor(props, "--color-light-bg-muted")};
-	color: ${(props) => getForegroundColor(props, "--color-dark-text")};
+interface Props {
+	primary?: boolean;
+	hasIcon?: boolean;
+}
+
+const Button = styled.button<Props>`
+	display: flex;
+	background: ${({ primary }) =>
+		primary ? "var(--color-primary)" : "var(--color-background)"};
+	color: ${({ primary }) =>
+		primary ? "var(--color-text-on-primary)" : "var(--color-text-primary)"};
 	border: none;
-	border-radius: 5px;
+	border-radius: var(--rounded-lg);
 	outline: none;
 	appearance: none;
 	cursor: pointer;
-	padding: 0 1rem;
-	height: ${(props) => sizes(props, "1.5em", "2.25em", "3em")};
-	line-height: ${(props) => sizes(props, "1.5em", "2.25em", "3em")};
-	box-shadow: 2px 2px 6px
-		${(props) => getShadowColor(props, "--color-dark-text-shadow")};
-	font-size: ${(props) => sizes(props, ".75em", "1em", "1.25em")};
+	padding: ${({ hasIcon }) =>
+		hasIcon ? "0.75rem .75rem 0.75rem 2rem" : "0.75rem 2rem"};
+	box-shadow: var(--shadow-md);
 	box-sizing: border-box;
-	font-family: inherit;
-	font-weight: inherit;
+	font-weight: 600;
 	text-align: left;
+	font-size: 1.1rem;
 	width: auto;
 	align-items: center;
+	justify-content: ${({ hasIcon }) => (hasIcon ? "space-between" : "center")};
 	transition: all 0.1s ease-in-out;
+	position: relative;
 
 	&:hover {
-		box-shadow: 2px 2px 12px
-			${(props) => getShadowColor(props, "--color-dark-text-shadow")};
+		box-shadow: var(--shadow-lg);
 	}
 `;
 

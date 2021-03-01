@@ -1,29 +1,30 @@
 import styled from "styled-components";
 import Button from "../../components/Button";
-import { Plus } from "react-feather";
+import { PlusOutline } from "@graywolfai/react-heroicons";
 import SidebarFolderItem from "./SidebarFolderItem";
 
 const UploadButton = styled(Button)`
-	margin-left: 32px;
-	margin-bottom: 32px;
+	margin-top: auto;
 `;
 
 const StyledAside = styled.aside`
 	height: 100vh;
-	width: 14rem;
+	width: 18rem;
 	background: var(--color-background-alt);
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	padding: 1rem;
+	padding: 1rem 2rem;
 	box-sizing: border-box;
 `;
 
-const ButtonPlus = styled(Plus)`
-	margin-right: 1rem;
-	height: 1.5rem;
-	width: 1.5rem;
-	display: inline-block;
+const ButtonPlus = styled(PlusOutline)`
+	height: 1.25rem;
+	width: 1.25rem;
+	display: block;
+	background: var(--color-primary-muted);
+	border-radius: var(--rounded-md);
+	padding: 0.5rem;
 `;
 
 const Title = styled.h1`
@@ -45,9 +46,15 @@ const TopLevelNavItem = styled.span<{ active?: boolean }>`
 	font-weight: 600;
 	color: ${(props) =>
 		props.active ? "var(--color-primary)" : "var(--color-text-primary)"};
+	display: inline-block;
+	margin: 0.5rem 0;
 `;
 
-const FolderItem = styled.li``;
+const FolderList = styled.ol`
+	margin: 0 0 0.5rem 0;
+	padding: 0;
+	color: var(--color-text-secondary);
+`;
 
 const FilesSidebar = () => (
 	<StyledAside>
@@ -55,20 +62,25 @@ const FilesSidebar = () => (
 		<Ol>
 			<li>
 				<TopLevelNavItem active>My files</TopLevelNavItem>
-				<ol>
+				<FolderList>
 					<SidebarFolderItem>Analytics</SidebarFolderItem>
 					<SidebarFolderItem>Assets</SidebarFolderItem>
 					<SidebarFolderItem>Marketing</SidebarFolderItem>
-				</ol>
+				</FolderList>
 			</li>
 			<li>
-				{" "}
+				<TopLevelNavItem>Shared with me</TopLevelNavItem>{" "}
+			</li>
+			<li>
 				<TopLevelNavItem>Starred</TopLevelNavItem>{" "}
 			</li>
+			<li>
+				<TopLevelNavItem>Deleted</TopLevelNavItem>{" "}
+			</li>
 		</Ol>
-		<UploadButton primary>
+		<UploadButton primary hasIcon>
+			<span>Create new</span>
 			<ButtonPlus />
-			New
 		</UploadButton>
 	</StyledAside>
 );
