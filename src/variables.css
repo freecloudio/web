@@ -15,17 +15,19 @@
 	--color-negative-accent: hsl(360, 95%, 94%);
 	--color-negative-shadow: hsla(360, 95%, 42%, 0.3);
 
-	--color-dark-text: hsl(0, 0%, 36%);
-	--color-dark-text-muted: hsl(0, 0%, 14%);
-	--color-dark-text-shadow: hsla(0, 0%, 36%, 0.3);
 
 	--color-light-background: hsl(216, 38.5%, 97.5%);
 	--color-light-background-alt: hsl(216, 38.5%, 100%);
 	--color-dark-background: hsl(216, 38.5%, 8.5%);
 	--color-dark-background-alt: hsl(216, 38.5%, 10.5%);
 
+	--color-light-text-primary: hsl(0, 0%, 20%);
+	--color-light-text-secondary: hsl(0, 0%, 36%);
+
 	--color-background: var(--color-light-background);
 	--color-background-alt: var(--color-light-background-alt);
+	--color-text-primary: var(--color-light-text-primary);
+	--color-text-secondary: var(--color-light-text-secondary);
 }
 
 @media (prefers-color-scheme: dark) {
