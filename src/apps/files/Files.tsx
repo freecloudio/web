@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import FlexBox from '../../components/FlexBox';
-import FilesSidebar from './FilesSidebar';
-import Spinner from '../../components/Spinner';
+import FlexBox from "../../components/FlexBox";
+import FilesSidebar from "./FilesSidebar";
+import Spinner from "../../components/Spinner";
 
 const Main = styled.main`
 	background: var(--color-background);
@@ -10,7 +10,6 @@ const Main = styled.main`
 	height: 100vh;
 	overflow: hidden;
 `;
-
 
 function Files() {
 	return (
@@ -20,7 +19,7 @@ function Files() {
 				<Spinner />
 			</Main>
 		</FlexBox>
-	)
+	);
 }
 
 export default Files;

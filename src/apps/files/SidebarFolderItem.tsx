@@ -1,9 +1,9 @@
-import { ReactNode } from 'react'
-import { Folder } from 'react-feather'
-import styled from 'styled-components';
+import { ReactNode } from "react";
+import { Folder } from "react-feather";
+import styled from "styled-components";
 
 interface Props {
-	children: ReactNode
+	children: ReactNode;
 }
 
 const StyledLi = styled.li`
@@ -11,8 +11,11 @@ const StyledLi = styled.li`
 	align-items: center;
 `;
 
-const SidebarFolderItem = ({children}: Props) => (
-	<StyledLi><Folder /><span>{children}</span></StyledLi>
+const SidebarFolderItem = ({ children }: Props) => (
+	<StyledLi>
+		<Folder />
+		<span>{children}</span>
+	</StyledLi>
 );
 
-export default SidebarFolderItem
+export default SidebarFolderItem;

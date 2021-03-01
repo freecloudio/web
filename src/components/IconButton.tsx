@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const IconButton = styled.button<{toggled?: boolean}>`
+const IconButton = styled.button<{ toggled?: boolean }>`
 	display: inline-flex;
-	background: ${props => props.toggled ? 'var(--color-primary-muted)' : 'transparent'};
+	background: ${(props) =>
+		props.toggled ? "var(--color-primary-muted)" : "transparent"};
 	color: white;
 	border: none;
 	border-radius: 100%;
@@ -17,11 +18,11 @@ const IconButton = styled.button<{toggled?: boolean}>`
 	text-align: left;
 	align-items: center;
 	justify-content: center;
-	transition: all .1s ease-in-out;
+	transition: all 0.1s ease-in-out;
 
 	&:hover {
 		background: var(--color-primary-muted);
 	}
 `;
 
-export default IconButton
+export default IconButton;

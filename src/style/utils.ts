@@ -1,4 +1,4 @@
-import {Colorizable, Sizable, Size} from "./modifiers";
+import { Colorizable, Sizable, Size } from "./modifiers";
 
 export function getBackgroundColor(colorizable: Colorizable, fallback: any) {
 	if (colorizable.negative) {
@@ -31,8 +31,12 @@ export function getShadowColor(colorizable: Colorizable, fallback: any) {
 }
 
 export function sizableToSize(sizable: Sizable): Size {
-	if (sizable.large) { return Size.Large }
-	if (sizable.small) { return Size.Small }
+	if (sizable.large) {
+		return Size.Large;
+	}
+	if (sizable.small) {
+		return Size.Small;
+	}
 	return Size.Default;
 }
 

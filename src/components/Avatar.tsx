@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface Props {
 	name: string;
@@ -26,18 +26,25 @@ const AvatarImage = styled.img`
 
 // TODO: Use something like useMemo to avoid calculating this on every redraw
 /**
-* Computes the initials for a given name.
-* Only the first two parts of the full name are taken into consideration
-*/
+ * Computes the initials for a given name.
+ * Only the first two parts of the full name are taken into consideration
+ */
 function getAvatarName(fullname: string) {
-	const parts = fullname.split(' ');
-	const initials = parts.map(part => part[0].toUpperCase());
-	return initials.reduce((name, part, index) => (index >= 2) ? name : name + part, '');
+	const parts = fullname.split(" ");
+	const initials = parts.map((part) => part[0].toUpperCase());
+	return initials.reduce(
+		(name, part, index) => (index >= 2 ? name : name + part),
+		""
+	);
 }
 
 const Avatar = (props: Props) => (
 	<StyledAvatar {...props}>
-		{ props.imageSrc ? <AvatarImage src={props.imageSrc}/> : getAvatarName(props.name) }
+		{props.imageSrc ? (
+			<AvatarImage src={props.imageSrc} />
+		) : (
+			getAvatarName(props.name)
+		)}
 	</StyledAvatar>
 );
 

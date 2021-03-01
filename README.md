@@ -13,7 +13,6 @@ There are multiple ways to contribute:
 - Cleaning up the code
 - Writing and improving translations
 
-
 ### Development Setup
 
 To get your machine setup for contributing to freecloud web, install the latest versions of [NodeJS](https://nodejs.org) and [NPM](https://npmjs.com).
@@ -38,4 +37,3 @@ npm run build
 ```
 
 This does a production build of the client. This build is optimized for performance and therefore should not be used during development.
-

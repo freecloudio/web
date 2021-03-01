@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import Button from '../../components/Button';
-import { Plus } from 'react-feather';
-import SidebarFolderItem from './SidebarFolderItem';
+import styled from "styled-components";
+import Button from "../../components/Button";
+import { Plus } from "react-feather";
+import SidebarFolderItem from "./SidebarFolderItem";
 
 const UploadButton = styled(Button)`
 	margin-left: 32px;
@@ -40,15 +40,14 @@ const Ol = styled.ol`
 	padding: 0;
 `;
 
-const TopLevelNavItem = styled.span<{active?: boolean}>`
+const TopLevelNavItem = styled.span<{ active?: boolean }>`
 	font-size: 1.25rem;
 	font-weight: 600;
-	color: ${props => props.active ? 'var(--color-primary)': 'var(--color-text-primary)'};
+	color: ${(props) =>
+		props.active ? "var(--color-primary)" : "var(--color-text-primary)"};
 `;
 
-const FolderItem = styled.li`
-
-`;
+const FolderItem = styled.li``;
 
 const FilesSidebar = () => (
 	<StyledAside>
@@ -62,9 +61,15 @@ const FilesSidebar = () => (
 					<SidebarFolderItem>Marketing</SidebarFolderItem>
 				</ol>
 			</li>
-			<li> <TopLevelNavItem>Starred</TopLevelNavItem> </li>
+			<li>
+				{" "}
+				<TopLevelNavItem>Starred</TopLevelNavItem>{" "}
+			</li>
 		</Ol>
-		<UploadButton primary><ButtonPlus />New</UploadButton>
+		<UploadButton primary>
+			<ButtonPlus />
+			New
+		</UploadButton>
 	</StyledAside>
 );
 

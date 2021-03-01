@@ -1,23 +1,26 @@
 body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: var(--main-font-size-base);
+	margin: 0;
+	font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+		"Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: var(--main-font-size-base);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
 }
 
 #root {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  box-sizing: border-box;
-  background: var(--color-light-bg);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	box-sizing: border-box;
+	background: var(--color-light-bg);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
 }

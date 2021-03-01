@@ -1,21 +1,20 @@
-import { File, Calendar, Image, CheckSquare } from 'react-feather';
-
+import { File, Calendar, Image, CheckSquare } from "react-feather";
 
 const apps = {
 	files: {
-		routePrefix: '/files',
+		routePrefix: "/files",
 		icon: File,
 	},
 	calendar: {
-		routePrefix: '/calendar',
+		routePrefix: "/calendar",
 		icon: Calendar,
 	},
 	photos: {
-		routePrefix: '/photos',
+		routePrefix: "/photos",
 		icon: Image,
 	},
 	tasks: {
-		routePrefix: '/tasks',
+		routePrefix: "/tasks",
 		icon: CheckSquare,
 	},
 };

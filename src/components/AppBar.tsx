@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import IconButton from './IconButton';
-import Logo from './Logo';
+import styled from "styled-components";
+import IconButton from "./IconButton";
+import Logo from "./Logo";
 // FIXME: This should be a prop
-import apps from '../appindex';
-import {Link, useLocation} from 'react-router-dom';
-import Avatar from './Avatar';
+import apps from "../appindex";
+import { Link, useLocation } from "react-router-dom";
+import Avatar from "./Avatar";
 
 const StyledAppBar = styled.header`
 	display: flex;
@@ -50,18 +50,23 @@ export default function AppBar() {
 	return (
 		<StyledAppBar>
 			<LogoContainer>
-				<Logo height="2rem"/>
+				<Logo height="2rem" />
 			</LogoContainer>
 			<IconNav>
-				{ Object.entries(apps).map(([ app, config ]) => (
+				{Object.entries(apps).map(([app, config]) => (
 					<Link to={config.routePrefix} component={L} key={app}>
-						<IconButton toggled={location.pathname.startsWith(config.routePrefix)}>
-							<config.icon/>
+						<IconButton
+							toggled={location.pathname.startsWith(config.routePrefix)}
+						>
+							<config.icon />
 						</IconButton>
 					</Link>
-				)) }
+				))}
 			</IconNav>
-			<Avatar name="John Doe" imageSrc="https://randomuser.me/api/portraits/men/17.jpg"/>
+			<Avatar
+				name="John Doe"
+				imageSrc="https://randomuser.me/api/portraits/men/17.jpg"
+			/>
 		</StyledAppBar>
 	);
 }
