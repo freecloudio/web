@@ -6,17 +6,16 @@ interface Props {
 }
 
 // TODO: Make the Avatar component sizable
-// TODO: Make the Avatar component colorable
 const StyledAvatar = styled.div<Props>`
 	background-color: white;
-	border-radius: 50%;
+	border-radius: var(--rounded-full);
 	overflow: hidden;
 	color: var(--color-dark-text);
 	width: 3rem;
 	height: 3rem;
 	line-height: 3rem;
 	text-align: center;
-	box-shadow: inset 0px 0px 8px 0px var(--color-dark-text-shadow);
+	border: 2px solid var(--color-text-primary);
 `;
 
 const AvatarImage = styled.img`
