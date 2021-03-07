@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 import FlexBox from "../../components/FlexBox";
 import FilesSidebar from "./FilesSidebar";
-import Spinner from "../../components/Spinner";
+import FileTable from "./table/FileTable";
 
 const Main = styled.main`
 	background: var(--color-background);
 	flex: 1;
 	height: 100vh;
 	overflow: hidden;
+	padding: 0 1rem;
 `;
 
 function Files() {
@@ -16,7 +17,7 @@ function Files() {
 		<FlexBox>
 			<FilesSidebar />
 			<Main>
-				<Spinner />
+				<FileTable />
 			</Main>
 		</FlexBox>
 	);
