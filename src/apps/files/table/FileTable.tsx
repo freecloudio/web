@@ -1,10 +1,10 @@
-import FileRow, { Props as FTProps } from "./FileRow";
+import File from "../models/File";
+import FileRow from "./FileRow";
 import faker from "faker";
 import styled from "styled-components";
 
-// TODO: Don't use the Prop interface directly, move this to a model
-let mockData: FTProps[] = [];
-
+// TODO: Move this mock data to a mocked file service
+let mockData: File[] = [];
 for (let i = 0; i < 20; i++) {
 	mockData.push({
 		type: faker.random.arrayElement(["directory", "file"]),
@@ -12,6 +12,7 @@ for (let i = 0; i < 20; i++) {
 		size: faker.random.number(),
 		starred: faker.random.boolean(),
 		lastModified: faker.date.past(),
+		id: faker.random.alpha(),
 	});
 }
 
