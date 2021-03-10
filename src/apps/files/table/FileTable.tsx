@@ -35,12 +35,17 @@ const TableHeader = styled.span<{ align: string }>`
 	text-align: ${(props) => props.align};
 `;
 
+const TableHeaderWithPadding = styled(TableHeader)`
+	padding-left: 1rem;
+`;
+
 const FileTable = () => (
 	<StyledTable>
 		<span></span>
 		<TableHeader align="left">Name</TableHeader>
-		<TableHeader align="left">Size</TableHeader>
-		<TableHeader align="left">Last Changed</TableHeader>
+		<TableHeaderWithPadding align="left">Shared with</TableHeaderWithPadding>
+		<TableHeaderWithPadding align="center">Size</TableHeaderWithPadding>
+		<TableHeaderWithPadding align="right">Last Changed</TableHeaderWithPadding>
 		{mockData.map((f) => (
 			<FileRow {...f} key={f.name} />
 		))}
