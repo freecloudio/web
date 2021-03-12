@@ -47,7 +47,7 @@
 	},
 	"devDependencies": {
 		"@types/faker": "^5.1.7",
-		"@types/styled-components": "^5.1.7",
+		"@types/styled-components": "^5.1.8",
 		"eslint-config-prettier": "^8.1.0",
 		"faker": "^5.4.0",
 		"husky": "^5.1.3",
