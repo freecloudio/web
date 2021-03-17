@@ -3,17 +3,17 @@ import styled from "styled-components";
 interface Props {
 	name: string;
 	imageSrc?: string;
+	small?: boolean;
 }
 
-// TODO: Make the Avatar component sizable
 const StyledAvatar = styled.div<Props>`
 	background-color: white;
 	border-radius: var(--rounded-full);
 	overflow: hidden;
 	color: var(--color-dark-text);
-	width: 3rem;
-	height: 3rem;
-	line-height: 3rem;
+	width: ${({ small }) => (small ? "2rem" : "3rem")};
+	height: ${({ small }) => (small ? "2rem" : "3rem")};
+	line-height: ${({ small }) => (small ? "2rem" : "3rem")};
 	text-align: center;
 	border: 2px solid var(--color-text-primary);
 `;
