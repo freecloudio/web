@@ -1,5 +1,6 @@
-import {FolderOutline, DocumentOutline} from "@graywolfai/react-heroicons";
-import styled from 'styled-components'
+import { FolderOutline, DocumentOutline } from "@graywolfai/react-heroicons";
+import styled from "styled-components";
+import Avatar from "../../../components/Avatar";
 
 export interface Props {
 	type: "directory" | "file";
@@ -69,7 +70,7 @@ const FileRow = ({
 		<StyledTd>{name}</StyledTd>
 		<StyledColumnWithPadding>
 			{sharedWith?.length
-				? sharedWith.map((username) => <Avatar name={username} />)
+				? sharedWith.map((username) => <Avatar small name={username} />)
 				: null}
 		</StyledColumnWithPadding>
 		<StyledColumnWithPadding>{size} B</StyledColumnWithPadding>

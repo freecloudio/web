@@ -3,6 +3,14 @@ import FileRow from "./FileRow";
 import faker from "faker";
 import styled from "styled-components";
 
+function getSharedWith() {
+	let sharedWith = [];
+	for (let i = 0; i < faker.random.number(4); i++) {
+		sharedWith.push(faker.name.findName());
+	}
+	return sharedWith;
+}
+
 // TODO: Move this mock data to a mocked file service
 let mockData: File[] = [];
 for (let i = 0; i < 20; i++) {
@@ -13,6 +21,7 @@ for (let i = 0; i < 20; i++) {
 		starred: faker.random.boolean(),
 		lastModified: faker.date.past(),
 		id: faker.random.alpha(),
+		sharedWith: getSharedWith(),
 	});
 }
 
@@ -24,7 +33,7 @@ const StyledTable = styled.div`
 	border-collapse: collapse;
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: [icon] 4rem [item] 1fr [size] max-content [changed] max-content;
+	grid-template-columns: [icon] 4rem [item] 1fr [shared] max-content [size] max-content [changed] max-content;
 	grid-auto-rows: 3.5rem;
 	padding: 0 0.5rem;
 	align-items: stretch;
