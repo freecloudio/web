@@ -39,10 +39,18 @@ const StyledTable = styled.div`
 	align-items: stretch;
 `;
 
-const TableHeader = styled.span<{ align: string }>`
+const TableHeader = styled.div<{ align: string }>`
 	font-size: 0.9rem;
 	font-weight: 700;
 	text-align: ${(props) => props.align};
+	position: sticky;
+	top: 0;
+	height: 3.5rem;
+	box-sizing: border-box;
+	background: var(--color-background);
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid var(--color-filetable-fake-shadow);
 `;
 
 const TableHeaderWithPadding = styled(TableHeader)`
@@ -51,7 +59,7 @@ const TableHeaderWithPadding = styled(TableHeader)`
 
 const FileTable = () => (
 	<StyledTable>
-		<span></span>
+		<TableHeader align="left"></TableHeader>
 		<TableHeader align="left">Name</TableHeader>
 		<TableHeaderWithPadding align="left">Shared with</TableHeaderWithPadding>
 		<TableHeaderWithPadding align="center">Size</TableHeaderWithPadding>
