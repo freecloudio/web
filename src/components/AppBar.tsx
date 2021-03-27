@@ -7,19 +7,15 @@ import { Link, useLocation } from "react-router-dom";
 import Avatar from "./Avatar";
 import { logout } from "../api/mutations/user";
 import useUser from "../api/hooks/useUser";
+import Box from "./Box";
 
-const StyledAppBar = styled.header`
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+const StyledAppBar = styled(Box)`
 	background: var(--color-primary);
-	color: white;
+	color: var(--color-text-on-primary);
 	height: 100vh;
 	width: 5rem;
 	line-height: 4rem;
-	box-sizing: border-box;
 	padding: 1rem 0;
-	align-items: center;
 `;
 
 const IconNav = styled.nav`
@@ -28,9 +24,7 @@ const IconNav = styled.nav`
 	width: 100%;
 	text-align: center;
 `;
-
-// TODO: These are shifted down by 1px for some reason
-const L = styled.a`
+const LogoContainer = styled(Box)`
 	width: 3rem;
 	height: 3rem;
 `;
@@ -39,6 +33,7 @@ const LogoContainer = styled.div`
 	width: 3rem;
 	height: 3rem;
 	background: #fff;
+	background: var(--color-text-on-primary);
 	border-radius: 2rem;
 	color: var(--color-primary);
 	box-sizing: border-box;
@@ -55,7 +50,7 @@ export default function AppBar() {
 		mutate();
 	}
 	return (
-		<StyledAppBar>
+		<StyledAppBar direction="col" as="header" justify="between">
 			<LogoContainer>
 				<Logo height="2rem" />
 			</LogoContainer>

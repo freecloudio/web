@@ -10,27 +10,23 @@ import {
 import apps from "./appindex";
 import AppBar from "./components/AppBar";
 import Spinner from "./components/Spinner";
-import FlexBox from "./components/FlexBox";
 import LoginPage from "./components/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Box from "./components/Box";
 
 const Files = lazy(() => import("./apps/files/Files"));
 
 const Main = styled.main`
 	overflow-x: hidden;
-	overflow-y: auto;
-	min-height: 100%;
+	overflow-y: hidden;
+	height: 100vh;
 	width: 100%;
 `;
 
 const WholeScreenSpinner = () => (
-	<FlexBox
-		style={{ width: "100%", height: "100%" }}
-		justify="center"
-		items="center"
-	>
+	<Box>
 		<Spinner large />
-	</FlexBox>
+	</Box>
 );
 
 function App() {

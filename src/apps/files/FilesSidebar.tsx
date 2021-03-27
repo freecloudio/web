@@ -2,20 +2,17 @@ import styled from "styled-components";
 import Button from "../../components/Button";
 import { PlusOutline } from "@graywolfai/react-heroicons";
 import SidebarFolderItem from "./SidebarFolderItem";
+import Box from "../../components/Box";
 
 const UploadButton = styled(Button)`
 	margin-top: auto;
 `;
 
-const StyledAside = styled.aside`
+const StyledAside = styled(Box)`
 	height: 100vh;
 	width: 18rem;
 	background: var(--color-background-alt);
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
 	padding: 1rem 2rem;
-	box-sizing: border-box;
 `;
 
 const ButtonPlus = styled(PlusOutline)`
@@ -57,7 +54,7 @@ const FolderList = styled.ol`
 `;
 
 const FilesSidebar = () => (
-	<StyledAside>
+	<StyledAside justify="start" direction="col" align="stretch">
 		<Title>Storage</Title>
 		<Ol>
 			<li>

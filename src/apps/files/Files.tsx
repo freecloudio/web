@@ -1,6 +1,6 @@
 import styled from "styled-components";
+import Box from "../../components/Box";
 
-import FlexBox from "../../components/FlexBox";
 import FilesSidebar from "./FilesSidebar";
 import FileTable from "./table/FileTable";
 
@@ -14,12 +14,12 @@ const Main = styled.main`
 
 function Files() {
 	return (
-		<FlexBox>
+		<Box align="stretch">
 			<FilesSidebar />
 			<Main>
 				<FileTable />
 			</Main>
-		</FlexBox>
+		</Box>
 	);
 }
 
