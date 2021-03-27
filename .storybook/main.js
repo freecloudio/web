@@ -8,4 +8,3 @@ module.exports = {
 		"storybook-dark-mode",
 	],
 };
-

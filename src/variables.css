@@ -1,11 +1,10 @@
 :root {
-	--main-font-size-smaller: 9px;
-	--main-font-size-smaller: 12px;
-	--main-font-size-base: 16px;
-	--main-font-size-larger: 20px;
-	--main-font-size-large: 25px;
-	--main-font-size-huge: 31px; /* 31.25 floored */
-
+	--font-size-base: 16px;
+	--font-stack-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+		"Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-stack-mono: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
 	--color-primary: hsl(235.7, 100%, 67.3%);
 	--color-text-on-primary: hsl(0, 0%, 100%);
 	--color-primary-muted: hsl(235.7, 100%, 73.7%);
@@ -56,10 +55,18 @@ body.theme-light {
 	--color-text-secondary: var(--color-light-text-secondary);
 }
 
-
 body.theme-dark {
 	--color-background: var(--color-dark-background);
 	--color-background-alt: var(--color-dark-background-alt);
 	--color-text-primary: var(--color-dark-text-primary);
 	--color-text-secondary: var(--color-dark-text-secondary);
+}
+
+body {
+	font-size: var(--font-size-base);
+	font-family: var(--font-stack-sans);
+}
+
+code {
+	font-family: var(--font-stack-mono);
 }

@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
-interface Props {
+export interface AvatarProps {
 	name: string;
 	imageSrc?: string;
 	small?: boolean;
 	onClick?: () => void;
 }
 
-const StyledAvatar = styled.div<Props>`
-	background-color: white;
+const StyledAvatar = styled.div<AvatarProps>`
+	background-color: var(--color-background-alt);
 	border-radius: var(--rounded-full);
 	overflow: hidden;
-	color: var(--color-dark-text);
+	color: var(--color-text-primary);
 	width: ${({ small }) => (small ? "2rem" : "3rem")};
 	height: ${({ small }) => (small ? "2rem" : "3rem")};
 	line-height: ${({ small }) => (small ? "2rem" : "3rem")};
@@ -38,7 +38,7 @@ function getAvatarName(fullname: string) {
 	);
 }
 
-const Avatar = (props: Props) => (
+const Avatar = (props: AvatarProps) => (
 	<StyledAvatar {...props}>
 		{props.imageSrc ? (
 			<AvatarImage src={props.imageSrc} />

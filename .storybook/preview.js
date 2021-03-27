@@ -1,4 +1,5 @@
 import { themes } from "@storybook/theming";
+import "!style-loader!css-loader!./../src/variables.css";
 
 export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
@@ -12,4 +13,3 @@ export const parameters = {
 		stylePreview: true,
 	},
 };
-
