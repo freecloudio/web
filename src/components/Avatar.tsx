@@ -7,6 +7,8 @@ export interface AvatarProps {
 	onClick?: () => void;
 }
 
+// FIXME: This flex-shrink definition is used as a workaround in the AppBar.
+//				It can be removed by adding customizable widths/heights to the Box component (not 100%)
 const StyledAvatar = styled.div<AvatarProps>`
 	background-color: var(--color-background-alt);
 	border-radius: var(--rounded-full);
@@ -17,6 +19,8 @@ const StyledAvatar = styled.div<AvatarProps>`
 	line-height: ${({ small }) => (small ? "2rem" : "3rem")};
 	text-align: center;
 	border: 2px solid var(--color-text-primary);
+	cursor: default;
+	flex-shrink: 0;
 `;
 
 const AvatarImage = styled.img`
@@ -39,7 +43,7 @@ function getAvatarName(fullname: string) {
 }
 
 const Avatar = (props: AvatarProps) => (
-	<StyledAvatar {...props}>
+	<StyledAvatar {...props} title={props.name}>
 		{props.imageSrc ? (
 			<AvatarImage src={props.imageSrc} />
 		) : (
