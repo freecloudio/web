@@ -11,6 +11,8 @@ import apps from "./appindex";
 import AppBar from "./components/AppBar";
 import Spinner from "./components/Spinner";
 import FlexBox from "./components/FlexBox";
+import LoginPage from "./components/LoginPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const Files = lazy(() => import("./apps/files/Files"));
 
@@ -35,13 +37,16 @@ function App() {
 	return (
 		<Router>
 			<Switch>
-				<Route path={apps.files.routePrefix}>
+				<ProtectedRoute path={apps.files.routePrefix}>
 					<AppBar />
 					<Main>
 						<Suspense fallback={<WholeScreenSpinner />}>
 							<Files />
 						</Suspense>
 					</Main>
+				</ProtectedRoute>
+				<Route path="/login">
+					<LoginPage />
 				</Route>
 				<Route path="/">
 					<Redirect to={{ pathname: apps.files.routePrefix }} />

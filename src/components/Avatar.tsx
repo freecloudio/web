@@ -4,6 +4,7 @@ interface Props {
 	name: string;
 	imageSrc?: string;
 	small?: boolean;
+	onClick?: () => void;
 }
 
 const StyledAvatar = styled.div<Props>`

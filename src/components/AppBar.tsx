@@ -5,6 +5,8 @@ import Logo from "./Logo";
 import apps from "../appindex";
 import { Link, useLocation } from "react-router-dom";
 import Avatar from "./Avatar";
+import { logout } from "../api/mutations/user";
+import useUser from "../api/hooks/useUser";
 
 const StyledAppBar = styled.header`
 	display: flex;
@@ -47,6 +49,11 @@ const LogoContainer = styled.div`
 
 export default function AppBar() {
 	const location = useLocation();
+	const { mutate } = useUser();
+	async function onAvatarClicked() {
+		await logout();
+		mutate();
+	}
 	return (
 		<StyledAppBar>
 			<LogoContainer>
@@ -66,6 +73,7 @@ export default function AppBar() {
 			<Avatar
 				name="John Doe"
 				imageSrc="https://randomuser.me/api/portraits/men/17.jpg"
+				onClick={onAvatarClicked}
 			/>
 		</StyledAppBar>
 	);
