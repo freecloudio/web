@@ -70,7 +70,9 @@ const FileRow = ({
 		<StyledTd>{name}</StyledTd>
 		<StyledColumnWithPadding>
 			{sharedWith?.length
-				? sharedWith.map((username) => <Avatar small name={username} />)
+				? sharedWith.map((username) => (
+						<Avatar key={username} small name={username} />
+				  ))
 				: null}
 		</StyledColumnWithPadding>
 		<StyledColumnWithPadding>{size} B</StyledColumnWithPadding>
