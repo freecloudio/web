@@ -1,21 +1,26 @@
-import { File, Calendar, Image, CheckSquare } from "react-feather";
+import {
+	DocumentOutline,
+	CalendarOutline,
+	PhotographOutline,
+	CheckCircleOutline,
+} from "@graywolfai/react-heroicons";
 
 const apps = {
 	files: {
 		routePrefix: "/files",
-		icon: File,
+		icon: DocumentOutline,
 	},
 	calendar: {
 		routePrefix: "/calendar",
-		icon: Calendar,
+		icon: CalendarOutline,
 	},
 	photos: {
 		routePrefix: "/photos",
-		icon: Image,
+		icon: PhotographOutline,
 	},
 	tasks: {
 		routePrefix: "/tasks",
-		icon: CheckSquare,
+		icon: CheckCircleOutline,
 	},
 };
 
