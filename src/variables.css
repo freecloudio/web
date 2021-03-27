@@ -48,3 +48,18 @@
 		--color-text-secondary: var(--color-dark-text-secondary);
 	}
 }
+
+body.theme-light {
+	--color-background: var(--color-light-background);
+	--color-background-alt: var(--color-light-background-alt);
+	--color-text-primary: var(--color-light-text-primary);
+	--color-text-secondary: var(--color-light-text-secondary);
+}
+
+
+body.theme-dark {
+	--color-background: var(--color-dark-background);
+	--color-background-alt: var(--color-dark-background-alt);
+	--color-text-primary: var(--color-dark-text-primary);
+	--color-text-secondary: var(--color-dark-text-secondary);
+}

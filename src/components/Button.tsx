@@ -1,11 +1,14 @@
+import { ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
 
-interface Props {
+interface ExtraProps {
 	primary?: boolean;
 	hasIcon?: boolean;
 }
 
-const Button = styled.button<Props>`
+export type ButtonProps = ButtonHTMLAttributes<{}> | ExtraProps;
+
+const Button = styled.button<ExtraProps>`
 	display: flex;
 	background: ${({ primary }) =>
 		primary ? "var(--color-primary)" : "var(--color-background)"};
