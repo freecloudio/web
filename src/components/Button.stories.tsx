@@ -4,7 +4,7 @@ import { Story, Meta } from "@storybook/react";
 import { default as Button, ButtonProps } from "./Button";
 
 export default {
-	title: "Core/Button",
+	title: "Controls/Button",
 	component: Button,
 } as Meta;
 
