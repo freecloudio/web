@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "../../components/Button";
-import { PlusOutline } from "@graywolfai/react-heroicons";
+import { PlusOutline } from "../../icons";
 import SidebarFolderItem from "./SidebarFolderItem";
 import Box from "../../components/Box";
 
@@ -16,8 +16,6 @@ const StyledAside = styled(Box)`
 `;
 
 const ButtonPlus = styled(PlusOutline)`
-	height: 1.25rem;
-	width: 1.25rem;
 	display: block;
 	background: var(--color-primary-muted);
 	border-radius: var(--rounded-md);

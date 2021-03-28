@@ -37,3 +37,17 @@ npm run build
 ```
 
 This does a production build of the client. This build is optimized for performance and therefore should not be used during development.
+
+### Generating icons
+
+freecloud currently uses the beautiful [heroicons](https://heroicons.dev) icon set. We generate
+components from the icons' SVG files via the `src/icons/makeIcons.ts` script which can be run with
+`npm generate-icons`. It will create a component for each icon as well as an icon index.
+The icons can then be used via the icon index like so:
+
+```tsx
+import { DocumentOutline } from "./src/icons";
+
+export const Component = () => (<DocumentOutline size="md" />);
+```
+

@@ -1,4 +1,4 @@
-import { CheckOutline, XCircleOutline } from "@graywolfai/react-heroicons";
+import { CheckOutline, XCircleOutline } from "../icons";
 import { Meta, Story } from "@storybook/react";
 import { BrowserRouter } from "react-router-dom";
 

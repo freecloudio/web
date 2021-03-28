@@ -3,7 +3,7 @@ import {
 	CalendarOutline,
 	PhotographOutline,
 	CheckCircleOutline,
-} from "@graywolfai/react-heroicons";
+} from "./icons";
 
 const apps = {
 	files: {

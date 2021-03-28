@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { FolderOutline } from "@graywolfai/react-heroicons";
+import { FolderOutline } from "../../icons";
 import styled from "styled-components";
 
 interface Props {
@@ -19,7 +19,7 @@ const StyledLabel = styled.span`
 
 const SidebarFolderItem = ({ children }: Props) => (
 	<StyledLi>
-		<FolderOutline width="1.5rem" />
+		<FolderOutline size="lg" />
 		<StyledLabel>{children}</StyledLabel>
 	</StyledLi>
 );

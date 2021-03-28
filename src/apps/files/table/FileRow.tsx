@@ -1,6 +1,6 @@
-import { FolderOutline, DocumentOutline } from "@graywolfai/react-heroicons";
 import styled from "styled-components";
 import Avatar from "../../../components/Avatar";
+import { DocumentOutline, FolderOutline } from "../../../icons";
 
 export interface Props {
 	type: "directory" | "file";
@@ -13,9 +13,9 @@ export interface Props {
 
 function iconForType(type: Props["type"]) {
 	if (type === "directory") {
-		return <FolderOutline width={24} />;
+		return <FolderOutline size="lg" />;
 	}
-	return <DocumentOutline width={24} />;
+	return <DocumentOutline size="lg" />;
 }
 
 // TODO: display: contents is not widely supported yet. Search for polyfills
