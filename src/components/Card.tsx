@@ -20,8 +20,8 @@ const backgroundMap = {
 };
 
 const colorMap = {
-	default: "var(--color-text)",
-	alt: "var(--color-text)",
+	default: "var(--color-text-secondary)",
+	alt: "var(--color-text-secondary)",
 	primary: "var(--color-text-on-primary)",
 };
 
@@ -38,7 +38,6 @@ const Card = styled(Box)<ExtraProps>`
 	width: auto;
 	height: auto;
 	padding: 1rem;
-	color: var(--color-text);
 	background-color: ${({ color }) => backgroundMap[color || "default"]};
 	color: ${({ color }) => colorMap[color || "default"]};
 `;
