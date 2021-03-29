@@ -40,7 +40,7 @@ export default function AppBar() {
 	return (
 		<StyledAppBar direction="col" as="header" justify="between">
 			<LogoContainer>
-				<Logo height="2rem" />
+				<Logo />
 			</LogoContainer>
 			<IconNav direction="col" items={appNavItems} gap="xl" shrink />
 			<Avatar
