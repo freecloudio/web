@@ -37,7 +37,7 @@ const Card = styled(Box)<ExtraProps>`
 	box-shadow: ${({ elevation }) => elevationMap[elevation || 1]};
 	width: auto;
 	height: auto;
-	padding: 1rem;
+	padding: 1rem 2rem;
 	background-color: ${({ color }) => backgroundMap[color || "default"]};
 	color: ${({ color }) => colorMap[color || "default"]};
 `;
