@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Box from "../../components/Box";
 
 import FilesSidebar from "./FilesSidebar";
+import usePath from "./hooks/usePath";
 import FileTable from "./table/FileTable";
 
 const Main = styled.main`
@@ -13,6 +14,8 @@ const Main = styled.main`
 `;
 
 function Files() {
+	const currentPath = usePath();
+	console.log("Current path is:", currentPath);
 	return (
 		<Box align="stretch">
 			<FilesSidebar />
