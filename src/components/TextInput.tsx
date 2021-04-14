@@ -1,3 +1,4 @@
+import { ChangeEventHandler } from "react";
 import styled from "styled-components";
 
 const backgroundMap = {
@@ -18,12 +19,19 @@ const colorMap = {
  */
 type InputType = "text" | "email" | "tel" | "password" | "search" | "url";
 
-interface ExtraProps {
+interface StyleProps {
 	color?: keyof typeof backgroundMap;
-	type: InputType;
 }
 
-const TextInput = styled.input<ExtraProps>`
+interface BaseProps {
+	onChange?: ChangeEventHandler<HTMLInputElement>;
+	type: InputType;
+	value?: string;
+}
+
+export type TextInputProps = StyleProps & BaseProps;
+
+const StyledTextInput = styled.input<StyleProps>`
 	appearance: none;
 	border: none;
 	border-radius: var(--rounded-md);
@@ -32,5 +40,12 @@ const TextInput = styled.input<ExtraProps>`
 	background-color: ${({ color }) => backgroundMap[color || "default"]};
 	color: ${({ color }) => colorMap[color || "default"]};
 `;
+
+const TextInput = (props: TextInputProps) => (
+	<StyledTextInput
+		onChange={props.onChange ? props.onChange : undefined}
+		{...props}
+	/>
+);
 
 export default TextInput;
