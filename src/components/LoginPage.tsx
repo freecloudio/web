@@ -6,11 +6,12 @@ import Box from "./Box";
 import Card from "./Card";
 import Logo from "./Logo";
 import TextInput from "./TextInput";
+import Spinner from "./Spinner";
 
 function LoginPage() {
 	const history = useHistory();
 	const { goTo } = useParams<{ goTo?: string }>();
-	const { user, mutate } = useUser();
+	const { loading, loggedOut, mutate } = useUser();
 
 	async function onLoginClicked() {
 		await login();
@@ -18,27 +19,37 @@ function LoginPage() {
 		history.replace("/");
 	}
 
-	if (user) {
-		if (goTo) {
-			return <Redirect to={decodeURIComponent(goTo)} />;
+	if (loggedOut || loading) {
+		if (loading) {
+			console.log("Loading...");
 		}
-		return <Redirect to="/" />;
+		return (
+			<Box>
+				<Card color="alt" direction="col">
+					<Logo size="xl" />
+					<h1>Welcome to freecloud!</h1>
+					<p>Sign in to access your files, calendar, contacts and more</p>
+					<Box direction="col" gap="md">
+						<TextInput type="email" />
+						<TextInput type="password" />
+						{loading ? (
+							<Spinner />
+						) : (
+							<Button primary onClick={onLoginClicked}>
+								{" "}
+								Sign in{" "}
+							</Button>
+						)}
+					</Box>
+				</Card>
+			</Box>
+		);
 	}
 
-	return (
-		<Box>
-			<Card color="alt" direction="col">
-				<Logo size="xl" />
-				<h1>Welcome to freecloud!</h1>
-				<p>Sign in to access your files, calendar, contacts and more</p>
-				<TextInput type="email" />
-				<TextInput type="password" />
-				<Button primary onClick={onLoginClicked}>
-					Sign in
-				</Button>
-			</Card>
-		</Box>
-	);
+	if (goTo) {
+		return <Redirect to={decodeURIComponent(goTo)} />;
+	}
+	return <Redirect to="/" />;
 }
 
 export default LoginPage;
