@@ -1,3 +1,4 @@
+/* FONTS */
 :root {
 	--font-size-base: 16px;
 	--font-stack-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -5,61 +6,6 @@
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 	--font-stack-mono: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
-	--color-primary: hsl(235.7, 100%, 67.3%);
-	--color-text-on-primary: hsl(0, 0%, 100%);
-	--color-primary-muted: hsl(235.7, 100%, 73.7%);
-
-	--color-negative: hsl(360, 95%, 42%);
-	--color-negative-accent: hsl(360, 95%, 94%);
-
-	--color-light-background: hsl(216, 38.5%, 97.5%);
-	--color-light-background-alt: hsl(216, 38.5%, 100%);
-	--color-dark-background: hsl(216, 38.5%, 11.5%);
-	--color-dark-background-alt: hsl(216, 38.5%, 14.5%);
-
-	--color-light-text-primary: hsl(0, 0%, 20%);
-	--color-light-text-secondary: hsl(0, 0%, 36%);
-	--color-dark-text-primary: hsl(0, 0%, 85%);
-	--color-dark-text-secondary: hsl(0, 0%, 74%);
-
-	--color-background: var(--color-light-background);
-	--color-background-alt: var(--color-light-background-alt);
-	--color-text-primary: var(--color-light-text-primary);
-	--color-text-secondary: var(--color-light-text-secondary);
-
-	--color-filetable-fake-shadow: rgba(0, 0, 0, 0.1);
-
-	--shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-	--shadow-md: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-	--shadow-lg: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-
-	--rounded: 0.25rem;
-	--rounded-md: 0.375rem;
-	--rounded-lg: 0.5rem;
-	--rounded-full: 9999px;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--color-background: var(--color-dark-background);
-		--color-background-alt: var(--color-dark-background-alt);
-		--color-text-primary: var(--color-dark-text-primary);
-		--color-text-secondary: var(--color-dark-text-secondary);
-	}
-}
-
-body.theme-light {
-	--color-background: var(--color-light-background);
-	--color-background-alt: var(--color-light-background-alt);
-	--color-text-primary: var(--color-light-text-primary);
-	--color-text-secondary: var(--color-light-text-secondary);
-}
-
-body.theme-dark {
-	--color-background: var(--color-dark-background);
-	--color-background-alt: var(--color-dark-background-alt);
-	--color-text-primary: var(--color-dark-text-primary);
-	--color-text-secondary: var(--color-dark-text-secondary);
 }
 
 body {
@@ -71,3 +17,95 @@ body {
 code {
 	font-family: var(--font-stack-mono);
 }
+
+/* COLORS */
+:root {
+	--base-hue: 222;
+	--base-saturation: 89;
+	--base-gray: var(--base-hue),8%;
+	--palette-gray-00: var(--base-gray),100%;
+	--palette-gray-10: var(--base-gray),95%;
+	--palette-gray-15: var(--base-gray),90%;
+	--palette-gray-20: var(--base-gray),85%;
+	--palette-gray-30: var(--base-gray),75%;
+	--palette-gray-40: var(--base-gray),65%;
+	--palette-gray-50: var(--base-gray),55%;
+	--palette-gray-60: var(--base-gray),45%;
+	--palette-gray-70: var(--base-gray),35%;
+	--palette-gray-80: var(--base-gray),25%;
+	--palette-gray-90: var(--base-gray),15%;
+	--palette-gray-95: var(--base-gray),10%;
+	--palette-gray-100: var(--base-gray),5%;
+	--base-blue: var(--base-hue),calc(var(--base-saturation) * 1%);
+	--palette-blue-10: var(--base-blue),95%;
+	--palette-blue-20: var(--base-blue),85%;
+	--palette-blue-30: var(--base-blue),75%;
+	--palette-blue-40: var(--base-blue),65%;
+	--palette-blue-45: var(--base-blue),60%;
+	--palette-blue-50: var(--base-blue),55%;
+	--palette-blue-60: var(--base-blue),45%;
+	--palette-blue-70: var(--base-blue),35%;
+	--palette-blue-80: var(--base-blue),25%;
+	--palette-blue-90: var(--base-blue),15%;
+	--base-red: 353,100%;
+	--palette-red-10: var(--base-red),95%;
+	--palette-red-20: var(--base-red),85%;
+	--palette-red-30: var(--base-red),75%;
+	--palette-red-40: var(--base-red),65%;
+	--palette-red-50: var(--base-red),55%;
+
+	--color-primary: hsla(var(--palette-blue-40), 100%);
+	--color-text-on-primary: hsla(var(--palette-gray-00), 100%);
+	--color-primary-muted: hsla(var(--palette-blue-45), 100%);
+
+	--color-negative: hsla(var(--palette-red-10), 100%);
+	--color-negative-accent: hsla(var(--palette-red-50), 100%);
+
+	--color-dark-background: hsl(222, 8%, 10%);
+	--color-dark-background-alt: hsla(222, 89%, 65%, 0.08);
+
+	--color-dark-text-primary: hsl(0, 0%, 85%);
+	--color-dark-text-secondary: hsl(0, 0%, 74%);
+
+	--color-filetable-fake-shadow: rgba(0, 0, 0, 0.1);
+}
+
+:root, body.theme-light {
+	/* Light default colors, are overriden in the media query below */
+	--color-background: hsla(var(--palette-gray-00), 100%);
+	--color-background-alt: hsla(var(--palette-blue-50), 8%);
+	--color-text-primary: hsla(var(--palette-gray-90), 100%);
+	--color-text-secondary: hsla(var(--palette-gray-70), 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-background: hsla(var(--palette-gray-95), 100%);
+		--color-background-alt: hsla(var(--palette-blue-40), 8%);
+		--color-text-primary: hsla(var(--palette-gray-00), 100%);
+		--color-text-secondary: hsla(var(--palette-gray-20), 100%);
+	}
+}
+
+body.theme-dark {
+	--color-background: hsla(var(--palette-gray-95), 100%);
+	--color-background-alt: hsla(var(--palette-blue-40), 8%);
+	--color-text-primary: hsla(var(--palette-gray-00), 100%);
+	--color-text-secondary: hsla(var(--palette-gray-20), 100%);
+}
+
+/* SHADOWS */
+:root {
+	--shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+	--shadow-md: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+	--shadow-lg: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+/* RADII */
+:root {
+	--rounded: 0.25rem;
+	--rounded-md: 0.375rem;
+	--rounded-lg: 0.5rem;
+	--rounded-full: 9999px;
+}
+
