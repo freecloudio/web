@@ -14,8 +14,8 @@ const Main = styled.main`
 `;
 
 function Files() {
-	const currentPath = usePath();
-	console.log("Current path is:", currentPath);
+	const { path } = usePath();
+	console.log("Current path is:", path);
 	return (
 		<Box align="stretch">
 			<FilesSidebar />

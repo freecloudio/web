@@ -1,6 +1,10 @@
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import Avatar from "../../../components/Avatar";
 import { DocumentOutline, FolderOutline } from "../../../icons";
+import apps from "../../../appindex";
+import { PointerEvent } from "react";
+import usePath from "../hooks/usePath";
 
 export interface Props {
 	type: "directory" | "file";
@@ -57,6 +61,16 @@ function lastModifiedAt(date: Date): string {
 	return `${date.getDay()}.${date.getMonth() + 1}.`;
 }
 
+function buildPath(type: Props["type"], currentPath: string, fileName: string) {
+	const prefix = `${apps.files.routePrefix}/${
+		type === "directory" ? "d" : "f"
+	}`;
+	if (currentPath === "/") {
+		return `${prefix}${currentPath}${fileName}`;
+	}
+	return `${prefix}${currentPath}/${fileName}`;
+}
+
 const FileRow = ({
 	type,
 	name,
@@ -64,20 +78,33 @@ const FileRow = ({
 	sharedWith,
 	starred,
 	lastModified,
-}: Props) => (
-	<StyledRow>
-		<IconTd>{iconForType(type)}</IconTd>
-		<StyledTd>{name}</StyledTd>
-		<StyledColumnWithPadding>
-			{sharedWith?.length
-				? sharedWith.map((username) => (
-						<Avatar key={username} small name={username} />
-				  ))
-				: null}
-		</StyledColumnWithPadding>
-		<StyledColumnWithPadding>{size} B</StyledColumnWithPadding>
-		<LastColumn>{lastModified ? lastModifiedAt(lastModified) : "-"}</LastColumn>
-	</StyledRow>
-);
+}: Props) => {
+	const history = useHistory();
+	const { path: currentPath } = usePath();
+
+	const navigateTo = (fileName: string, type: Props["type"]) => (
+		event: PointerEvent<HTMLDivElement>
+	) => {
+		event.preventDefault();
+		history.push(buildPath(type, currentPath, fileName));
+	};
+	return (
+		<StyledRow onDoubleClick={navigateTo(name, type)}>
+			<IconTd>{iconForType(type)}</IconTd>
+			<StyledTd>{name}</StyledTd>
+			<StyledColumnWithPadding>
+				{sharedWith?.length
+					? sharedWith.map((username) => (
+							<Avatar key={username} small name={username} />
+					  ))
+					: null}
+			</StyledColumnWithPadding>
+			<StyledColumnWithPadding>{size} B</StyledColumnWithPadding>
+			<LastColumn>
+				{lastModified ? lastModifiedAt(lastModified) : "-"}
+			</LastColumn>
+		</StyledRow>
+	);
+};
 
 export default FileRow;
