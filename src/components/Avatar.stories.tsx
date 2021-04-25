@@ -10,12 +10,12 @@ export default {
 
 const Template: Story<AvatarProps> = (args) => <Avatar {...args} />;
 
-export const WithName = () => (
+export const WithName = (small?: boolean) => (
   <Box gap="md">
-    <Avatar name="Tyrell Johnson" />
-    <Avatar name="Kumar Imbala" />
-    <Avatar name="Daniel Groß" />
-    <Avatar name="John Freedman" />
+    <Avatar {...small} name="Tyrell Johnson" />
+    <Avatar {...small} name="Kumar Imbala" />
+    <Avatar {...small} name="Daniel Groß" />
+    <Avatar {...small} name="John Freedman" />
   </Box>
 );
 

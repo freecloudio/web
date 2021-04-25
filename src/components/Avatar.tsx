@@ -7,8 +7,13 @@ export interface AvatarProps {
   onClick?: () => void;
 }
 
-// TODO: Add more colors here
-const avatarColors = ["--palette-red-50", "--palette-blue-50"];
+const avatarColors = [
+  "linear-gradient(230deg, hsl(var(--palette-red-40)) 0%, hsl(var(--palette-red-60)) 100%)",
+  "linear-gradient(230deg, hsl(var(--palette-blue-40)) 0%, hsl(var(--palette-blue-60)) 100%)",
+  "linear-gradient(230deg, hsl(var(--palette-green-40)) 0%, hsl(var(--palette-green-60)) 100%)",
+  "linear-gradient(230deg, hsl(var(--palette-yellow-50)) 0%, hsl(var(--palette-yellow-70)) 100%)",
+  "linear-gradient(230deg, hsl(var(--palette-orange-50)) 0%, hsl(var(--palette-orange-70)) 100%)",
+];
 
 function nameToNumber(name: string): number {
   return name
@@ -24,7 +29,7 @@ function colorFromName(name: string) {
 // FIXME: This flex-shrink definition is used as a workaround in the AppBar.
 //				It can be removed by adding customizable widths/heights to the Box component (not 100%)
 const StyledAvatar = styled.div<AvatarProps>`
-  background-color: hsl(var(${({ name }) => colorFromName(name)}));
+  background: ${({ name }) => colorFromName(name)};
   border-radius: var(--rounded-full);
   overflow: hidden;
   color: var(--color-text-primary);
@@ -32,9 +37,10 @@ const StyledAvatar = styled.div<AvatarProps>`
   height: ${({ small }) => (small ? "2rem" : "3rem")};
   line-height: ${({ small }) => (small ? "2rem" : "3rem")};
   text-align: center;
-  border: 2px solid var(--color-text-primary);
   cursor: default;
   flex-shrink: 0;
+  font-weight: 600;
+  font-size: ${({ small }) => (small ? ".9rem" : "1.1rem")};
 `;
 
 const AvatarImage = styled.img`
