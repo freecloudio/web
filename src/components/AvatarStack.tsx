@@ -6,7 +6,7 @@ const AvatarStack = styled.div`
   justify-content: flex-end;
 
   > *:not(:first-child) {
-    margin-right: -0.75rem;
+    margin-right: -0.65rem;
   }
 `;
 
