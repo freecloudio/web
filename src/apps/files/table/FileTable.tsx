@@ -37,7 +37,7 @@ const TableHeaderWithPadding = styled(TableHeader)`
 function FileTable() {
   const { path } = usePath();
   // TODO: Handle the loading state with a skeleton screen
-  const { loading, files } = useDirectoryContent(path);
+  const { files } = useDirectoryContent(path);
 
   return (
     <StyledTable>
