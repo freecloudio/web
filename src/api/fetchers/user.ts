@@ -5,8 +5,9 @@ const tokenStorageKey = "fc-token";
 export async function userFetcher() {}
 
 export async function mockUserFetcher() {
+	console.log("Refetching user");
 	// sleep 500ms
-	await new Promise((res) => setTimeout(res, 500));
+	await new Promise((res) => setTimeout(res, 1500));
 
 	const token = localStorage.getItem(tokenStorageKey);
 	if (token) {
