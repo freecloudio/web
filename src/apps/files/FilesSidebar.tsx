@@ -1,83 +1,66 @@
 import styled from "styled-components";
+import Heading from "../../components/Heading";
 import Button from "../../components/Button";
 import { PlusOutline } from "../../icons";
 import SidebarFolderItem from "./SidebarFolderItem";
 import Box from "../../components/Box";
 
 const UploadButton = styled(Button)`
-	margin-top: auto;
+  margin-top: auto;
 `;
 
 const StyledAside = styled(Box)`
-	height: 100vh;
-	width: 18rem;
-	background: var(--color-background-alt);
-	padding: 1rem 2rem;
+  height: 100vh;
+  width: 18rem;
+  padding: 1rem 2rem;
 `;
 
 const ButtonPlus = styled(PlusOutline)`
-	display: block;
-	background: var(--color-primary-muted);
-	border-radius: var(--rounded-md);
-	padding: 0.5rem;
-`;
-
-const Title = styled.h1`
-	line-height: 3rem;
-	margin: 0;
-	font-size: 1.5rem;
-	font-weight: 700;
-	color: var(--color-text-primary);
+  display: block;
+  background: var(--color-primary-muted);
+  border-radius: var(--rounded-md);
+  padding: 0.5rem;
 `;
 
 const Ol = styled.ol`
-	list-style-type: none;
-	margin: 2rem 0 0 0;
-	padding: 0;
-`;
-
-const TopLevelNavItem = styled.span<{ active?: boolean }>`
-	font-size: 1.25rem;
-	font-weight: 600;
-	color: ${(props) =>
-		props.active ? "var(--color-primary)" : "var(--color-text-primary)"};
-	display: inline-block;
-	margin: 0.5rem 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 `;
 
 const FolderList = styled.ol`
-	margin: 0 0 0.5rem 0;
-	padding: 0;
-	color: var(--color-text-secondary);
+  margin: 0 0 0.5rem 0;
+  padding: 0;
 `;
 
 const FilesSidebar = () => (
-	<StyledAside justify="start" direction="col" align="stretch">
-		<Title>Storage</Title>
-		<Ol>
-			<li>
-				<TopLevelNavItem active>My files</TopLevelNavItem>
-				<FolderList>
-					<SidebarFolderItem>Analytics</SidebarFolderItem>
-					<SidebarFolderItem>Assets</SidebarFolderItem>
-					<SidebarFolderItem>Marketing</SidebarFolderItem>
-				</FolderList>
-			</li>
-			<li>
-				<TopLevelNavItem>Shared with me</TopLevelNavItem>{" "}
-			</li>
-			<li>
-				<TopLevelNavItem>Starred</TopLevelNavItem>{" "}
-			</li>
-			<li>
-				<TopLevelNavItem>Deleted</TopLevelNavItem>{" "}
-			</li>
-		</Ol>
-		<UploadButton primary hasIcon>
-			<span>Create new</span>
-			<ButtonPlus />
-		</UploadButton>
-	</StyledAside>
+  <StyledAside as="aside" justify="start" direction="col" align="stretch">
+    <Ol>
+      <li>
+        <Heading level={3} primary>
+          My files
+        </Heading>
+        <FolderList>
+          <SidebarFolderItem>Analytics</SidebarFolderItem>
+          <SidebarFolderItem>Assets</SidebarFolderItem>
+          <SidebarFolderItem>Marketing</SidebarFolderItem>
+        </FolderList>
+      </li>
+      <li>
+        <Heading level={3}>Shared with me</Heading>{" "}
+      </li>
+      <li>
+        <Heading level={3}>Starred</Heading>{" "}
+      </li>
+      <li>
+        <Heading level={3}>Deleted</Heading>{" "}
+      </li>
+    </Ol>
+    <UploadButton primary hasIcon>
+      <span>Create new</span>
+      <ButtonPlus />
+    </UploadButton>
+  </StyledAside>
 );
 
 export default FilesSidebar;
