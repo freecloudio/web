@@ -9,7 +9,8 @@ body {
 	height: 100vh;
 	overflow: hidden;
 	box-sizing: border-box;
-	background: var(--color-light-bg);
+	background: var(--color-background);
+	color: var(--color-text-primary);
 	display: flex;
 	flex-direction: row;
 	align-items: center;
