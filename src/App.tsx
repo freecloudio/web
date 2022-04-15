@@ -1,18 +1,14 @@
 import { lazy, Suspense } from "react";
-import "./index.css";
+import { Navigate, Route, Routes } from "react-router";
+import { BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
 import apps from "./appindex";
 import AppBar from "./components/AppBar";
-import Spinner from "./components/Spinner";
-import LoginPage from "./components/LoginPage";
-import ProtectedRoute from "./components/ProtectedRoute";
 import Box from "./components/Box";
+import LoginPage from "./components/LoginPage";
+import RequireAuth from "./components/RequireAuth";
+import Spinner from "./components/Spinner";
+import "./index.css";
 
 const Files = lazy(() => import("./apps/files/Files"));
 
@@ -32,24 +28,35 @@ const WholeScreenSpinner = () => (
 function App() {
   return (
     <Router>
-      <Switch>
-        <ProtectedRoute path={apps.files.routePrefix}>
-          <Box direction="col" justify="center">
-            <AppBar />
-            <Main>
-              <Suspense fallback={<WholeScreenSpinner />}>
-                <Files />
-              </Suspense>
-            </Main>
-          </Box>
-        </ProtectedRoute>
-        <Route path="/login">
-          <LoginPage />
-        </Route>
-        <Route path="/">
-          <Redirect to={{ pathname: apps.files.routePrefix }} />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route
+          path="/apps/*"
+          element={
+            <Routes>
+              <Route
+                path="files/*"
+                element={
+                  <RequireAuth
+                    wantedRoute={apps.files.routePrefix}
+                    redirectTo="/login"
+                  >
+                    <Box direction="col" justify="center">
+                      <AppBar />
+                      <Main>
+                        <Suspense fallback={<WholeScreenSpinner />}>
+                          <Files />
+                        </Suspense>
+                      </Main>
+                    </Box>
+                  </RequireAuth>
+                }
+              />
+            </Routes>
+          }
+        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<Navigate to="/apps/files" />} />
+      </Routes>
     </Router>
   );
 }

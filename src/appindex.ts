@@ -1,25 +1,25 @@
 import {
-  FolderOutline,
   CalendarOutline,
-  PhotographOutline,
   CheckCircleOutline,
+  FolderOutline,
+  PhotographOutline,
 } from "./icons";
 
 const apps = {
   files: {
-    routePrefix: "/files",
+    routePrefix: "files",
     icon: FolderOutline,
   },
   calendar: {
-    routePrefix: "/calendar",
+    routePrefix: "calendar",
     icon: CalendarOutline,
   },
   photos: {
-    routePrefix: "/photos",
+    routePrefix: "photos",
     icon: PhotographOutline,
   },
   tasks: {
-    routePrefix: "/tasks",
+    routePrefix: "tasks",
     icon: CheckCircleOutline,
   },
 };

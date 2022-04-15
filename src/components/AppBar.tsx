@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import Logo from "./Logo";
+import useUser from "../api/hooks/useUser";
+import { logout } from "../api/mutations/user";
 // FIXME: This should be a prop
 import apps from "../appindex";
 import Avatar from "./Avatar";
-import { logout } from "../api/mutations/user";
-import useUser from "../api/hooks/useUser";
 import Box from "./Box";
 import IconNav from "./IconNav";
+import Logo from "./Logo";
 
 const StyledAppBar = styled(Box)`
   color: var(--color-text-on-primary);
@@ -26,7 +26,7 @@ const LogoContainer = styled(Box)`
 
 const appNavItems = Object.entries(apps).map(([app, config]) => ({
   name: app,
-  path: config.routePrefix,
+  path: "/apps/" + config.routePrefix,
   icon: config.icon,
 }));
 

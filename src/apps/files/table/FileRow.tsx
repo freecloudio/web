@@ -1,11 +1,9 @@
-import { useHistory } from "react-router";
+import { PointerEvent } from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import Avatar from "../../../components/Avatar";
 import AvatarStack from "../../../components/AvatarStack";
 import { DocumentOutline, FolderOutline } from "../../../icons";
-import apps from "../../../appindex";
-import { PointerEvent } from "react";
-import usePath from "../hooks/usePath";
 
 export interface Props {
   type: "directory" | "file";
@@ -62,16 +60,6 @@ function lastModifiedAt(date: Date): string {
   return `${date.getDay()}.${date.getMonth() + 1}.`;
 }
 
-function buildPath(type: Props["type"], currentPath: string, fileName: string) {
-  const prefix = `${apps.files.routePrefix}/${
-    type === "directory" ? "d" : "f"
-  }`;
-  if (currentPath === "/") {
-    return `${prefix}${currentPath}${fileName}`;
-  }
-  return `${prefix}${currentPath}/${fileName}`;
-}
-
 const getAvatarStack = (sharedWith: Props["sharedWith"]) =>
   sharedWith?.length ? (
     <AvatarStack>
@@ -89,15 +77,14 @@ const FileRow = ({
   starred,
   lastModified,
 }: Props) => {
-  const history = useHistory();
-  const { path: currentPath } = usePath();
+  const navigate = useNavigate();
 
-  const navigateTo = (fileName: string, type: Props["type"]) => (
-    event: PointerEvent<HTMLDivElement>
-  ) => {
-    event.preventDefault();
-    history.push(buildPath(type, currentPath, fileName));
-  };
+  const navigateTo =
+    (fileName: string, type: Props["type"]) =>
+    (event: PointerEvent<HTMLDivElement>) => {
+      event.preventDefault();
+      navigate(fileName);
+    };
   return (
     <StyledRow onDoubleClick={navigateTo(name, type)}>
       <IconTd>{iconForType(type)}</IconTd>

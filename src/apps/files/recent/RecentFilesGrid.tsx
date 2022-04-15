@@ -1,8 +1,10 @@
-import Box from "../../../components/Box";
+import Chance from "chance";
 import styled from "styled-components";
+import Box from "../../../components/Box";
 import File from "../models/File";
 import RecentFileCard from "./RecentFileCard";
-import { datatype } from "faker";
+
+const chance = new Chance();
 
 const StyledRecentsContainer = styled(Box)`
   height: 8rem;
@@ -10,10 +12,18 @@ const StyledRecentsContainer = styled(Box)`
 
 // TODO: Load the recent files from the server
 const files = [
-  { id: datatype.uuid(), type: "file", name: "Interesting Sales.xlsx" },
-  { id: datatype.uuid(), type: "folder", name: "Documents" },
-  { id: datatype.uuid(), type: "file", name: "Interesting Sales.xlsx" },
-  { id: datatype.uuid(), type: "folder", name: "Pictures" },
+  {
+    id: chance.guid({ version: 4 }),
+    type: "file",
+    name: "Interesting Sales.xlsx",
+  },
+  { id: chance.guid({ version: 4 }), type: "folder", name: "Documents" },
+  {
+    id: chance.guid({ version: 4 }),
+    type: "file",
+    name: "Interesting Sales.xlsx",
+  },
+  { id: chance.guid({ version: 4 }), type: "folder", name: "Pictures" },
 ] as File[];
 
 function RecentFilesGrid() {

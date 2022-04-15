@@ -1,7 +1,7 @@
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { default as Box, BoxProps } from "./Box";
+import { BoxProps, default as Box } from "./Box";
 import IconButton from "./IconButton";
 
 export type NavItem = {
@@ -18,7 +18,7 @@ export type IconNavProps = ExtraProps;
 
 const StyledNav = styled(Box)``;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   width: 3rem;
   height: 3rem;
 `;
@@ -28,16 +28,11 @@ function IconNav({ items, ...props }: ExtraProps) {
   return (
     <StyledNav as="nav" justify="start" {...props}>
       {items.map((item) => (
-        <Link
-          to={item.path}
-          component={StyledLink}
-          title={item.name}
-          key={item.name}
-        >
+        <StyledLink to={item.path} title={item.name} key={item.name}>
           <IconButton toggled={location.pathname.startsWith(item.path)}>
             <item.icon />
           </IconButton>
-        </Link>
+        </StyledLink>
       ))}
     </StyledNav>
   );
