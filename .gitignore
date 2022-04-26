@@ -105,3 +105,6 @@ yarn-error.log*
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/yarn
+
+dist
+.parcel-cache
