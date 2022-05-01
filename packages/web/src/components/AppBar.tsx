@@ -1,12 +1,11 @@
+import { Avatar, Logo } from "@freecloudio/components";
 import styled from "styled-components";
 import useUser from "../api/hooks/useUser";
 import { logout } from "../api/mutations/user";
 // FIXME: This should be a prop
 import apps from "../appindex";
-import Avatar from "./Avatar";
 import Box from "./Box";
 import IconNav from "./IconNav";
-import Logo from "./Logo";
 
 const StyledAppBar = styled(Box)`
   color: var(--color-text-on-primary);
@@ -36,16 +35,14 @@ export default function AppBar() {
     await logout();
     mutate(null);
   }
+
   return (
     <StyledAppBar as="header" justify="between">
-      <LogoContainer>
-        <Logo />
-      </LogoContainer>
+      <Logo />
       <IconNav items={appNavItems} gap="sm" shrink />
       <Avatar
         name="John Doe"
-        imageSrc="https://randomuser.me/api/portraits/men/17.jpg"
-        onClick={onAvatarClicked}
+        img="https://randomuser.me/api/portraits/men/17.jpg"
       />
     </StyledAppBar>
   );

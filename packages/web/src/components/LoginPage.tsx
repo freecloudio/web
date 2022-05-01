@@ -1,9 +1,8 @@
-import { Button as Btn } from "@freecloudio/components";
+import { Button } from "@freecloudio/components";
 import { Navigate, useParams } from "react-router";
 import useUser from "../api/hooks/useUser";
 import { login } from "../api/mutations/user";
 import Box from "./Box";
-import Button from "./Button";
 import Card from "./Card";
 import Logo from "./Logo";
 import Spinner from "./Spinner";
@@ -13,7 +12,7 @@ function LoginPage() {
   const { goTo } = useParams<{ goTo?: string }>();
   const { loading, loggedOut, mutate } = useUser();
 
-  async function onLoginClicked() {
+  async function onLoginClicked(_: any) {
     await login();
     mutate();
   }
@@ -26,7 +25,6 @@ function LoginPage() {
       <Box>
         <Card color="alt" direction="col">
           <Logo size="xl" />
-          <Btn>Hello world</Btn>
           <h1>Welcome to freecloud!</h1>
           <p>Sign in to access your files, calendar, contacts and more</p>
           <Box direction="col" gap="md">
@@ -35,9 +33,8 @@ function LoginPage() {
             {loading ? (
               <Spinner />
             ) : (
-              <Button primary onClick={onLoginClicked}>
-                {" "}
-                Sign in{" "}
+              <Button variant="primary" onClick={onLoginClicked}>
+                Sign in
               </Button>
             )}
           </Box>
