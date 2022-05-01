@@ -7,7 +7,7 @@
   "types": "dist/types.d.ts",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.17.9",
+    "@mdi/js": "^6.6.96",
     "@storybook/addon-actions": "^6.4.22",
     "@storybook/addon-essentials": "^6.4.22",
     "@storybook/addon-interactions": "^6.4.22",
@@ -19,8 +19,6 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "autoprefixer": "^9.8.8",
-    "babel-loader": "^8.2.5",
-    "cross-env": "^7.0.3",
     "parcel": "^2.5.0",
     "postcss": "^8.2.1",
     "react": "^18.0.0",
@@ -33,12 +31,14 @@
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "^6.3.0",
-    "styled-components": "^5.3.5"
+    "react-router-dom": "^6.3.0"
   },
   "scripts": {
     "build": "parcel build",
     "dev": "parcel watch",
     "storybook": "start-storybook -p 6006"
+  },
+  "dependencies": {
+    "clsx": "^1.1.1"
   }
 }

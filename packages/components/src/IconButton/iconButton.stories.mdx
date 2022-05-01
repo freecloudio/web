@@ -1,0 +1,36 @@
+import { Meta, Story } from "@storybook/addon-docs";
+import { IconButton } from ".";
+import { Icon } from "../Icon";
+import {
+  mdiNumeric1BoxOutline,
+  mdiNumeric2BoxOutline,
+  mdiNumeric3BoxOutline,
+} from "@mdi/js";
+
+<Meta title="Controls/IconButton" component={IconButton} />
+
+<Story name="Default">
+  <IconButton
+    label="icon"
+    label="An icon button"
+    icon={<Icon path={mdiNumeric1BoxOutline} />}
+  />
+</Story>
+
+<Story name="Variants">
+  <IconButton
+    variant="primary"
+    label="primary-icon"
+    icon={<Icon path={mdiNumeric1BoxOutline} />}
+  />
+  <IconButton
+    variant="secondary"
+    label="secondary-icon"
+    icon={<Icon path={mdiNumeric2BoxOutline} />}
+  />
+  <IconButton
+    variant="tertiary"
+    label="tertiary-icon"
+    icon={<Icon path={mdiNumeric3BoxOutline} />}
+  />
+</Story>

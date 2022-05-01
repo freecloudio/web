@@ -1,0 +1,12 @@
+import { Meta, Story } from "@storybook/addon-docs";
+import { Avatar } from ".";
+
+<Meta title="Media/Avatar" component={Avatar} />
+
+<Story name="With Image">
+  <Avatar img="https://github.com/riesinger.png" name="John Doe" />
+</Story>
+
+<Story name="Without Image">
+  <Avatar name="Jane Doe" />
+</Story>

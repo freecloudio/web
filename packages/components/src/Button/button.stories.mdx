@@ -1,12 +1,14 @@
 import { Meta, Story } from "@storybook/addon-docs";
 import { Button } from ".";
 
-<Meta title="Button" component={Button} />
+<Meta title="Controls/Button" component={Button} />
 
 <Story name="Default">
   <Button>Default button</Button>
 </Story>
 
-<Story name="Primary">
-  <Button primary>Primary button</Button>
+<Story name="Variants">
+  <Button variant="primary">Primary Button</Button>
+  <Button variant="secondary">Secondary (default) Button</Button>
+  <Button variant="tertiary">Tertiary Button</Button>
 </Story>
