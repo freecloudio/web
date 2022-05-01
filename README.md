@@ -13,41 +13,21 @@ There are multiple ways to contribute:
 - Cleaning up the code
 - Writing and improving translations
 
-### Development Setup
+## Development Setup
 
-To get your machine setup for contributing to freecloud web, install the latest versions of [NodeJS](https://nodejs.org) and [NPM](https://npmjs.com).
-Then clone the repository and run `npm install` to install all dependencies.
+### Requirements
 
-We provide several scripts which will make development easier.
+To get your machine setup for contributing to freecloud web, install the latest versions of [NodeJS](https://nodejs.org) and [NPM](https://npmjs.com). Since this repository uses NPM workspaces, you'll need _at least_ NPM v7.
 
-```sh
-npm start
-```
+Next, clone the repository and run `npm install` in it.
+This will install all NPM packages and link our packages together.
 
-This will start the development server, so you can start hacking right away.
+### Running the app
 
-```sh
-npm test
-```
+To run a development server in all packages, use `npm run dev`. This will watch for changes & recompile library packages and will also start a dev server for the main web app.
 
-This runs the unit tests by starting `jest`. For more info on how to use jest, see: [jestjs.io](https://jestjs.io/).
+For our component library, we also provide a storybook, so running `npm run -w packages/components storybook` will open it.
 
-```sh
-npm run build
-```
+### Building a production bundle
 
-This does a production build of the client. This build is optimized for performance and therefore should not be used during development.
-
-### Generating icons
-
-freecloud currently uses the beautiful [heroicons](https://heroicons.dev) icon set. We generate
-components from the icons' SVG files via the `src/icons/makeIcons.ts` script which can be run with
-`npm generate-icons`. It will create a component for each icon as well as an icon index.
-The icons can then be used via the icon index like so:
-
-```tsx
-import { DocumentOutline } from "./src/icons";
-
-export const Component = () => (<DocumentOutline size="md" />);
-```
-
+To build an optimized production build, use `npm run build`. This will build all dependencies and packages.

@@ -37,18 +37,8 @@
     "styled-components": "^5.3.5"
   },
   "scripts": {
-    "analyze:bundle": "cross-env BUNDLE_ANALYZE=1 webpack",
     "build": "parcel build",
-    "watch": "parcel watch",
-    "lint": "eslint . --ext .js,.jsx --fix",
-    "lint-staged": "eslint --fix",
-    "storybook": "start-storybook -p 6006",
-    "test": "jest -c jest.config.js",
-    "test:watch": "jest -c jest.config.js --watchAll",
-    "test:e2e": "playwright test",
-    "test:e2e:ci": "cross-env CI=true playwright test",
-    "test:e2e:watch": "jest -c jest.e2e.js --watchAll",
-    "test:e2e:debug": "cross-env PWDEBUG=1 playwright test",
-    "build-storybook": "build-storybook"
+    "dev": "parcel watch",
+    "storybook": "start-storybook -p 6006"
   }
 }
